@@ -6,246 +6,247 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ScreenController">
+<AnchorPane prefHeight="700.0" prefWidth="1175.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.IndexController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="68.0" styleClass="sidepane" stylesheets="@../css/style.css">
-         <children>
-            <Pane onMouseClicked="#switchToHome" prefHeight="62.0" prefWidth="0.0">
+      <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1175.0">
+         <left>
+            <VBox prefHeight="600.0" prefWidth="75.0" styleClass="sidepane" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="12.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pics/home_icon.png" />
-                     </image>
-                  </ImageView>
-               </children></Pane>
-            <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToContracts" prefHeight="22.0" prefWidth="74.0">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pics/documt_icon.jpeg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToCustomers" prefHeight="22.0" prefWidth="74.0">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pics/customer_icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="22.0" prefWidth="74.0">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pics/overview_icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button blendMode="HARD_LIGHT" mnemonicParsing="false" prefHeight="22.0" prefWidth="74.0">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pics/settings_icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button blendMode="HARD_LIGHT" mnemonicParsing="false" opacity="0.0" prefHeight="22.0" prefWidth="74.0" text="deleted">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pics/documt_icon.jpeg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button blendMode="HARD_LIGHT" mnemonicParsing="false" opacity="0.0" prefHeight="22.0" prefWidth="74.0" text="deleted">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pics/documt_icon.jpeg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button blendMode="HARD_LIGHT" mnemonicParsing="false" prefHeight="22.0" prefWidth="74.0">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pics/log_out_icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="200.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-      <Pane prefHeight="400.0" prefWidth="833.0">
-         <children>
-            <Pane layoutX="59.0" layoutY="61.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
+                  <Pane onMouseClicked="#switchToHome" prefHeight="65.0" prefWidth="96.0">
+                     <children>
+                        <ImageView fitHeight="65.0" fitWidth="76.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pics/home_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToContracts" prefHeight="59.0" prefWidth="78.0">
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pics/documt_icon.jpeg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToCustomers" prefHeight="59.0" prefWidth="78.0">
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pics/customer_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="59.0" prefWidth="78.0">
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pics/overview_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToAnalytics" prefHeight="59.0" prefWidth="78.0">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pics/money_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+                  <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToSettings" prefHeight="59.0" prefWidth="78.0">
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pics/settings_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button blendMode="HARD_LIGHT" mnemonicParsing="false" prefHeight="59.0" prefWidth="78.0">
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pics/log_out_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children></VBox>
+         </left>
+         <center>
+            <Pane prefHeight="700.0" prefWidth="1100.0">
                <children>
-                  <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
+                  <Pane layoutX="59.0" layoutY="61.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
                      <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-                  <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
+                  </Pane>
+                  <Pane layoutX="294.0" layoutY="61.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
                      <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
+                  </Pane>
+                  <Pane layoutX="527.0" layoutY="61.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
+                     <children>
+                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="59.0" layoutY="359.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
+                     <children>
+                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="294.0" layoutY="359.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
+                     <children>
+                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="527.0" layoutY="359.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
+                     <children>
+                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
+                           <children>
+                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Button layoutX="191.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#withdrawContract" prefHeight="25.0" prefWidth="84.0" text="withdraw" />
+                  <TextField fx:id="contractIdField" layoutX="59.0" layoutY="301.0" prefHeight="25.0" prefWidth="110.0" promptText="id" />
+                  <TextField fx:id="dateField" layoutX="406.0" layoutY="301.0" prefHeight="25.0" prefWidth="188.0" promptText="date" />
+                  <Button layoutX="613.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="Prolong" />
+                  <Button layoutX="294.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#takeOutContract" prefHeight="25.0" prefWidth="84.0" text="take out" />
                </children>
             </Pane>
-            <Pane layoutX="294.0" layoutY="61.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
-               <children>
-                  <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                     <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                     <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                     </children>
-                  </VBox>
-               </children>
-            </Pane>
-            <Pane layoutX="527.0" layoutY="61.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
-               <children>
-                  <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                     <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                     <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                     </children>
-                  </VBox>
-               </children>
-            </Pane>
-            <Pane layoutX="59.0" layoutY="359.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
-               <children>
-                  <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                     <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                     <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                     </children>
-                  </VBox>
-               </children>
-            </Pane>
-            <Pane layoutX="294.0" layoutY="359.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
-               <children>
-                  <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                     <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                     <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                     </children>
-                  </VBox>
-               </children>
-            </Pane>
-            <Pane layoutX="527.0" layoutY="359.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
-               <children>
-                  <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Label>
-                  <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                     <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                     <children>
-                        <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                        <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                     </children>
-                  </VBox>
-               </children>
-            </Pane>
-            <TextField layoutX="59.0" layoutY="301.0" prefHeight="25.0" prefWidth="84.0" promptText="id" />
-            <Button layoutX="175.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Submit" />
-         </children>
-      </Pane>
+         </center>
+      </BorderPane>
    </children>
-</HBox>
+</AnchorPane>

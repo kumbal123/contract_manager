@@ -1,33 +1,126 @@
 package cz.fit.cvut.contract_manager.controller;
 
-import cz.fit.cvut.contract_manager.service.ContractService;
+import cz.fit.cvut.contract_manager.entity.Contract;
+import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ContractController implements Initializable {
+public class ContractController extends Controller {
 
-    public TextField contractField;
-    public TextField priceField;
+    public TableView<Contract> tvContracts;
+    public TableColumn<Contract, String> colPersonalNumber;
+    public TableColumn<Contract, String> colName;
+    public TableColumn<Contract, String> colContractId;
+    public TableColumn<Contract, String> colItemInfo;
+    public TableColumn<Contract, String> colLendPrice;
+    public TableColumn<Contract, String> colCreationDate;
+    public TableColumn<Contract, String> colExpireDate;
 
-    private final ContractService service = ContractService.getInstance();
+    public TextField searchBar;
+    public BorderPane mainPane;
+
+    private Contract contract;
+
+    private final Integer contractLimitDisplay = 20;
+    private final ContractRepositoryService contractService = ContractRepositoryService.getInstance();
 
     @FXML
-    public void createContract(MouseEvent event) {
-        //Node node = (Node) event.getSource();
-        //Stage stage = (Stage) node.getScene().getWindow();
-        String id = contractField.getText().trim();
-        String price = priceField.getText().trim();
+    public void switchToCreateContract(final MouseEvent event) throws IOException {
+        mainPane.setCenter(getPage("createContract.fxml"));
+    }
 
-        service.saveContract(id, Integer.parseInt(price));
+    @FXML
+    public void switchToOverview(final MouseEvent event) throws IOException {
+        mainPane.setCenter(getPage("overview.fxml"));
+    }
+
+    @FXML
+    public void deleteContract(final MouseEvent event) {
+        contractService.removeCustomer(contract);
+        contractService.deleteByEntity(contract);
+        showContracts();
+    }
+
+    @FXML
+    public void handleMouseEvent(final MouseEvent event) throws IOException {
+        contract = tvContracts.getSelectionModel().getSelectedItem();
+
+        if(event.getClickCount() > 1 && contract != null) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/createContract.fxml"));
+            Pane pane = loader.load();
+
+            CreateContractController createContractController = loader.getController();
+            createContractController.initContractData(contract);
+            createContractController.initCustomerData(contract.getCustomer());
+
+            mainPane.setCenter(pane);
+        }
+    }
+
+    private void showContracts() {
+        ObservableList<Contract> contractList = FXCollections.observableArrayList(contractService.getAll());
+
+        colPersonalNumber.setCellValueFactory(new PropertyValueFactory<Contract, String>("personalNumber"));
+        colName.setCellValueFactory(new PropertyValueFactory<Contract, String>("name"));
+        colContractId.setCellValueFactory(new PropertyValueFactory<Contract, String>("contractId"));
+        colItemInfo.setCellValueFactory(new PropertyValueFactory<Contract, String>("itemInfo"));
+        colLendPrice.setCellValueFactory(new PropertyValueFactory<Contract, String>("lendPrice"));
+
+        colCreationDate.setCellValueFactory(
+            cellData -> getStringPropertyFromDate(cellData.getValue().getCreationDate())
+        );
+
+        colExpireDate.setCellValueFactory(
+            cellData -> getStringPropertyFromDate(cellData.getValue().getExpireDateOrig())
+        );
+
+        FilteredList<Contract> filteredList =
+            new FilteredList<>(contractList, contract -> contractList.indexOf(contract) < contractLimitDisplay);
+
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(Contract -> {
+                if(newValue.isEmpty()) {
+                    return true;
+                }
+
+                String searchKeyword = newValue.toLowerCase();
+
+                if(Contract.getPersonalNumber().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                } else if(Contract.getName().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                } else if(Contract.getCreationDate().toString().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                } else {
+                    return Contract.getContractId().toLowerCase().contains(searchKeyword);
+                }
+            });
+        });
+
+        SortedList<Contract> sortedList = new SortedList<>(filteredList);
+
+        sortedList.comparatorProperty().bind(tvContracts.comparatorProperty());
+        tvContracts.setItems(sortedList);
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
+    public void initialize(URL location, ResourceBundle resources) {
+        showContracts();
     }
 }
