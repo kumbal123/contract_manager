@@ -50,7 +50,6 @@ public class ViewContractController extends Controller {
     public Pane rightPane;
 
     private Contract contract;
-    private final ContractRepositoryService contractService = ContractRepositoryService.getInstance();
 
     public void initContractData(final Contract src) {
         contract = src;

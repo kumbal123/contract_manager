@@ -4,13 +4,11 @@ import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
