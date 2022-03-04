@@ -48,40 +48,6 @@ public class AnalyticsController extends Controller {
 
             contractList.removeIf(contract -> contract.getCreationDate().compareTo(fromDate) < 0 || contract.getCreationDate().compareTo(toDate) > 0);
 
-            colContractId.setCellValueFactory(new PropertyValueFactory<>("contractId"));
-            colLendPrice.setCellValueFactory(new PropertyValueFactory<>("lendPrice"));
-            colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("totalPriceCurr"));
-
-            colInterest.setCellValueFactory(cellDate -> {
-                int interest = cellDate.getValue().getTotalPriceCurr() - cellDate.getValue().getLendPrice();
-                return new SimpleStringProperty(Integer.toString(interest));
-            });
-
-            colCreationDate.setCellValueFactory(
-                cellData -> getStringPropertyFromDate(cellData.getValue().getCreationDate())
-            );
-
-            colExpireDate.setCellValueFactory(
-                cellData -> getStringPropertyFromDate(cellData.getValue().getExpireDateCurr())
-            );
-
-            tvContracts.setRowFactory(tv -> new TableRow<>() {
-                @Override
-                protected void updateItem(Contract contract, boolean empty) {
-                    super.updateItem(contract, empty);
-
-                    if (contract == null || contract.getState() == ContractState.VALID) {
-                        setStyle("");
-                    } else if (contract.getState() == ContractState.EXPIRED) {
-                        setStyle("-fx-background-color: #ffb561;");
-                    } else if (contract.getState() == ContractState.WITHDRAWN) {
-                        setStyle("-fx-background-color: #64ff61;");
-                    } else {
-                        setStyle("-fx-background-color: #ff6161;");
-                    }
-                }
-            });
-
             int expense = 0;
             int income = 0;
 
@@ -117,6 +83,40 @@ public class AnalyticsController extends Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("Here");
 
+        colContractId.setCellValueFactory(new PropertyValueFactory<>("contractId"));
+        colLendPrice.setCellValueFactory(new PropertyValueFactory<>("lendPrice"));
+        colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("totalPriceCurr"));
+
+        colInterest.setCellValueFactory(cellDate -> {
+            int interest = cellDate.getValue().getTotalPriceCurr() - cellDate.getValue().getLendPrice();
+            return new SimpleStringProperty(Integer.toString(interest));
+        });
+
+        colCreationDate.setCellValueFactory(
+                cellData -> getStringPropertyFromDate(cellData.getValue().getCreationDate())
+        );
+
+        colExpireDate.setCellValueFactory(
+                cellData -> getStringPropertyFromDate(cellData.getValue().getExpireDateCurr())
+        );
+
+        tvContracts.setRowFactory(tv -> new TableRow<>() {
+            @Override
+            protected void updateItem(Contract contract, boolean empty) {
+                super.updateItem(contract, empty);
+
+                if (contract == null || contract.getState() == ContractState.VALID) {
+                    setStyle("");
+                } else if (contract.getState() == ContractState.EXPIRED) {
+                    setStyle("-fx-background-color: #ffb561;");
+                } else if (contract.getState() == ContractState.WITHDRAWN) {
+                    setStyle("-fx-background-color: #64ff61;");
+                } else {
+                    setStyle("-fx-background-color: #ff6161;");
+                }
+            }
+        });
     }
 }

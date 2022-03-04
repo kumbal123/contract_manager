@@ -126,8 +126,6 @@ public class CreateContractController extends Controller {
         dateOfBirthField.setDisable(true);
     }
 
-
-
     @FXML
     public void createContract(final MouseEvent event) throws IOException, ParseException {
         if(customer == null) {

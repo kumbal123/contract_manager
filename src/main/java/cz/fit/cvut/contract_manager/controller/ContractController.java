@@ -76,11 +76,11 @@ public class ContractController extends Controller {
     private void showContracts() {
         ObservableList<Contract> contractList = FXCollections.observableArrayList(contractService.getAll());
 
-        colPersonalNumber.setCellValueFactory(new PropertyValueFactory<Contract, String>("personalNumber"));
-        colName.setCellValueFactory(new PropertyValueFactory<Contract, String>("name"));
-        colContractId.setCellValueFactory(new PropertyValueFactory<Contract, String>("contractId"));
-        colItemInfo.setCellValueFactory(new PropertyValueFactory<Contract, String>("itemInfo"));
-        colLendPrice.setCellValueFactory(new PropertyValueFactory<Contract, String>("lendPrice"));
+        colPersonalNumber.setCellValueFactory(new PropertyValueFactory<>("personalNumber"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colContractId.setCellValueFactory(new PropertyValueFactory<>("contractId"));
+        colItemInfo.setCellValueFactory(new PropertyValueFactory<>("itemInfo"));
+        colLendPrice.setCellValueFactory(new PropertyValueFactory<>("lendPrice"));
 
         colCreationDate.setCellValueFactory(
             cellData -> getStringPropertyFromDate(cellData.getValue().getCreationDate())

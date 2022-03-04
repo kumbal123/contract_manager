@@ -17,7 +17,7 @@
                 <Pane prefHeight="600.0" prefWidth="901.0">
                     <children>
                         <TextField fx:id="fromField" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="185.0" promptText="from" />
-                        <Button layoutX="456.0" layoutY="43.0" mnemonicParsing="false" onMouseEntered="#analyzeContracts" prefHeight="25.0" prefWidth="84.0" text="Analyze" />
+                        <Button layoutX="456.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#analyzeContracts" prefHeight="25.0" prefWidth="84.0" text="Analyze" />
                         <Pane layoutX="46.0" layoutY="81.0" prefHeight="594.0" prefWidth="494.0">
                             <children>
                                 <TableView fx:id="tvContracts" layoutY="-2.0" onMouseClicked="#handleMouseEvent" prefHeight="597.0" prefWidth="493.0">
