@@ -10,5 +10,7 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
         <mapping class="cz.fit.cvut.contract_manager.entity.Contract" />
+        <mapping class="cz.fit.cvut.contract_manager.entity.Customer" />
+        <mapping class="cz.fit.cvut.contract_manager.entity.History" />
     </session-factory>
 </hibernate-configuration> 

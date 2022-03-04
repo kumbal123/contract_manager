@@ -1,101 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ScreenController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ContractController">
     <children>
-        <VBox prefHeight="400.0" prefWidth="68.0" styleClass="sidepane" stylesheets="@../css/style.css">
-            <children>
-                <Pane onMouseClicked="#switchToHome" prefHeight="62.0" prefWidth="0.0">
-                    <children>
-                        <ImageView fitHeight="46.0" fitWidth="51.0" layoutX="12.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../pics/home_icon.png" />
-                            </image>
-                        </ImageView>
-                    </children></Pane>
-                <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToContracts" prefHeight="22.0" prefWidth="74.0">
-                    <graphic>
-                        <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../pics/documt_icon.jpeg" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToCustomers" prefHeight="22.0" prefWidth="74.0">
-                    <graphic>
-                        <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../pics/customer_icon.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="22.0" prefWidth="74.0">
-                    <graphic>
-                        <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../pics/overview_icon.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button blendMode="HARD_LIGHT" mnemonicParsing="false" prefHeight="22.0" prefWidth="74.0">
-                    <graphic>
-                        <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../pics/settings_icon.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button blendMode="HARD_LIGHT" mnemonicParsing="false" opacity="0.0" prefHeight="22.0" prefWidth="74.0" text="deleted">
-                    <graphic>
-                        <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../pics/documt_icon.jpeg" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button blendMode="HARD_LIGHT" mnemonicParsing="false" opacity="0.0" prefHeight="22.0" prefWidth="74.0" text="deleted">
-                    <graphic>
-                        <ImageView fitHeight="38.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../pics/documt_icon.jpeg" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button blendMode="HARD_LIGHT" mnemonicParsing="false" prefHeight="22.0" prefWidth="74.0">
-                    <graphic>
-                        <ImageView fitHeight="38.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../pics/log_out_icon.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                    <VBox.margin>
-                        <Insets top="200.0" />
-                    </VBox.margin>
-                </Button>
-            </children>
-        </VBox>
-        <Pane prefHeight="400.0" prefWidth="833.0">
-            <children>
-                <TextField layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="426.0" promptText="search" />
-                <Button layoutX="623.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#switchToCreateContract" prefHeight="25.0" prefWidth="84.0" text="Create" />
-                <Button layoutX="623.0" layoutY="194.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="View" />
-                <Pane layoutX="46.0" layoutY="81.0" prefHeight="486.0" prefWidth="426.0" />
-            </children>
-        </Pane>
+      <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1101.0">
+         <center>
+              <Pane prefHeight="600.0" prefWidth="901.0">
+                  <children>
+                      <TextField fx:id="searchBar" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="914.0" promptText="search" />
+                      <Button layoutX="993.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#switchToCreateContract" prefHeight="25.0" prefWidth="84.0" text="Create" />
+                      <Button layoutX="993.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="25.0" prefWidth="84.0" text="View" />
+                  <Button layoutX="993.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#deleteContract" prefHeight="25.0" prefWidth="84.0" text="Delete" />
+                      <Pane layoutX="46.0" layoutY="81.0" prefHeight="594.0" prefWidth="914.0">
+                     <children>
+                        <TableView fx:id="tvContracts" onMouseClicked="#handleMouseEvent" prefHeight="595.0" prefWidth="916.0">
+                          <columns>
+                            <TableColumn fx:id="colPersonalNumber" prefWidth="104.0" text="PersonalNumber" />
+                            <TableColumn fx:id="colName" prefWidth="152.0" text="Name" />
+                              <TableColumn fx:id="colContractId" prefWidth="72.0" text="ContractId" />
+                              <TableColumn fx:id="colItemInfo" prefWidth="265.0" text="ItemInfo" />
+                              <TableColumn fx:id="colLendPrice" prefWidth="68.0" text="LendPrice" />
+                              <TableColumn fx:id="colCreationDate" minWidth="0.0" prefWidth="97.0" text="CreationDate" />
+                              <TableColumn fx:id="colExpireDate" prefWidth="89.0" text="ExpireDate" />
+                              <TableColumn fx:id="colDelete" prefWidth="38.0" />
+                          </columns>
+                        </TableView>
+                     </children></Pane>
+                  </children>
+              </Pane>
+         </center>
+      </BorderPane>
     </children>
 </HBox>

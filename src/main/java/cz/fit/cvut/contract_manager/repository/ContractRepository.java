@@ -3,9 +3,13 @@ package cz.fit.cvut.contract_manager.repository;
 import cz.fit.cvut.contract_manager.entity.Contract;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.jboss.logging.Logger;
 
-public class ContractRepository implements Repository<Contract> {
+import java.util.Comparator;
+import java.util.List;
+
+public class ContractRepository extends Repository<Integer, Contract> {
 
     private static final Logger LOG = Logger.getLogger(ContractRepository.class);
 
@@ -13,18 +17,46 @@ public class ContractRepository implements Repository<Contract> {
         return ContractRepositoryHolder.INSTANCE;
     }
 
-    @Override
-    public void save(Contract obj) {
+    public Contract getMostRecentByContractId(final String id) {
         Session session = FACTORY.openSession();
         Transaction trans = session.beginTransaction();
-        try {
-            session.save(obj);
-            LOG.info("Task saved succesfully");
-        } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage());
-        } finally {
-            trans.commit();
-        }
+
+        Query query = session.createQuery("from Contract where contractId=:contractId");
+        query.setParameter("contractId", id);
+
+        List<Contract> contracts = (List<Contract>) query.list();
+        contracts.sort(Comparator.comparing(Contract::getCreationDate).reversed());
+
+        trans.commit();
+        session.close();
+
+        return contracts.isEmpty() ? null : contracts.get(0);
+    }
+
+    @Override
+    public Contract getById(final Integer id) {
+        Session session = FACTORY.openSession();
+        Transaction trans = session.beginTransaction();
+
+        Contract contract = session.get(Contract.class, id);
+
+        trans.commit();
+        session.close();
+
+        return contract;
+    }
+
+    @Override
+    public List<Contract> getAll() {
+        Session session = FACTORY.openSession();
+        Transaction trans = session.beginTransaction();
+
+        List<Contract> contracts = (List<Contract>) session.createQuery("from Contract").list();
+
+        trans.commit();
+        session.close();
+
+        return contracts;
     }
 
 
