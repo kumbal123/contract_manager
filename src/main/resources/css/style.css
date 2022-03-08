@@ -1,3 +1,13 @@
 .sidepane {
     -fx-background-color: #ffffff;
 }
+
+.popup_err {
+    -fx-background-color: #ff6161;
+    -fx-font-size: 30;
+}
+
+.popup_ok {
+    -fx-background-color: #64ff61;
+    -fx-font-size: 30;
+}

@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.CreateCustomerController">
     <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0">
         <center>
-            <Pane prefHeight="600.0" prefWidth="900.0">
+            <Pane prefHeight="352.0" prefWidth="1128.0">
                 <TextField fx:id="nameField" layoutX="45.0" layoutY="34.0" prefHeight="25.0" prefWidth="238.0" promptText="name" />
                 <TextField fx:id="genderField" layoutX="295.0" layoutY="34.0" prefHeight="25.0" prefWidth="122.0" promptText="gender" />
                 <TextField fx:id="addressField" layoutX="45.0" layoutY="80.0" prefHeight="25.0" prefWidth="238.0" promptText="address" />
@@ -23,6 +29,71 @@
                 <Button layoutX="373.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#createCustomer" text="create" />
                 <Button fx:id="updateButton" disable="true" layoutX="295.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#updateCustomer" text="update" />
             <Button fx:id="createContractButton" disable="true" layoutX="45.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#createContract" text="create contract" />
+            <PieChart fx:id="pieChart" layoutX="462.0" layoutY="34.0" legendSide="LEFT" prefHeight="337.0" prefWidth="618.0" />
+            <Label layoutX="460.0" layoutY="30.0" text="Total Contracts: ">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelTotalContracts" layoutX="653.0" layoutY="30.0" prefHeight="34.0" prefWidth="169.0">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Pane fx:id="bottomLeftPane" layoutY="340.0" prefHeight="360.0" prefWidth="550.0">
+               <children>
+                  <LineChart fx:id="lineChartMoney" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <TextField fx:id="fromYearMoneyField" layoutX="20.0" layoutY="35.0" prefHeight="25.0" prefWidth="113.0" promptText="from year" />
+                  <TextField fx:id="toYearMoneyField" layoutX="219.0" layoutY="35.0" prefHeight="25.0" prefWidth="113.0" promptText="to year" />
+                  <Button layoutX="142.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#analyzeMoneyInMonths" text="months" />
+                  <Button layoutX="350.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#analyzeMoneyInYears" text="years" />
+                  <Button layoutX="491.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#clearMoneyChart" text="clear" />
+                  <Label layoutX="20.0" layoutY="-10.0" text="Total Money:">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelTotalMoney" layoutX="181.0" layoutY="-10.0" prefHeight="34.0" prefWidth="169.0">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="bottomRightPane" layoutX="547.0" layoutY="340.0" prefHeight="360.0" prefWidth="550.0">
+               <children>
+                  <LineChart fx:id="lineChartContracts" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <TextField fx:id="fromYearContractsField" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="113.0" promptText="from year" />
+                  <TextField fx:id="toYearContractsField" layoutX="212.0" layoutY="35.0" prefHeight="25.0" prefWidth="113.0" promptText="to year" />
+                  <Button layoutX="139.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#analyzeContractCountInMonths" text="months" />
+                  <Button layoutX="338.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#analyzeContractCountInYears" text="years" />
+                  <Button layoutX="488.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#clearContractChart" text="clear" />
+                  <Label layoutX="14.0" layoutY="-10.0" text="Total Contracts:">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelTotalContractInterval" layoutX="212.0" layoutY="-10.0" prefHeight="34.0" prefWidth="169.0">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
             </Pane>
         </center>
     </BorderPane>

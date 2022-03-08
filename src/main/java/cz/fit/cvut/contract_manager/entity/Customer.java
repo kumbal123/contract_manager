@@ -1,5 +1,7 @@
 package cz.fit.cvut.contract_manager.entity;
 
+import cz.fit.cvut.contract_manager.util.Util;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -129,5 +131,53 @@ public class Customer {
 
     public void assignContract(Contract contract) {
         this.contracts.add(contract);
+    }
+
+    public int getContractCount(int month, int year) {
+        int count = 0;
+
+        for(Contract contract : contracts) {
+            int contractMonth = Util.getMonth(contract.getCreationDate());
+            int contractYear = Util.getYear(contract.getCreationDate());
+
+            count += contractMonth == month && contractYear == year ? 1 : 0;
+        }
+
+        return count;
+    }
+
+    public int getContractCount(int year) {
+        int count = 0;
+
+        for(Contract contract : contracts) {
+            count += Util.getYear(contract.getCreationDate()) == year ? 1 : 0;
+        }
+
+        return count;
+    }
+
+    public int getMoneySpent(int month, int year) {
+        int money = 0;
+
+        for(Contract contract : contracts) {
+            int contractMonth = Util.getMonth(contract.getCreationDate());
+            int contractYear = Util.getYear(contract.getCreationDate());
+            int interest = contract.getTotalPriceCurr() - contract.getLendPrice();
+
+            money += contractMonth == month && contractYear == year && contract.isWithdrawn() ? interest : 0;
+        }
+
+        return money;
+    }
+
+    public int getMoneySpent(int year) {
+        int money = 0;
+
+        for(Contract contract : contracts) {
+            int interest = contract.getTotalPriceCurr() - contract.getLendPrice();
+            money += Util.getYear(contract.getCreationDate()) == year && contract.isWithdrawn() ? interest : 0;
+        }
+
+        return money;
     }
 }

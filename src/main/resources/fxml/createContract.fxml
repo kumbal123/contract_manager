@@ -14,32 +14,32 @@
    <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0">
       <center>
             <Pane prefHeight="700.0" prefWidth="506.0" BorderPane.alignment="CENTER">
-                  <TextField fx:id="nameField" layoutX="45.0" layoutY="34.0" prefHeight="25.0" prefWidth="238.0" promptText="name" />
-                  <TextField fx:id="genderField" layoutX="295.0" layoutY="34.0" prefHeight="25.0" prefWidth="122.0" promptText="gender" />
-                  <TextField fx:id="addressField" layoutX="45.0" layoutY="80.0" prefHeight="25.0" prefWidth="238.0" promptText="address" />
-                  <TextField fx:id="cityField" layoutX="45.0" layoutY="123.0" prefHeight="25.0" prefWidth="373.0" promptText="city" />
-                  <TextField fx:id="personalNumberField" layoutX="45.0" layoutY="168.0" prefHeight="25.0" prefWidth="179.0" promptText="personal number" />
-                  <TextField fx:id="cardIdNumberField" layoutX="239.0" layoutY="168.0" prefHeight="25.0" prefWidth="179.0" promptText="card id number" />
-                  <TextField fx:id="meuField" layoutX="45.0" layoutY="206.0" prefHeight="25.0" prefWidth="179.0" promptText="MeU" />
-                  <TextField fx:id="nationalityField" layoutX="239.0" layoutY="206.0" prefHeight="25.0" prefWidth="179.0" promptText="nationality" />
-                  <TextField fx:id="dateOfBirthField" layoutX="295.0" layoutY="80.0" prefHeight="25.0" prefWidth="122.0" promptText="date of birth" />
-                  <TextField fx:id="creationDateField" disable="true" layoutX="74.0" layoutY="242.0" prefHeight="25.0" prefWidth="122.0" promptText="date of issue" />
-                  <TextField fx:id="lendPriceField" layoutX="164.0" layoutY="279.0" prefHeight="39.0" prefWidth="135.0" promptText="lend price" />
-                  <TextField fx:id="expireDateField" layoutX="163.0" layoutY="325.0" prefHeight="25.0" prefWidth="135.0" promptText="expire date" />
-                  <TextField fx:id="contractIdField" layoutX="315.0" layoutY="279.0" prefHeight="53.0" prefWidth="103.0" promptText="id" />
+                  <TextField fx:id="nameField" layoutX="45.0" layoutY="57.0" prefHeight="25.0" prefWidth="238.0" promptText="name" />
+                  <TextField fx:id="genderField" layoutX="294.0" layoutY="57.0" prefHeight="25.0" prefWidth="122.0" promptText="gender" />
+                  <TextField fx:id="addressField" layoutX="45.0" layoutY="93.0" prefHeight="25.0" prefWidth="238.0" promptText="address" />
+                  <TextField fx:id="cityField" layoutX="45.0" layoutY="130.0" prefHeight="25.0" prefWidth="373.0" promptText="city" />
+                  <TextField fx:id="personalNumberField" layoutX="45.0" layoutY="164.0" prefHeight="25.0" prefWidth="179.0" promptText="personal number" />
+                  <TextField fx:id="cardIdNumberField" layoutX="239.0" layoutY="164.0" prefHeight="25.0" prefWidth="179.0" promptText="card id number" />
+                  <TextField fx:id="meuField" layoutX="46.0" layoutY="196.0" prefHeight="25.0" prefWidth="179.0" promptText="MeU" />
+                  <TextField fx:id="nationalityField" layoutX="239.0" layoutY="196.0" prefHeight="25.0" prefWidth="179.0" promptText="nationality" />
+                  <TextField fx:id="dateOfBirthField" layoutX="294.0" layoutY="93.0" prefHeight="25.0" prefWidth="122.0" promptText="date of birth" />
+                  <TextField fx:id="creationDateField" layoutX="75.0" layoutY="232.0" prefHeight="25.0" prefWidth="122.0" promptText="date of issue" />
+                  <TextField fx:id="lendPriceField" layoutX="164.0" layoutY="277.0" prefHeight="39.0" prefWidth="135.0" promptText="lend price" />
+                  <TextField fx:id="expireDateField" layoutX="164.0" layoutY="325.0" prefHeight="25.0" prefWidth="135.0" promptText="expire date" />
+                  <TextField fx:id="contractIdField" layoutX="316.0" layoutY="257.0" prefHeight="53.0" prefWidth="103.0" promptText="id" />
                   <TextField fx:id="itemInfoField" layoutX="45.0" layoutY="368.0" prefHeight="25.0" prefWidth="373.0" promptText="what - model, brand" />
-                  <TextField fx:id="itemSpecificationField" layoutX="45.0" layoutY="406.0" prefHeight="25.0" prefWidth="373.0" promptText="s. number, weight" />
+                  <TextField fx:id="itemSpecificationField" layoutX="45.0" layoutY="405.0" prefHeight="25.0" prefWidth="373.0" promptText="s. number, weight" />
                   <Button layoutX="435.0" layoutY="368.0" mnemonicParsing="false" onMouseClicked="#searchPrices" text="research" />
-                  <TextField fx:id="totalPriceField" layoutX="282.0" layoutY="464.0" prefHeight="39.0" prefWidth="135.0" promptText="total price" />
-                  <Button fx:id="updateButton" disable="true" layoutX="46.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#updateContract" text="update" />
-                  <Button layoutX="367.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#printContract" text="print" />
-                  <Button layoutX="299.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#createContract" text="create" />
+                  <TextField fx:id="totalPriceField" layoutX="287.0" layoutY="440.0" prefHeight="39.0" prefWidth="135.0" promptText="total price" />
+                  <Button fx:id="updateButton" disable="true" layoutX="46.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#updateContract" text="update" />
+                  <Button layoutX="367.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#printContract" text="print" />
+                  <Button layoutX="302.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#createContract" text="create" />
             </Pane>
       </center>
       <right>
          <Pane fx:id="rightPane" prefHeight="700.0" prefWidth="595.0" visible="false" BorderPane.alignment="CENTER">
             <children>
-               <TableView fx:id="tvPrices" onMouseClicked="#handleMouseEvent" layoutX="24.0" layoutY="32.0" prefHeight="471.0" prefWidth="549.0">
+               <TableView fx:id="tvPrices" layoutX="24.0" layoutY="32.0" onMouseClicked="#handleMouseEvent" prefHeight="471.0" prefWidth="549.0">
                  <columns>
                    <TableColumn fx:id="colName" prefWidth="452.0" text="Name" />
                      <TableColumn fx:id="colPrice" prefWidth="76.0" text="Price" />

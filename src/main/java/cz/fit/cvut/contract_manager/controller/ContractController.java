@@ -105,7 +105,7 @@ public class ContractController extends Controller {
                     return true;
                 } else if(Contract.getName().toLowerCase().contains(searchKeyword)) {
                     return true;
-                } else if(Contract.getCreationDate().toString().toLowerCase().contains(searchKeyword)) {
+                } else if(getStringFromDate(Contract.getCreationDate()).contains(searchKeyword)) {
                     return true;
                 } else {
                     return Contract.getContractId().toLowerCase().contains(searchKeyword);

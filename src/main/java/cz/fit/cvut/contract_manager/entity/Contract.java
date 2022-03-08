@@ -186,6 +186,22 @@ public class Contract implements Serializable {
         return history.size();
     }
 
+    public Boolean isValid() {
+        return state == ContractState.VALID;
+    }
+
+    public Boolean isExpired() {
+        return state == ContractState.EXPIRED;
+    }
+
+    public Boolean isWithdrawn() {
+        return state == ContractState.WITHDRAWN;
+    }
+
+    public Boolean isTakenOut() {
+        return state == ContractState.TAKEN_OUT;
+    }
+
     public void setExpireDateOrig(final Date date) {
         this.expireDateOrig = date;
     }

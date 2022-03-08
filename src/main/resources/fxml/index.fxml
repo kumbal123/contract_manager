@@ -66,6 +66,15 @@
                         <Insets />
                      </VBox.margin>
                   </Button>
+                  <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToChartAnalytics" prefHeight="59.0" prefWidth="78.0">
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pics/chart_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                   <Button blendMode="HARD_LIGHT" mnemonicParsing="false" onMouseClicked="#switchToSettings" prefHeight="59.0" prefWidth="78.0">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">

@@ -1,5 +1,6 @@
 package cz.fit.cvut.contract_manager.controller;
 
+import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.Customer;
 import cz.fit.cvut.contract_manager.entity.History;
@@ -19,6 +20,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
@@ -66,6 +68,25 @@ public class CreateContractController extends Controller {
     private final ContractRepositoryService contractService = ContractRepositoryService.getInstance();
     private final CustomerRepositoryService customerService = CustomerRepositoryService.getInstance();
     private final WebService webService = WebService.getInstance();
+
+    private Boolean setErrColorCustomer(final String name, final String personalNumber, final String dateOfBirth) {
+        nameField.setStyle(name.isBlank() ? "-fx-background-color: #ff6161;" : "");
+        personalNumberField.setStyle(personalNumber.isBlank() ? "-fx-background-color: #ff6161;" : "");
+        dateOfBirthField.setStyle(!isDate(dateOfBirth) ? "-fx-background-color: #ff6161;" : "");
+
+        return !name.isBlank() && !personalNumber.isBlank() && isDate(dateOfBirth);
+    }
+
+    private Boolean setErrColorContract(final String contractId, final String lendPrice, final String expireDate,
+                                        final String itemInfo, final String totalPrice) {
+        contractIdField.setStyle(contractId.isBlank() ? "-fx-background-color: #ff6161;" : "");
+        lendPriceField.setStyle(!isInteger(lendPrice) ? "-fx-background-color: #ff6161;" : "");
+        expireDateField.setStyle(!isDate(expireDate) ? "-fx-background-color: #ff6161;" : "");
+        itemInfoField.setStyle(itemInfo.isBlank() ? "-fx-background-color: #ff6161;" : "");
+        totalPriceField.setStyle(!isInteger(totalPrice) ? "-fx-background-color: #ff6161;" : "");
+
+        return !contractId.isBlank() && isInteger(lendPrice) && isDate(expireDate) && !itemInfo.isBlank() && isInteger(totalPrice);
+    }
 
     private void computeTotalPrice() {
         try {
@@ -137,40 +158,65 @@ public class CreateContractController extends Controller {
             String cardIdNumber = cardIdNumberField.getText().trim();
             String meu = meuField.getText().trim();
             String nationality = nationalityField.getText().trim();
-            Date dateOfBirth = getDateFromString(dateOfBirthField.getText().trim());
-            customer = new Customer(name, gender, address, city, personalNumber, cardIdNumber, meu, nationality, dateOfBirth);
-            customerService.create(customer);
+            String dateOfBirth = dateOfBirthField.getText().trim();
+
+            if(setErrColorCustomer(name, personalNumber, dateOfBirth)) {
+                customer = new Customer(name, gender, address, city, personalNumber, cardIdNumber, meu,
+                        nationality, getDateFromString(dateOfBirth));
+                customerService.create(customer);
+            }
         }
 
         String contractId = contractIdField.getText().trim();
-        Date creationDate = getDateFromString(creationDateField.getText().trim());
-        Integer lendPrice = getInteger(lendPriceField.getText().trim());
-        Date expireDate = getDateFromString(expireDateField.getText().trim());
+        String creationDate = creationDateField.getText().trim();
+        String lendPrice = lendPriceField.getText().trim();
+        String expireDate = expireDateField.getText().trim();
         String itemInfo = itemInfoField.getText().trim();
         String itemSpecification = itemSpecificationField.getText().trim();
-        Integer totalPrice = getInteger(totalPriceField.getText().trim());
+        String totalPrice = totalPriceField.getText().trim();
 
-        contract = new Contract(contractId, creationDate, lendPrice, expireDate, itemInfo, itemSpecification, totalPrice, customer);
+        if(setErrColorContract(contractId, lendPrice, expireDate, itemInfo, totalPrice) && customer != null) {
+            contract = new Contract(contractId, getDateFromString(creationDate), getInteger(lendPrice),
+                    getDateFromString(expireDate), itemInfo, itemSpecification, getInteger(totalPrice), customer);
 
-        customerService.assignContract(customer, contract);
+            customerService.assignContract(customer, contract);
 
-        mainPane.getChildren().removeAll();
-        mainPane.setCenter(getPage("contracts.fxml"));
+            mainPane.getChildren().removeAll();
+            mainPane.setCenter(getPage("contracts.fxml"));
+
+            Notification.showPopupMessageOk("Contract successfully created!", (Stage) mainPane.getScene().getWindow());
+        } else {
+            Notification.showPopupMessageErr("Some required fields are empty!", (Stage) mainPane.getScene().getWindow());
+        }
     }
 
     @FXML
     public void updateContract(final MouseEvent event) throws IOException, ParseException {
-        contract.setLendPrice(getInteger(lendPriceField.getText().trim()));
-        contract.setExpireDateOrig(getDateFromString(expireDateField.getText().trim()));
-        contract.setContractId(contractIdField.getText().trim());
-        contract.setItemInfo(itemInfoField.getText().trim());
-        contract.setItemSpecification(itemSpecificationField.getText().trim());
-        contract.setTotalPriceOrig(getInteger(totalPriceField.getText().trim()));
+        String contractId = contractIdField.getText().trim();
+        String lendPrice = lendPriceField.getText().trim();
+        String expireDate = expireDateField.getText().trim();
+        String itemInfo = itemInfoField.getText().trim();
+        String itemSpecification = itemSpecificationField.getText().trim();
+        String totalPrice = totalPriceField.getText().trim();
 
-        contractService.update(contract);
+        if(setErrColorContract(contractId, lendPrice, expireDate, itemInfo, totalPrice)) {
+            contract.setLendPrice(getInteger(lendPrice));
+            contract.setExpireDateOrig(getDateFromString(expireDate));
+            contract.setContractId(contractId);
+            contract.setItemInfo(itemInfo);
+            contract.setItemSpecification(itemSpecification);
+            contract.setTotalPriceOrig(getInteger(totalPrice));
+            contract.setCreationDate(getDateFromString(creationDateField.getText().trim()));
 
-        mainPane.getChildren().removeAll();
-        mainPane.setCenter(getPage("contracts.fxml"));
+            contractService.update(contract);
+
+            mainPane.getChildren().removeAll();
+            mainPane.setCenter(getPage("contracts.fxml"));
+
+            Notification.showPopupMessageOk("Contract successfully created!", (Stage) mainPane.getScene().getWindow());
+        } else {
+            Notification.showPopupMessageErr("Some required fields are empty!", (Stage) mainPane.getScene().getWindow());
+        }
     }
 
     @FXML

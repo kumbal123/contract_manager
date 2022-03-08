@@ -1,5 +1,6 @@
 package cz.fit.cvut.contract_manager.controller;
 
+import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
@@ -9,11 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class IndexController extends Controller {
@@ -27,7 +28,7 @@ public class IndexController extends Controller {
     private BorderPane mainPane;
 
     @FXML
-    private void switchToHome(MouseEvent event) throws IOException {
+    private void switchToHome(final MouseEvent event) throws IOException {
         Pane pane = (Pane) event.getSource();
         Parent stage = pane.getScene().getRoot();
         stage.getScene().setRoot(getPage("index.fxml"));
@@ -54,6 +55,11 @@ public class IndexController extends Controller {
     }
 
     @FXML
+    public void switchToChartAnalytics(final MouseEvent event) throws IOException {
+        mainPane.setCenter(getPage("chartAnalytics.fxml"));
+    }
+
+    @FXML
     private void switchToSettings(final MouseEvent event) throws IOException {
         //TODO
     }
@@ -68,7 +74,14 @@ public class IndexController extends Controller {
         String contractId = contractIdField.getText().trim();
         Contract contract = contractService.getMostRecentByContractId(contractId);
 
-        contractService.withdraw(contract);
+        if(contractService.withdraw(contract)) {
+            Notification.showPopupMessageOk("Withdraw was successful!", (Stage) mainPane.getScene().getWindow());
+        } else {
+            Notification.showPopupMessageErr(
+                "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
     }
 
     @FXML
@@ -76,21 +89,40 @@ public class IndexController extends Controller {
         String contractId = contractIdField.getText().trim();
         Contract contract = contractService.getMostRecentByContractId(contractId);
 
-        contractService.takeOut(contract);
+        if(contractService.takeOut(contract)) {
+            Notification.showPopupMessageOk("Takeout was successful!", (Stage) mainPane.getScene().getWindow());
+        } else {
+            Notification.showPopupMessageErr(
+                "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
     }
 
     @FXML
     public void prolongContract(final MouseEvent event) throws ParseException {
         String contractId = contractIdField.getText().trim();
-        Date date = getDateFromString(dateField.getText().trim());
+        String dateStr = dateField.getText().trim();
 
-        Contract contract = contractService.getMostRecentByContractId(contractId);
+        if(isDate(dateStr)) {
+            Contract contract = contractService.getMostRecentByContractId(contractId);
+            History history = new History(contract.getTotalPriceCurr(), contract.getExpireDateCurr(),
+                    getDateFromString(dateStr), contract);
 
-        History history = new History(contract.getTotalPriceCurr(), contract.getExpireDateCurr(), date, contract);
-
-        contractService.prolong(contract, history);
-
-        //TODO successful pop up
+            if(contractService.prolong(contract, history)) {
+                Notification.showPopupMessageOk("Prolong was successful!", (Stage) mainPane.getScene().getWindow());
+            } else {
+                Notification.showPopupMessageErr(
+                    "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                    (Stage) mainPane.getScene().getWindow()
+                );
+            }
+        } else {
+            Notification.showPopupMessageErr(
+                "Date is not actually date!",
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
     }
 
     @Override
