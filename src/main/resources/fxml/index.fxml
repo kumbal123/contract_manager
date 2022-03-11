@@ -98,161 +98,59 @@
          <center>
             <Pane prefHeight="700.0" prefWidth="1100.0">
                <children>
-                  <Pane layoutX="59.0" layoutY="61.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
+                  <Pane layoutX="35.0" layoutY="105.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
                      <children>
-                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                        <Label layoutX="14.0" prefHeight="46.0" prefWidth="103.0" text="Expenses:">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="294.0" layoutY="61.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
-                     <children>
-                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                        <Label fx:id="labelTotalExpenses" layoutX="117.0" prefHeight="46.0" prefWidth="84.0">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                           </children>
-                        </VBox>
+                        <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="94.0" text="Total Contracts:">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelTotalNewContracts" layoutX="112.0" layoutY="31.0" prefHeight="46.0" prefWidth="94.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
-                  <Pane layoutX="527.0" layoutY="61.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
+                  <Button layoutX="156.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#withdrawContract" prefHeight="25.0" prefWidth="84.0" text="withdraw" />
+                  <TextField fx:id="contractIdField" layoutX="35.0" layoutY="55.0" prefHeight="25.0" prefWidth="110.0" promptText="id" />
+                  <TextField fx:id="dateField" layoutX="355.0" layoutY="55.0" prefHeight="25.0" prefWidth="188.0" promptText="date" />
+                  <Button layoutX="560.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="Prolong" />
+                  <Button layoutX="255.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#takeOutContract" prefHeight="25.0" prefWidth="84.0" text="take out" />
+                  <Pane layoutX="255.0" layoutY="105.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
                      <children>
-                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                        <Label layoutX="14.0" prefHeight="46.0" prefWidth="103.0" text="Income:">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="59.0" layoutY="359.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
-                     <children>
-                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                        <Label fx:id="labelTotalIncome" layoutX="117.0" prefHeight="46.0" prefWidth="84.0">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="294.0" layoutY="359.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
-                     <children>
-                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                        <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="94.0" text="Total Contracts:">
                            <font>
-                              <Font name="System Bold" size="22.0" />
+                              <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="527.0" layoutY="359.0" prefHeight="185.0" prefWidth="200.0" styleClass="infobox" stylesheets="@../css/style.css">
-                     <children>
-                        <Label layoutX="100.0" layoutY="21.0" prefHeight="46.0" prefWidth="84.0" text="652 Kc">
+                        <Label fx:id="labelTotalWithdrawnContracts" layoutX="112.0" layoutY="31.0" prefHeight="46.0" prefWidth="94.0">
                            <font>
-                              <Font name="System Bold" size="22.0" />
+                              <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <VBox layoutX="6.0" layoutY="63.0" prefHeight="123.0" prefWidth="139.0" styleClass="info_v_box" stylesheets="@../css/style.css">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="number of con. :" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="\% phones:" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="150.0" layoutY="63.0" prefHeight="123.0" prefWidth="51.0">
-                           <children>
-                              <Label prefHeight="42.0" prefWidth="145.0" text="10" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                              <Label prefHeight="29.0" prefWidth="149.0" text="15%" />
-                           </children>
-                        </VBox>
                      </children>
                   </Pane>
-                  <Button layoutX="191.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#withdrawContract" prefHeight="25.0" prefWidth="84.0" text="withdraw" />
-                  <TextField fx:id="contractIdField" layoutX="59.0" layoutY="301.0" prefHeight="25.0" prefWidth="110.0" promptText="id" />
-                  <TextField fx:id="dateField" layoutX="406.0" layoutY="301.0" prefHeight="25.0" prefWidth="188.0" promptText="date" />
-                  <Button layoutX="613.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="Prolong" />
-                  <Button layoutX="294.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#takeOutContract" prefHeight="25.0" prefWidth="84.0" text="take out" />
                </children>
             </Pane>
          </center>

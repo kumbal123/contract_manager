@@ -34,6 +34,7 @@ public class ChartAnalyticsController extends Controller {
     public LineChart<String, Integer> lineChartExpense;
     public Label labelTotalExpenses;
 
+    public Label labelTotalContracts;
     public PieChart pieChart;
 
     public Pane bottomLeftPane;
@@ -41,6 +42,7 @@ public class ChartAnalyticsController extends Controller {
     public BorderPane mainPane;
 
     private final ContractRepositoryService contractRepositoryService = ContractRepositoryService.getInstance();
+
     private List<Contract> contractList;
 
     private void analyzeContracts(final String year, final List<Contract> contracts) {
@@ -51,7 +53,7 @@ public class ChartAnalyticsController extends Controller {
         HashMap<Integer, Integer> monthlyExpenses = new HashMap<>();
         HashMap<Integer, Integer> monthlyIncome = new HashMap<>();
 
-        int totalExpenses = 0, totalIncome = 0;
+        int totalExpenses = 0, totalIncome = 0, withdrawn = 0, left = 0, totalContracts = contracts.size();
 
         for(Contract contract: contracts) {
             int month = Util.getMonth(contract.getCreationDate());
@@ -65,6 +67,8 @@ public class ChartAnalyticsController extends Controller {
 
             totalExpenses += contract.getLendPrice();
             totalIncome += contract.isWithdrawn() ? contract.getTotalPriceCurr() : 0;
+            withdrawn += contract.isWithdrawn() ? 1 : 0;
+            left += contract.isTakenOut() ? 1 : 0;
         }
 
         for(int i = 0; i < 12; i++) {
@@ -74,6 +78,22 @@ public class ChartAnalyticsController extends Controller {
             listExpensesData.add(new XYChart.Data<>(Util.months[i], monthExpense));
             listIncomeData.add(new XYChart.Data<>(Util.months[i], yearIncome));
             listProfitLossData.add(new XYChart.Data<>(Util.months[i], yearIncome - monthExpense));
+        }
+
+        int stillValid = totalContracts - left - withdrawn;
+
+        labelTotalContracts.setText(String.valueOf(totalContracts));
+
+        if(totalContracts != 0) {
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Left behind - " + left + " - " + (left * 100/totalContracts) + "%", left),
+                new PieChart.Data("Withdrawn - " + withdrawn + " - " + (withdrawn * 100/totalContracts) + "%", withdrawn),
+                new PieChart.Data("Still valid - " + stillValid + " - " + (stillValid * 100/totalContracts) + "%", stillValid)
+            );
+
+            pieChart.setData(pieChartData);
+        } else {
+            pieChart.getData().clear();
         }
 
         ObservableList<XYChart.Data<String, Integer>> lineChartExpenseData = FXCollections.observableArrayList(listExpensesData);
@@ -103,7 +123,7 @@ public class ChartAnalyticsController extends Controller {
         HashMap<Integer, Integer> yearlyExpenses = new HashMap<>();
         HashMap<Integer, Integer> yearlyIncome = new HashMap<>();
 
-        int totalExpenses = 0, totalIncome = 0;
+        int totalExpenses = 0, totalIncome = 0, withdrawn = 0, left = 0, totalContracts = contracts.size();;
 
         for(Contract contract: contracts) {
             int year = Util.getYear(contract.getCreationDate());
@@ -116,6 +136,8 @@ public class ChartAnalyticsController extends Controller {
 
             totalExpenses += contract.getLendPrice();
             totalIncome += contract.isWithdrawn() ? contract.getTotalPriceCurr() : 0;
+            withdrawn += contract.isWithdrawn() ? 1 : 0;
+            left += contract.isTakenOut() ? 1 : 0;
         }
 
         for(int i = fromYear; i <= toYear; i++) {
@@ -126,6 +148,23 @@ public class ChartAnalyticsController extends Controller {
             listIncomeData.add(new XYChart.Data<>(String.valueOf(i), yearIncome));
             listProfitLossData.add(new XYChart.Data<>(String.valueOf(i), yearIncome - yearExpense));
         }
+
+        int stillValid = totalContracts - left - withdrawn;
+
+        labelTotalContracts.setText(String.valueOf(totalContracts));
+
+        if(totalContracts != 0) {
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Left behind - " + left + " - " + (left * 100/totalContracts) + "%", left),
+                new PieChart.Data("Withdrawn - " + withdrawn + " - " + (withdrawn * 100/totalContracts) + "%", withdrawn),
+                new PieChart.Data("Still valid - " + stillValid + " - " + (stillValid * 100/totalContracts) + "%", stillValid)
+            );
+
+            pieChart.setData(pieChartData);
+        } else {
+            pieChart.getData().clear();
+        }
+
 
         ObservableList<XYChart.Data<String, Integer>> lineChartExpenseData = FXCollections.observableArrayList(listExpensesData);
         lineChartExpense.getData().add(new XYChart.Series<>(lineChartExpenseData));
@@ -175,10 +214,12 @@ public class ChartAnalyticsController extends Controller {
 
     @FXML
     public void clearCharts(final MouseEvent event) {
+        labelTotalContracts.setText("0");
         labelTotalExpenses.setText("0");
         labelTotalIncome.setText("0");
         labelTotalProfitLoss.setText("0");
 
+        pieChart.getData().clear();
         lineChartExpense.getData().clear();
         lineChartIncome.getData().clear();
         lineChartProfitLoss.getData().clear();

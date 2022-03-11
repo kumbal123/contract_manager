@@ -43,16 +43,13 @@ public class WebService implements Service {
         try {
             String webLink = "https://www.google.com/search?q=";
             String link = webLink + productName.replaceAll(" ", "+");
-            System.out.println(link);
+
             HtmlPage page = webClient.getPage(link);
 
             webClient.getCurrentWindow().getJobManager().removeAllJobs();
             webClient.close();
 
             List<HtmlDivision> anchors = page.getByXPath("//div[contains(@class, 'rwVHAc')]");
-            System.out.println("Size: " + anchors.size());
-
-
 
             for (HtmlElement anchor : anchors) {
                 HtmlAnchor name = anchor.getFirstByXPath("./div[@role='heading']/a[contains(@class, 'plantl pla-unit-title-link')]");

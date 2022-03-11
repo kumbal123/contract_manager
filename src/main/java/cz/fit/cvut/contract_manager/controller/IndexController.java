@@ -4,8 +4,10 @@ import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
+import cz.fit.cvut.contract_manager.util.Util;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -15,12 +17,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class IndexController extends Controller {
 
     public TextField contractIdField;
     public TextField dateField;
+
+    public Label labelTotalExpenses;
+    public Label labelTotalNewContracts;
+    public Label labelTotalIncome;
+    public Label labelTotalWithdrawnContracts;
 
     private final ContractRepositoryService contractService = ContractRepositoryService.getInstance();
 
@@ -127,6 +136,23 @@ public class IndexController extends Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        List<Contract> contractList = contractService.getAll();
 
+        int totalExpenses = 0, totalNewContracts = 0, totalIncome = 0, totalWithdrawnContracts = 0;
+
+        for(Contract contract : contractList) {
+            if(Util.isToday(contract.getCreationDate())) {
+                totalExpenses += contract.getLendPrice();
+                totalNewContracts += 1;
+            } else if(Util.isToday(contract.getExpireDateCurr()) && contract.isWithdrawn()) {
+                totalIncome += contract.getTotalPriceCurr();
+                totalWithdrawnContracts += 1;
+            }
+        }
+
+        labelTotalExpenses.setText(String.valueOf(totalExpenses));
+        labelTotalNewContracts.setText(String.valueOf(totalNewContracts));
+        labelTotalIncome.setText(String.valueOf(totalIncome));
+        labelTotalWithdrawnContracts.setText(String.valueOf(totalWithdrawnContracts));
     }
 }
