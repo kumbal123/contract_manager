@@ -1,13 +1,62 @@
 .sidepane {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #006edb;
+    -fx-pref-height: 100%;
 }
 
 .popup_err {
     -fx-background-color: #ff6161;
-    -fx-font-size: 30;
+    -fx-font-size: 23;
 }
 
 .popup_ok {
     -fx-background-color: #64ff61;
-    -fx-font-size: 30;
+    -fx-font-size: 23;
 }
+
+.text-field {
+    -fx-background-color: -fx-control-inner-background;
+}
+
+.button {
+    -fx-background-radius: 30;
+    -fx-background-color: #006edb;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: #3b9eff;
+}
+
+.buttonPane {
+    -fx-pref-height: 40;
+}
+
+.buttonPane:hover {
+    -fx-background-color: linear-gradient(to left, rgba(255,0,0,0), rgba(255,255,255,255));
+    -fx-border-width: 0px 0px 0px 3px;
+}
+
+.text-field:focused {
+    -fx-border-color: #006edb;
+    -fx-border-width: 2;
+}
+
+.table-view {
+    -fx-background-color: #006edb;
+    -fx-fill: white;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #006edb;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 40px;
+    -fx-border-width: 0 0 10 0;
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+

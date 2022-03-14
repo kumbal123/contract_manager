@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -83,11 +82,16 @@ public class IndexController extends Controller {
         String contractId = contractIdField.getText().trim();
         Contract contract = contractService.getMostRecentByContractId(contractId);
 
-        if(contractService.withdraw(contract)) {
+        if(contract != null && contractService.withdraw(contract)) {
             Notification.showPopupMessageOk("Withdraw was successful!", (Stage) mainPane.getScene().getWindow());
-        } else {
+        } else if(contract != null) {
             Notification.showPopupMessageErr(
                 "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                (Stage) mainPane.getScene().getWindow()
+            );
+        } else {
+            Notification.showPopupMessageErr(
+                "Contract with " + contractId + " id does not exist!",
                 (Stage) mainPane.getScene().getWindow()
             );
         }
@@ -98,11 +102,16 @@ public class IndexController extends Controller {
         String contractId = contractIdField.getText().trim();
         Contract contract = contractService.getMostRecentByContractId(contractId);
 
-        if(contractService.takeOut(contract)) {
+        if(contract != null && contractService.takeOut(contract)) {
             Notification.showPopupMessageOk("Takeout was successful!", (Stage) mainPane.getScene().getWindow());
-        } else {
+        } else if(contract != null) {
             Notification.showPopupMessageErr(
                 "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                (Stage) mainPane.getScene().getWindow()
+            );
+        } else {
+            Notification.showPopupMessageErr(
+                "Contract with " + contractId + " id does not exist!",
                 (Stage) mainPane.getScene().getWindow()
             );
         }
@@ -115,16 +124,24 @@ public class IndexController extends Controller {
 
         if(isDate(dateStr)) {
             Contract contract = contractService.getMostRecentByContractId(contractId);
-            History history = new History(contract.getTotalPriceCurr(), contract.getExpireDateCurr(),
-                    getDateFromString(dateStr), contract);
 
-            if(contractService.prolong(contract, history)) {
-                Notification.showPopupMessageOk("Prolong was successful!", (Stage) mainPane.getScene().getWindow());
-            } else {
+            if(contract == null) {
                 Notification.showPopupMessageErr(
-                    "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                    "Contract with " + contractId + " id does not exist!",
                     (Stage) mainPane.getScene().getWindow()
                 );
+            } else {
+                History history = new History(contract.getTotalPriceCurr(), contract.getExpireDateCurr(),
+                        getDateFromString(dateStr), contract);
+
+                if(contractService.prolong(contract, history)) {
+                    Notification.showPopupMessageOk("Prolong was successful!", (Stage) mainPane.getScene().getWindow());
+                } else {
+                    Notification.showPopupMessageErr(
+                            "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                            (Stage) mainPane.getScene().getWindow()
+                    );
+                }
             }
         } else {
             Notification.showPopupMessageErr(

@@ -83,7 +83,7 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <PieChart fx:id="pieChart" layoutX="21.0" layoutY="60.0" prefHeight="308.0" prefWidth="522.0" />
+            <PieChart fx:id="pieChart" animated="false" layoutX="21.0" layoutY="60.0" prefHeight="308.0" prefWidth="522.0" />
             <Label layoutX="14.0" layoutY="67.0" text="Total Contracts:">
                <font>
                   <Font name="System Bold" size="28.0" />

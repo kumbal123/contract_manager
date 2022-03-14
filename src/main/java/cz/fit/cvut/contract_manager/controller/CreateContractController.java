@@ -11,6 +11,8 @@ import cz.fit.cvut.contract_manager.service.WebService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.print.*;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,6 +22,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -28,6 +32,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.util.ResourceBundle;
@@ -60,6 +65,7 @@ public class CreateContractController extends Controller {
     public Button updateButton;
     public BorderPane mainPane;
     public Pane rightPane;
+    public Pane contractDataPane;
 
     private Customer customer;
     private Contract contract;
@@ -221,6 +227,18 @@ public class CreateContractController extends Controller {
 
     @FXML
     public void printContract(final MouseEvent event) {
+        PrinterJob job = PrinterJob.createPrinterJob();
+        if (job != null) {
+            PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.A5, PageOrientation.PORTRAIT, 0, 0, 0, 0);
+            boolean printed = job.printPage(pageLayout, contractDataPane);
+            if (printed) {
+                job.endJob();
+            } else {
+                System.out.println("Printing failed.");
+            }
+        } else {
+            System.out.println("Could not create a printer job.");
+        }
     }
 
     @FXML
