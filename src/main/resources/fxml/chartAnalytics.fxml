@@ -31,7 +31,7 @@
                                 <Font name="System Bold" size="28.0" />
                             </font>
                         </Label>
-                        <Label fx:id="labelTotalIncome" layoutX="182.0" layoutY="26.0" prefHeight="34.0" prefWidth="169.0">
+                        <Label fx:id="labelTotalIncome" layoutX="225.0" layoutY="26.0" prefHeight="34.0" prefWidth="169.0">
                             <font>
                                 <Font name="System Bold" size="28.0" />
                             </font>
@@ -53,7 +53,7 @@
                                 <Font name="System Bold" size="28.0" />
                             </font>
                         </Label>
-                        <Label fx:id="labelTotalProfitLoss" layoutX="233.0" layoutY="26.0" prefHeight="34.0" prefWidth="169.0">
+                        <Label fx:id="labelTotalProfitLoss" layoutX="285.0" layoutY="26.0" prefHeight="34.0" prefWidth="169.0">
                             <font>
                                 <Font name="System Bold" size="28.0" />
                             </font>
@@ -78,7 +78,7 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="labelTotalExpenses" layoutX="767.0" layoutY="33.0" prefHeight="34.0" prefWidth="169.0">
+            <Label fx:id="labelTotalExpenses" layoutX="800.0" layoutY="33.0" prefHeight="34.0" prefWidth="169.0">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -89,7 +89,7 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="labelTotalContracts" layoutX="210.0" layoutY="67.0" prefHeight="34.0" prefWidth="169.0">
+            <Label fx:id="labelTotalContracts" layoutX="254.0" layoutY="67.0" prefHeight="34.0" prefWidth="169.0">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>

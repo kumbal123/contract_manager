@@ -35,7 +35,7 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="labelTotalContracts" layoutX="653.0" layoutY="30.0" prefHeight="34.0" prefWidth="169.0">
+            <Label fx:id="labelTotalContracts" layoutX="693.0" layoutY="30.0" prefHeight="34.0" prefWidth="169.0">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -60,7 +60,7 @@
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelTotalMoney" layoutX="181.0" layoutY="-10.0" prefHeight="34.0" prefWidth="169.0">
+                  <Label fx:id="labelTotalMoney" layoutX="211.0" layoutY="-10.0" prefHeight="34.0" prefWidth="169.0">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -87,7 +87,7 @@
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelTotalContractInterval" layoutX="212.0" layoutY="-10.0" prefHeight="34.0" prefWidth="169.0">
+                  <Label fx:id="labelTotalContractInterval" layoutX="254.0" layoutY="-10.0" prefHeight="34.0" prefWidth="169.0">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>

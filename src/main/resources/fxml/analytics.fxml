@@ -32,12 +32,12 @@
                                 </TableView>
                             </children></Pane>
                   <TextField fx:id="toField" layoutX="249.0" layoutY="43.0" prefHeight="25.0" prefWidth="185.0" promptText="to" />
-                  <Label layoutX="583.0" layoutY="81.0" prefHeight="54.0" prefWidth="196.0" text="Total Contracts: ">
+                  <Label layoutX="583.0" layoutY="81.0" prefHeight="54.0" prefWidth="237.0" text="Total Contracts: ">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelTotalContracts" layoutX="785.0" layoutY="81.0" prefHeight="54.0" prefWidth="222.0">
+                  <Label fx:id="labelTotalContracts" layoutX="827.0" layoutY="81.0" prefHeight="54.0" prefWidth="222.0">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -57,17 +57,17 @@
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelExpenses" layoutX="785.0" layoutY="135.0" prefHeight="54.0" prefWidth="222.0">
+                  <Label fx:id="labelExpenses" layoutX="827.0" layoutY="135.0" prefHeight="54.0" prefWidth="222.0">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelIncome" layoutX="785.0" layoutY="189.0" prefHeight="54.0" prefWidth="222.0">
+                  <Label fx:id="labelIncome" layoutX="827.0" layoutY="189.0" prefHeight="54.0" prefWidth="222.0">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelProfitLoss" layoutX="785.0" layoutY="243.0" prefHeight="54.0" prefWidth="222.0">
+                  <Label fx:id="labelProfitLoss" layoutX="827.0" layoutY="243.0" prefHeight="54.0" prefWidth="222.0">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
