@@ -40,6 +40,15 @@ public class CustomerRepository extends Repository<Integer, Customer> {
         return customers;
     }
 
+    @Override
+    public void deleteAll() {
+        Session session = FACTORY.openSession();
+        Transaction trans = session.beginTransaction();
+        session.createQuery("delete Customer").executeUpdate();
+        trans.commit();
+        session.close();
+    }
+
     private static class CustomerRepositoryHolder {
 
         private static final CustomerRepository INSTANCE = new CustomerRepository();

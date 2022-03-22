@@ -59,6 +59,15 @@ public class ContractRepository extends Repository<Integer, Contract> {
         return contracts;
     }
 
+    @Override
+    public void deleteAll() {
+        Session session = FACTORY.openSession();
+        Transaction trans = session.beginTransaction();
+        session.createQuery("delete from Contract").executeUpdate();
+        trans.commit();
+        session.close();
+    }
+
 
     private static class ContractRepositoryHolder {
 

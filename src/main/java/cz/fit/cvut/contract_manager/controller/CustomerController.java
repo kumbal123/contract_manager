@@ -1,5 +1,6 @@
 package cz.fit.cvut.contract_manager.controller;
 
+import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Customer;
 import cz.fit.cvut.contract_manager.service.CustomerRepositoryService;
 import javafx.collections.FXCollections;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,8 +45,14 @@ public class CustomerController extends Controller {
 
     @FXML
     public void deleteCustomer(final MouseEvent event) {
-        customerService.deleteByEntity(customer);
-        showCustomers();
+        if(customer != null) {
+            customerService.deleteByEntity(customer);
+            showCustomers();
+            Notification.showPopupMessageOk("Successfully deleted customer: " + customer.getName() + "!", (Stage) mainPane.getScene().getWindow());
+            customer = null;
+        } else {
+            Notification.showPopupMessageErr("Could not delete. Pick a customer by clicking on it first!", (Stage) mainPane.getScene().getWindow());
+        }
     }
 
     @FXML

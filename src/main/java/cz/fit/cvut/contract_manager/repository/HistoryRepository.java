@@ -40,6 +40,15 @@ public class HistoryRepository extends Repository<Integer, History> {
         return history;
     }
 
+    @Override
+    public void deleteAll() {
+        Session session = FACTORY.openSession();
+        Transaction trans = session.beginTransaction();
+        session.createQuery("delete History").executeUpdate();
+        trans.commit();
+        session.close();
+    }
+
     private static class HistoryRepositoryHolder {
 
         private static final HistoryRepository INSTANCE = new HistoryRepository();

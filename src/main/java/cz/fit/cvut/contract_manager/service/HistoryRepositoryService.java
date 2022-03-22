@@ -4,7 +4,7 @@ import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.repository.HistoryRepository;
 
 public class HistoryRepositoryService extends RepositoryService<Integer, History, HistoryRepository> {
-    protected HistoryRepositoryService(HistoryRepository repository) {
+    protected HistoryRepositoryService(final HistoryRepository repository) {
         super(repository);
     }
 

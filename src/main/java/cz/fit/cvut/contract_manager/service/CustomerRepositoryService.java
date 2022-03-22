@@ -6,7 +6,7 @@ import cz.fit.cvut.contract_manager.repository.CustomerRepository;
 
 public class CustomerRepositoryService extends RepositoryService<Integer, Customer, CustomerRepository> {
 
-    protected CustomerRepositoryService(CustomerRepository repository) {
+    protected CustomerRepositoryService(final CustomerRepository repository) {
         super(repository);
     }
 

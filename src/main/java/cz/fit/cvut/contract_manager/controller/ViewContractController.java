@@ -92,7 +92,17 @@ public class ViewContractController extends Controller {
 
             tvHistory.setItems(historyList);
 
-            labelTotalPrice.setText(historyList.get(contract.getNumberOfProlongs() - 1).getTotalPrice().toString());
+            labelTotalPrice.setText(contract.getTotalPriceCurr().toString());
+
+            if(contract.isWithdrawn()) {
+                labelTotalPrice.setStyle("-fx-background-color: #64ff61;");
+            } else if(contract.isTakenOut()) {
+                labelTotalPrice.setStyle("-fx-background-color: #ff6161;");
+            } else if(contract.isExpired()) {
+                labelTotalPrice.setStyle("-fx-background-color: #ffb561;");
+            } else {
+                labelTotalPrice.setStyle("");
+            }
         }
     }
 

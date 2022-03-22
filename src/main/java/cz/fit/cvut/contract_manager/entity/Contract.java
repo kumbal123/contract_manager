@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 public class Contract implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
 
     private String contractId;
@@ -63,19 +63,16 @@ public class Contract implements Serializable {
 
         Contract contract = (Contract) o;
         return id.equals(contract.id) &&
-                expireDateOrig.equals(contract.expireDateOrig) &&
                 lendPrice.equals(contract.lendPrice) &&
-                creationDate.equals(contract.creationDate) &&
                 contractId.equals(contract.contractId) &&
                 itemInfo.equals(contract.itemInfo) &&
                 itemSpecification.equals(contract.itemSpecification) &&
-                totalPriceOrig.equals(contract.totalPriceOrig) &&
-                customer.equals(contract.customer);
+                totalPriceOrig.equals(contract.totalPriceOrig);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, expireDateOrig, lendPrice, creationDate, contractId, itemInfo, itemSpecification,
+        return Objects.hash(id, expireDateOrig, lendPrice, creationDate, itemInfo, itemSpecification,
                 totalPriceOrig, customer);
     }
 
@@ -232,6 +229,12 @@ public class Contract implements Serializable {
 
     public void setState(final ContractState state) {
         this.state = state;
+
+        if(state == ContractState.WITHDRAWN) {
+            this.totalPriceCurr = History.computeInterest(this.lendPrice, this.creationDate, new Date()) + this.lendPrice;
+        } else if(state == ContractState.TAKEN_OUT) {
+            this.totalPriceCurr = 0;
+        }
     }
 
     public void removeCustomer() {

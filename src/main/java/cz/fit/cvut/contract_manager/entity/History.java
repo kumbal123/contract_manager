@@ -6,10 +6,12 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Integer.max;
+
 @Entity
 public class History implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
 
     private Integer startPrice;
@@ -23,7 +25,7 @@ public class History implements Serializable {
 
     public static Integer computeInterest(final Integer price, final Date fromDate, final Date toDate) {
         int days = (int) TimeUnit.DAYS.convert(toDate.getTime() - fromDate.getTime(), TimeUnit.MILLISECONDS);
-        return days * price / 100;
+        return max(days * price / 100, 20);
     }
 
     public History() {
@@ -63,10 +65,7 @@ public class History implements Serializable {
         return id.equals(history.id) &&
                 startPrice.equals(history.startPrice) &&
                 interest.equals(history.interest) &&
-                totalPrice.equals(history.totalPrice) &&
-                fromDate.equals(history.fromDate) &&
-                toDate.equals(history.toDate) &&
-                contract.equals(history.contract);
+                totalPrice.equals(history.totalPrice);
     }
 
     @Override

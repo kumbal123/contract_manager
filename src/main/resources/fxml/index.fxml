@@ -18,7 +18,7 @@
       <URL value="@../css/style.css" />
    </stylesheets>
    <children>
-      <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1175.0">
+      <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <VBox prefHeight="700.0" prefWidth="63.0" styleClass="sidepane" BorderPane.alignment="CENTER">
                <children>

@@ -15,8 +15,8 @@ public class Notification {
             popup.setY(stage.getY() + 22);
         });
         Label label = new Label(message);
+        label.setPrefWidth(stage.getWidth() - 63);
         label.setOnMouseReleased(e -> popup.hide());
-        label.setPrefWidth(1108);
         label.getStyleClass().add(className);
         label.getStylesheets().add("/css/style.css");
         popup.getContent().add(label);

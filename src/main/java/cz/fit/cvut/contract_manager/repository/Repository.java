@@ -1,5 +1,6 @@
 package cz.fit.cvut.contract_manager.repository;
 
+import cz.fit.cvut.contract_manager.entity.Contract;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -36,4 +37,5 @@ public abstract class Repository<K, E> {
 
     public abstract E getById(final K id);
     public abstract List<E> getAll();
+    public abstract void deleteAll();
 }

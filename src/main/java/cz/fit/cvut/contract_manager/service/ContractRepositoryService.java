@@ -6,7 +6,7 @@ import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.repository.ContractRepository;
 
 public class ContractRepositoryService extends RepositoryService<Integer, Contract, ContractRepository> {
-    protected ContractRepositoryService(ContractRepository repository) {
+    protected ContractRepositoryService(final ContractRepository repository) {
         super(repository);
     }
 
@@ -46,15 +46,18 @@ public class ContractRepositoryService extends RepositoryService<Integer, Contra
         return false;
     }
 
-    public void expire(final Contract contract) {
+    public Boolean expire(final Contract contract) {
         if(contract.isValid()) {
             contract.setState(ContractState.EXPIRED);
             repository.update(contract);
+            return true;
         }
+
+        return false;
     }
 
     public Boolean prolong(final Contract contract, final History history) {
-        if (!contract.isWithdrawn() && !contract.isTakenOut()) {
+        if (!contract.isWithdrawn() && !contract.isTakenOut() && history.getToDate().compareTo(contract.getExpireDateCurr()) > 0) {
             contract.addHistory(history);
             repository.update(contract);
             return true;
