@@ -4,6 +4,7 @@ import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
+import cz.fit.cvut.contract_manager.service.HistoryRepositoryService;
 import cz.fit.cvut.contract_manager.util.Util;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -31,6 +32,7 @@ public class IndexController extends Controller {
     public Label labelTotalWithdrawnContracts;
 
     private final ContractRepositoryService contractService = ContractRepositoryService.getInstance();
+    private final HistoryRepositoryService historyService = HistoryRepositoryService.getInstance();
 
     @FXML
     private BorderPane mainPane;
@@ -69,11 +71,6 @@ public class IndexController extends Controller {
 
     @FXML
     private void switchToSettings(final MouseEvent event) throws IOException {
-        //TODO
-    }
-
-    @FXML
-    private void logOut(final MouseEvent event) {
         //TODO
     }
 
@@ -135,11 +132,12 @@ public class IndexController extends Controller {
                         getDateFromString(dateStr), contract);
 
                 if(contractService.prolong(contract, history)) {
+                    historyService.create(history);
                     Notification.showPopupMessageOk("Prolong was successful!", (Stage) mainPane.getScene().getWindow());
                 } else {
                     Notification.showPopupMessageErr(
-                            "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
-                            (Stage) mainPane.getScene().getWindow()
+                        "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                        (Stage) mainPane.getScene().getWindow()
                     );
                 }
             }

@@ -22,10 +22,10 @@ class BootServiceTest {
     void shouldExpireContractsThatAreDue() {
         long today = new Date().getTime();
 
-        Contract contract1 = new Contract("A10", new Date(10), 1000, new Date(20), "mobile", "", 1000, null);
-        Contract contract2 = new Contract("R12", new Date(100), 5000, new Date(220), "phone", "", 4000, null);
-        Contract contract3 = new Contract("B01", new Date(100), 5000, new Date(today + 1002340), "phone", "", 4000, null);
-        Contract contract4 = new Contract("K99", new Date(100), 5000, new Date(today + 12321), "phone", "", 4000, null);
+        Contract contract1 = new Contract("A10", new Date(10), 1000, new Date(20), "mobile", "", 1000);
+        Contract contract2 = new Contract("R12", new Date(100), 5000, new Date(220), "phone", "", 4000);
+        Contract contract3 = new Contract("B01", new Date(100), 5000, new Date(today + 1002340), "phone", "", 4000);
+        Contract contract4 = new Contract("K99", new Date(100), 5000, new Date(today + 12321), "phone", "", 4000);
 
         contractRepository.save(contract1);
         contractRepository.save(contract2);

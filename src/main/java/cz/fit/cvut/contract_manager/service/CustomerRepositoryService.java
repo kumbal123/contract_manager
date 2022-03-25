@@ -4,6 +4,8 @@ import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.Customer;
 import cz.fit.cvut.contract_manager.repository.CustomerRepository;
 
+import java.util.List;
+
 public class CustomerRepositoryService extends RepositoryService<Integer, Customer, CustomerRepository> {
 
     protected CustomerRepositoryService(final CustomerRepository repository) {
@@ -20,6 +22,9 @@ public class CustomerRepositoryService extends RepositoryService<Integer, Custom
 
     public void assignContract(final Customer customer, final Contract contract) {
         customer.assignContract(contract);
-        repository.update(customer);
+    }
+
+    public List<Contract> getContracts(final Integer id) {
+        return repository.getContracts(id);
     }
 }

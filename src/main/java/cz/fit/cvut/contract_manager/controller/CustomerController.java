@@ -3,6 +3,7 @@ package cz.fit.cvut.contract_manager.controller;
 import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Customer;
 import cz.fit.cvut.contract_manager.service.CustomerRepositoryService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -74,10 +75,13 @@ public class CustomerController extends Controller {
     private void showCustomers() {
         ObservableList<Customer> customerList = FXCollections.observableArrayList(customerService.getAll());
 
-        colName.setCellValueFactory(new PropertyValueFactory<Customer, String>("name"));
-        colPersonalNumber.setCellValueFactory(new PropertyValueFactory<Customer, String>("personalNumber"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<Customer, String>("address"));
-        colNumOfContracts.setCellValueFactory(new PropertyValueFactory<Customer, String>("numberOfContracts"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colPersonalNumber.setCellValueFactory(new PropertyValueFactory<>("personalNumber"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+
+        colNumOfContracts.setCellValueFactory(
+            cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getNumberOfContracts()))
+        );
 
         colDateOfBirth.setCellValueFactory(
             cellData -> getStringPropertyFromDate(cellData.getValue().getDateOfBirth())

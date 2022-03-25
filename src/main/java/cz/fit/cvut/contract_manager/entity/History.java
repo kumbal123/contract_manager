@@ -32,6 +32,14 @@ public class History implements Serializable {
 
     }
 
+    public History(final Integer startPrice, final Date fromDate, final Date toDate) {
+        this.startPrice = startPrice;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.interest = computeInterest(startPrice, fromDate, toDate);
+        this.totalPrice = startPrice + interest;
+    }
+
     public History(final Integer startPrice, final Date fromDate, final Date toDate, final Contract contract) {
         this.startPrice = startPrice;
         this.fromDate = fromDate;

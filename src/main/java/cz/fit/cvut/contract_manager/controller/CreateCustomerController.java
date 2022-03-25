@@ -55,6 +55,55 @@ public class CreateCustomerController extends Controller {
 
     public CustomerRepositoryService customerService = CustomerRepositoryService.getInstance();
     private Customer customer;
+    private List<Contract> contracts;
+
+    public int getContractCount(int month, int year) {
+        int count = 0;
+
+        for(Contract contract : contracts) {
+            int contractMonth = Util.getMonth(contract.getCreationDate());
+            int contractYear = Util.getYear(contract.getCreationDate());
+
+            count += contractMonth == month && contractYear == year ? 1 : 0;
+        }
+
+        return count;
+    }
+
+    public int getContractCount(int year) {
+        int count = 0;
+
+        for(Contract contract : contracts) {
+            count += Util.getYear(contract.getCreationDate()) == year ? 1 : 0;
+        }
+
+        return count;
+    }
+
+    public int getMoneySpent(int month, int year) {
+        int money = 0;
+
+        for(Contract contract : contracts) {
+            int contractMonth = Util.getMonth(contract.getCreationDate());
+            int contractYear = Util.getYear(contract.getCreationDate());
+            int interest = contract.getTotalPriceCurr() - contract.getLendPrice();
+
+            money += contractMonth == month && contractYear == year && contract.isWithdrawn() ? interest : 0;
+        }
+
+        return money;
+    }
+
+    public int getMoneySpent(int year) {
+        int money = 0;
+
+        for(Contract contract : contracts) {
+            int interest = contract.getTotalPriceCurr() - contract.getLendPrice();
+            money += Util.getYear(contract.getCreationDate()) == year && contract.isWithdrawn() ? interest : 0;
+        }
+
+        return money;
+    }
 
     private Boolean setErrColorCustomer(final String name, final String personalNumber, final String dateOfBirth) {
         nameField.setStyle(name.isBlank() ? "-fx-background-color: #ff6161;" : "");
@@ -65,23 +114,26 @@ public class CreateCustomerController extends Controller {
     }
 
     private void initPieChart() {
-        int withdrawn = 0, left = 0, totalContracts = customer.getContracts().size();
+        int withdrawn = 0, left = 0, totalContracts = customer.getNumberOfContracts();
 
-        for(Contract contract : customer.getContracts()) {
+        for(Contract contract : contracts) {
             withdrawn += contract.isWithdrawn() ? 1 : 0;
             left += contract.isTakenOut() ? 1 : 0;
         }
 
         int stillValid = totalContracts - left - withdrawn;
 
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-            new PieChart.Data("Left behind - " + left + " - " + (left * 100/totalContracts) + "%", left),
-            new PieChart.Data("Withdrawn - " + withdrawn + " - " + (withdrawn * 100/totalContracts) + "%", withdrawn),
-            new PieChart.Data("Still valid - " + stillValid + " - " + (stillValid * 100/totalContracts) + "%", stillValid)
-        );
+        if(totalContracts != 0) {
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Left behind - " + left + " - " + (left * 100/totalContracts) + "%", left),
+                new PieChart.Data("Withdrawn - " + withdrawn + " - " + (withdrawn * 100/totalContracts) + "%", withdrawn),
+                new PieChart.Data("Still valid - " + stillValid + " - " + (stillValid * 100/totalContracts) + "%", stillValid)
+            );
+
+            pieChart.setData(pieChartData);
+        }
 
         labelTotalContracts.setText(String.valueOf(totalContracts));
-        pieChart.setData(pieChartData);
     }
 
     private void initLineChartContractCount() {
@@ -90,7 +142,7 @@ public class CreateCustomerController extends Controller {
         int year = Util.getYear(new Date()), total = 0;
 
         for(int i = 0; i < 12; i++) {
-            int contractCount = customer.getContractCount(i, year);
+            int contractCount = getContractCount(i, year);
             list.add(new XYChart.Data<>(Util.months[i], contractCount));
             total += contractCount;
         }
@@ -112,7 +164,7 @@ public class CreateCustomerController extends Controller {
         int year = Util.getYear(new Date()), total = 0;
 
         for(int i = 0; i < 12; i++) {
-            int money = customer.getMoneySpent(i, year);
+            int money = getMoneySpent(i, year);
             list.add(new XYChart.Data<>(Util.months[i], money));
             total += money;
         }
@@ -130,6 +182,7 @@ public class CreateCustomerController extends Controller {
 
     public void initUpdateCustomer(final Customer src) {
         customer = src;
+        contracts = new ArrayList<>(customerService.getContracts(customer.getId()));
 
         nameField.setText(customer.getName());
         genderField.setText(customer.getGender());
@@ -230,7 +283,7 @@ public class CreateCustomerController extends Controller {
             List<XYChart.Data<String, Integer>> list = new ArrayList<>();
 
             for(int i = 0; i < 12; i++) {
-                int money = customer.getMoneySpent(i, year);
+                int money = getMoneySpent(i, year);
                 list.add(new XYChart.Data<>(Util.months[i], money));
                 total += money;
             }
@@ -259,7 +312,7 @@ public class CreateCustomerController extends Controller {
             List<XYChart.Data<String, Integer>> list = new ArrayList<>();
 
             for(int i = fromYear; i <= toYear; i++) {
-                int money = customer.getMoneySpent(i);
+                int money = getMoneySpent(i);
                 list.add(new XYChart.Data<>(String.valueOf(i), money));
                 total += money;
             }
@@ -284,7 +337,7 @@ public class CreateCustomerController extends Controller {
             List<XYChart.Data<String, Integer>> list = new ArrayList<>();
 
             for(int i = 0; i < 12; i++) {
-                int money = customer.getContractCount(i, year);
+                int money = getContractCount(i, year);
                 list.add(new XYChart.Data<>(Util.months[i], money));
                 total += money;
             }
@@ -313,7 +366,7 @@ public class CreateCustomerController extends Controller {
             List<XYChart.Data<String, Integer>> list = new ArrayList<>();
 
             for(int i = fromYear; i <= toYear; i++) {
-                int money = customer.getContractCount(i);
+                int money = getContractCount(i);
                 list.add(new XYChart.Data<>(String.valueOf(i), money));
                 total += money;
             }

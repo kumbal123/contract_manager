@@ -56,7 +56,7 @@
                 <TextField fx:id="itemSpecificationField" layoutX="45.0" layoutY="406.0" prefHeight="25.0" prefWidth="373.0" promptText="s. number, weight" />
                 <TextField fx:id="totalPriceField" layoutX="282.0" layoutY="464.0" prefHeight="39.0" prefWidth="135.0" promptText="total price" />
                 <Button layoutX="356.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#takeOut" text="take out" />
-            <Button layoutX="295.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#fulfill" text="fufill" />
+            <Button layoutX="295.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#withdraw" text="fufill" />
             </Pane>
       </left>
     </BorderPane>

@@ -1,8 +1,10 @@
 package cz.fit.cvut.contract_manager.controller;
 
+import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
+import cz.fit.cvut.contract_manager.service.HistoryRepositoryService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Comparator;
@@ -51,6 +54,9 @@ public class ViewContractController extends Controller {
 
     private Contract contract;
 
+    private final HistoryRepositoryService historyService = HistoryRepositoryService.getInstance();
+    private final ContractRepositoryService contractService = ContractRepositoryService.getInstance();
+
     public void initContractData(final Contract src) {
         contract = src;
 
@@ -74,13 +80,13 @@ public class ViewContractController extends Controller {
         if(contract.getNumberOfProlongs() > 0) {
             rightPane.setVisible(true);
 
-            ObservableList<History> historyList = FXCollections.observableArrayList(contract.getHistory());
+            ObservableList<History> historyList = FXCollections.observableArrayList(historyService.getAllFromContractId(contract.getId()));
 
             historyList.sort(Comparator.comparing(History::getFromDate));
 
-            colStartPrice.setCellValueFactory(new PropertyValueFactory<History, String>("startPrice"));
-            colInterest.setCellValueFactory(new PropertyValueFactory<History, String>("interest"));
-            colTotalPrice.setCellValueFactory(new PropertyValueFactory<History, String>("totalPrice"));
+            colStartPrice.setCellValueFactory(new PropertyValueFactory<>("startPrice"));
+            colInterest.setCellValueFactory(new PropertyValueFactory<>("interest"));
+            colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 
             colFromDate.setCellValueFactory(
                 cellData -> getStringPropertyFromDate(cellData.getValue().getFromDate())
@@ -108,12 +114,26 @@ public class ViewContractController extends Controller {
 
     @FXML
     public void takeOut(final MouseEvent event) {
-        //TODO
+        if(contractService.takeOut(contract)) {
+            Notification.showPopupMessageOk("Takeout was successful!", (Stage) mainPane.getScene().getWindow());
+        } else {
+            Notification.showPopupMessageErr(
+                "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
     }
 
     @FXML
-    public void fulfill(final MouseEvent event) {
-        //TODO
+    public void withdraw(final MouseEvent event) {
+        if(contractService.withdraw(contract)) {
+            Notification.showPopupMessageOk("Withdraw was successful!", (Stage) mainPane.getScene().getWindow());
+        } else {
+            Notification.showPopupMessageErr(
+                "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
     }
 
     @Override

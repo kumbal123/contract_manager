@@ -21,10 +21,10 @@ public class ContractRepository extends Repository<Integer, Contract> {
         Session session = FACTORY.openSession();
         Transaction trans = session.beginTransaction();
 
-        Query query = session.createQuery("from Contract where contractId=:contractId");
+        Query<Contract> query = session.createQuery("from Contract where contractId=:contractId", Contract.class);
         query.setParameter("contractId", id);
 
-        List<Contract> contracts = (List<Contract>) query.list();
+        List<Contract> contracts = query.list();
         contracts.sort(Comparator.comparing(Contract::getCreationDate).reversed());
 
         trans.commit();
@@ -51,7 +51,7 @@ public class ContractRepository extends Repository<Integer, Contract> {
         Session session = FACTORY.openSession();
         Transaction trans = session.beginTransaction();
 
-        List<Contract> contracts = (List<Contract>) session.createQuery("from Contract").list();
+        List<Contract> contracts = session.createQuery("from Contract", Contract.class).list();
 
         trans.commit();
         session.close();

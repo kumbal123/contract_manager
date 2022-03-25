@@ -60,3 +60,7 @@
     -fx-text-fill: white;
 }
 
+.frontPane {
+    -fx-background-color: #e7e7e5;
+}
+

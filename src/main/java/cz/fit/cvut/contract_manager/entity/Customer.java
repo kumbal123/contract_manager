@@ -1,7 +1,5 @@
 package cz.fit.cvut.contract_manager.entity;
 
-import cz.fit.cvut.contract_manager.util.Util;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,8 +21,9 @@ public class Customer {
     private String meu;
     private String nationality;
     private Date dateOfBirth;
+    private Integer numOfContracts;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Contract> contracts;
 
     public Customer() {
@@ -43,6 +42,7 @@ public class Customer {
         this.meu = meu;
         this.nationality = nationality;
         this.dateOfBirth = dateOfBirth;
+        this.numOfContracts = 0;
         this.contracts = new HashSet<>();
     }
 
@@ -66,8 +66,7 @@ public class Customer {
                 Objects.equals(cardIdNumber, customer.cardIdNumber) &&
                 Objects.equals(meu, customer.meu) &&
                 Objects.equals(nationality, customer.nationality) &&
-                Objects.equals(dateOfBirth, customer.dateOfBirth) &&
-                Objects.equals(contracts, customer.contracts);
+                Objects.equals(dateOfBirth, customer.dateOfBirth);
     }
 
     @Override
@@ -120,7 +119,8 @@ public class Customer {
     }
 
     public int getNumberOfContracts() {
-        return contracts.size();
+        return numOfContracts;
+
     }
 
     public void setName(final String name) {
@@ -159,55 +159,10 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void assignContract(Contract contract) {
-        this.contracts.add(contract);
+    public void assignContract(final Contract contract) {
+        contract.setCustomer(this);
+        this.numOfContracts += 1;
     }
 
-    public int getContractCount(int month, int year) {
-        int count = 0;
 
-        for(Contract contract : contracts) {
-            int contractMonth = Util.getMonth(contract.getCreationDate());
-            int contractYear = Util.getYear(contract.getCreationDate());
-
-            count += contractMonth == month && contractYear == year ? 1 : 0;
-        }
-
-        return count;
-    }
-
-    public int getContractCount(int year) {
-        int count = 0;
-
-        for(Contract contract : contracts) {
-            count += Util.getYear(contract.getCreationDate()) == year ? 1 : 0;
-        }
-
-        return count;
-    }
-
-    public int getMoneySpent(int month, int year) {
-        int money = 0;
-
-        for(Contract contract : contracts) {
-            int contractMonth = Util.getMonth(contract.getCreationDate());
-            int contractYear = Util.getYear(contract.getCreationDate());
-            int interest = contract.getTotalPriceCurr() - contract.getLendPrice();
-
-            money += contractMonth == month && contractYear == year && contract.isWithdrawn() ? interest : 0;
-        }
-
-        return money;
-    }
-
-    public int getMoneySpent(int year) {
-        int money = 0;
-
-        for(Contract contract : contracts) {
-            int interest = contract.getTotalPriceCurr() - contract.getLendPrice();
-            money += Util.getYear(contract.getCreationDate()) == year && contract.isWithdrawn() ? interest : 0;
-        }
-
-        return money;
-    }
 }

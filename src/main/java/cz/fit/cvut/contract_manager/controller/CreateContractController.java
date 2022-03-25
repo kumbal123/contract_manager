@@ -106,6 +106,10 @@ public class CreateContractController extends Controller {
     }
 
     private int computeAvgPrice(final ObservableList<Price> prices) {
+        if(prices.size() == 0) {
+            return 0;
+        }
+
         int sum = 0;
 
         for(Price price : prices) {
@@ -182,9 +186,10 @@ public class CreateContractController extends Controller {
 
         if(setErrColorContract(contractId, lendPrice, expireDate, itemInfo, totalPrice) && customer != null) {
             contract = new Contract(contractId, getDateFromString(creationDate), getInteger(lendPrice),
-                    getDateFromString(expireDate), itemInfo, itemSpecification, getInteger(totalPrice), customer);
+                    getDateFromString(expireDate), itemInfo, itemSpecification, getInteger(totalPrice));
 
             customerService.assignContract(customer, contract);
+            contractService.create(contract);
 
             mainPane.getChildren().removeAll();
             mainPane.setCenter(getPage("contracts.fxml"));
@@ -242,7 +247,7 @@ public class CreateContractController extends Controller {
 
     @FXML
     public void searchPrices(final MouseEvent event) {
-        priceList = FXCollections.observableArrayList(webService.getPrices(itemInfoField.getText()));
+        priceList = FXCollections.observableArrayList(webService.getPrices(itemInfoField.getText(), (Stage) mainPane.getScene().getWindow()));
 
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));

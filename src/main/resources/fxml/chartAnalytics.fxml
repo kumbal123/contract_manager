@@ -18,7 +18,7 @@
             <Pane prefHeight="352.0" prefWidth="1128.0">
                 <Pane fx:id="bottomLeftPane" layoutY="340.0" prefHeight="360.0" prefWidth="550.0">
                     <children>
-                        <LineChart fx:id="lineChartIncome" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0">
+                        <LineChart fx:id="lineChartIncome" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0" styleClass="chartAnalytics">
                             <xAxis>
                                 <CategoryAxis side="BOTTOM" />
                             </xAxis>
@@ -40,7 +40,7 @@
                 </Pane>
                 <Pane fx:id="bottomRightPane" layoutX="547.0" layoutY="340.0" prefHeight="360.0" prefWidth="550.0">
                     <children>
-                        <LineChart fx:id="lineChartProfitLoss" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0">
+                        <LineChart fx:id="lineChartProfitLoss" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0" styleClass="chartAnalytics">
                             <xAxis>
                                 <CategoryAxis side="BOTTOM" />
                             </xAxis>
@@ -65,7 +65,7 @@
                   <TextField fx:id="toYearField" layoutX="225.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="to year" />
                   <Button layoutX="351.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeContractsInYears" text="years" />
                   <Button layoutX="460.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#clearCharts" text="clear" />
-            <LineChart fx:id="lineChartExpense" animated="false" layoutX="547.0" layoutY="67.0" prefHeight="300.0" prefWidth="550.0">
+            <LineChart fx:id="lineChartExpense" animated="false" layoutX="547.0" layoutY="67.0" prefHeight="300.0" prefWidth="550.0" styleClass="chartAnalytics">
                <xAxis>
                   <CategoryAxis side="BOTTOM" />
                </xAxis>

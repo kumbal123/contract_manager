@@ -50,12 +50,11 @@ class CustomerRepositoryServiceTest {
         Customer customer = new Customer("Mike", "m", "fast1", "velocity", "123l123", "a24234", "V", "vn", new Date(332342342));
         Contract contract = new Contract("R12", new Date(20), 1000, new Date(1234567), "Mobile", "j123", 1000, null);
 
-        assertEquals(0, customer.getContracts().size());
+        assertEquals(0, customer.getNumberOfContracts());
 
         customerRepositoryService.assignContract(customer, contract);
 
-        assertEquals(1, customer.getContracts().size());
-        assertTrue(customer.getContracts().contains(contract));
-        verify(customerRepository, times(1)).update(customer);
+        assertEquals(1, customer.getNumberOfContracts());
+        assertEquals(customer, contract.getCustomer());
     }
 }
