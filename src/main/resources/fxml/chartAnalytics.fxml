@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ChartAnalyticsController">
+    <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0">
+        <center>
+            <Pane prefHeight="352.0" prefWidth="1128.0">
+                <Pane fx:id="bottomLeftPane" layoutY="340.0" prefHeight="360.0" prefWidth="550.0">
+                    <children>
+                        <LineChart fx:id="lineChartIncome" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0" styleClass="chartAnalytics">
+                            <xAxis>
+                                <CategoryAxis side="BOTTOM" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis side="LEFT" />
+                            </yAxis>
+                        </LineChart>
+                        <Label layoutX="14.0" layoutY="26.0" text="Total Income:">
+                            <font>
+                                <Font name="System Bold" size="28.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="labelTotalIncome" layoutX="225.0" layoutY="26.0" prefHeight="34.0" prefWidth="169.0">
+                            <font>
+                                <Font name="System Bold" size="28.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+                <Pane fx:id="bottomRightPane" layoutX="547.0" layoutY="340.0" prefHeight="360.0" prefWidth="550.0">
+                    <children>
+                        <LineChart fx:id="lineChartProfitLoss" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0" styleClass="chartAnalytics">
+                            <xAxis>
+                                <CategoryAxis side="BOTTOM" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis side="LEFT" />
+                            </yAxis>
+                        </LineChart>
+                        <Label layoutX="24.0" layoutY="26.0" text="Total Profit/Loss:">
+                            <font>
+                                <Font name="System Bold" size="28.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="labelTotalProfitLoss" layoutX="285.0" layoutY="26.0" prefHeight="34.0" prefWidth="169.0">
+                            <font>
+                                <Font name="System Bold" size="28.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+                  <TextField fx:id="fromYearField" layoutX="24.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="from year" />
+                  <Button layoutX="151.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeContractsInMonths" text="months" />
+                  <TextField fx:id="toYearField" layoutX="225.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="to year" />
+                  <Button layoutX="351.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeContractsInYears" text="years" />
+                  <Button layoutX="460.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#clearCharts" text="clear" />
+            <LineChart fx:id="lineChartExpense" animated="false" layoutX="547.0" layoutY="67.0" prefHeight="300.0" prefWidth="550.0" styleClass="chartAnalytics">
+               <xAxis>
+                  <CategoryAxis side="BOTTOM" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis side="LEFT" />
+               </yAxis>
+            </LineChart>
+            <Label layoutX="567.0" layoutY="33.0" text="Total Expenses:">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelTotalExpenses" layoutX="800.0" layoutY="33.0" prefHeight="34.0" prefWidth="169.0">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <PieChart fx:id="pieChart" animated="false" layoutX="2.0" layoutY="96.0" prefHeight="276.0" prefWidth="563.0" />
+            <Label layoutX="14.0" layoutY="67.0" text="Total Contracts:">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelTotalContracts" layoutX="254.0" layoutY="67.0" prefHeight="34.0" prefWidth="169.0">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            </Pane>
+        </center>
+    </BorderPane>
+
+</HBox>

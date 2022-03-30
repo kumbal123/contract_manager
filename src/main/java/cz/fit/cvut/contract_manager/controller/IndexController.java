@@ -1,19 +1,24 @@
 package cz.fit.cvut.contract_manager.controller;
 
+import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
+import cz.fit.cvut.contract_manager.service.HistoryRepositoryService;
+import cz.fit.cvut.contract_manager.util.Util;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
-import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class IndexController extends Controller {
@@ -21,13 +26,19 @@ public class IndexController extends Controller {
     public TextField contractIdField;
     public TextField dateField;
 
+    public Label labelTotalExpenses;
+    public Label labelTotalNewContracts;
+    public Label labelTotalIncome;
+    public Label labelTotalWithdrawnContracts;
+
     private final ContractRepositoryService contractService = ContractRepositoryService.getInstance();
+    private final HistoryRepositoryService historyService = HistoryRepositoryService.getInstance();
 
     @FXML
     private BorderPane mainPane;
 
     @FXML
-    private void switchToHome(MouseEvent event) throws IOException {
+    private void switchToHome(final MouseEvent event) throws IOException {
         Pane pane = (Pane) event.getSource();
         Parent stage = pane.getScene().getRoot();
         stage.getScene().setRoot(getPage("index.fxml"));
@@ -54,12 +65,12 @@ public class IndexController extends Controller {
     }
 
     @FXML
-    private void switchToSettings(final MouseEvent event) throws IOException {
-        //TODO
+    public void switchToChartAnalytics(final MouseEvent event) throws IOException {
+        mainPane.setCenter(getPage("chartAnalytics.fxml"));
     }
 
     @FXML
-    private void logOut(final MouseEvent event) {
+    private void switchToSettings(final MouseEvent event) throws IOException {
         //TODO
     }
 
@@ -68,7 +79,19 @@ public class IndexController extends Controller {
         String contractId = contractIdField.getText().trim();
         Contract contract = contractService.getMostRecentByContractId(contractId);
 
-        contractService.withdraw(contract);
+        if(contract != null && contractService.withdraw(contract)) {
+            Notification.showPopupMessageOk("Withdraw was successful!", (Stage) mainPane.getScene().getWindow());
+        } else if(contract != null) {
+            Notification.showPopupMessageErr(
+                "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                (Stage) mainPane.getScene().getWindow()
+            );
+        } else {
+            Notification.showPopupMessageErr(
+                "Contract with " + contractId + " id does not exist!",
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
     }
 
     @FXML
@@ -76,25 +99,75 @@ public class IndexController extends Controller {
         String contractId = contractIdField.getText().trim();
         Contract contract = contractService.getMostRecentByContractId(contractId);
 
-        contractService.takeOut(contract);
+        if(contract != null && contractService.takeOut(contract)) {
+            Notification.showPopupMessageOk("Takeout was successful!", (Stage) mainPane.getScene().getWindow());
+        } else if(contract != null) {
+            Notification.showPopupMessageErr(
+                "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                (Stage) mainPane.getScene().getWindow()
+            );
+        } else {
+            Notification.showPopupMessageErr(
+                "Contract with " + contractId + " id does not exist!",
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
     }
 
     @FXML
     public void prolongContract(final MouseEvent event) throws ParseException {
         String contractId = contractIdField.getText().trim();
-        Date date = getDateFromString(dateField.getText().trim());
+        String dateStr = dateField.getText().trim();
 
-        Contract contract = contractService.getMostRecentByContractId(contractId);
+        if(isDate(dateStr)) {
+            Contract contract = contractService.getMostRecentByContractId(contractId);
 
-        History history = new History(contract.getTotalPriceCurr(), contract.getExpireDateCurr(), date, contract);
+            if(contract == null) {
+                Notification.showPopupMessageErr(
+                    "Contract with " + contractId + " id does not exist!",
+                    (Stage) mainPane.getScene().getWindow()
+                );
+            } else {
+                History history = new History(contract.getTotalPriceCurr(), contract.getExpireDateCurr(),
+                        getDateFromString(dateStr), contract);
 
-        contractService.prolong(contract, history);
-
-        //TODO successful pop up
+                if(contractService.prolong(contract, history)) {
+                    historyService.create(history);
+                    Notification.showPopupMessageOk("Prolong was successful!", (Stage) mainPane.getScene().getWindow());
+                } else {
+                    Notification.showPopupMessageErr(
+                        "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                        (Stage) mainPane.getScene().getWindow()
+                    );
+                }
+            }
+        } else {
+            Notification.showPopupMessageErr(
+                "Date is not actually date!",
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        List<Contract> contractList = contractService.getAll();
 
+        int totalExpenses = 0, totalNewContracts = 0, totalIncome = 0, totalWithdrawnContracts = 0;
+
+        for(Contract contract : contractList) {
+            if(Util.isToday(contract.getCreationDate())) {
+                totalExpenses += contract.getLendPrice();
+                totalNewContracts += 1;
+            } else if(Util.isToday(contract.getExpireDateCurr()) && contract.isWithdrawn()) {
+                totalIncome += contract.getTotalPriceCurr();
+                totalWithdrawnContracts += 1;
+            }
+        }
+
+        labelTotalExpenses.setText(String.valueOf(totalExpenses));
+        labelTotalNewContracts.setText(String.valueOf(totalNewContracts));
+        labelTotalIncome.setText(String.valueOf(totalIncome));
+        labelTotalWithdrawnContracts.setText(String.valueOf(totalWithdrawnContracts));
     }
 }

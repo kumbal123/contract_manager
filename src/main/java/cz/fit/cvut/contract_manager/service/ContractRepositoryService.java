@@ -6,7 +6,7 @@ import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.repository.ContractRepository;
 
 public class ContractRepositoryService extends RepositoryService<Integer, Contract, ContractRepository> {
-    protected ContractRepositoryService(ContractRepository repository) {
+    protected ContractRepositoryService(final ContractRepository repository) {
         super(repository);
     }
 
@@ -26,27 +26,43 @@ public class ContractRepositoryService extends RepositoryService<Integer, Contra
         contract.removeCustomer();
     }
 
-    public void withdraw(final Contract contract) {
-        contract.setState(ContractState.WITHDRAWN);
-        repository.update(contract);
+    public Boolean withdraw(final Contract contract) {
+        if(!contract.isWithdrawn() && !contract.isTakenOut()) {
+            contract.setState(ContractState.WITHDRAWN);
+            repository.update(contract);
+            return true;
+        }
+
+        return false;
     }
 
-    public void takeOut(final Contract contract) {
-        contract.setState(ContractState.TAKEN_OUT);
-        repository.update(contract);
+    public Boolean takeOut(final Contract contract) {
+        if(!contract.isWithdrawn() && !contract.isTakenOut()) {
+            contract.setState(ContractState.TAKEN_OUT);
+            repository.update(contract);
+            return true;
+        }
+
+        return false;
     }
 
-    public void expire(final Contract contract) {
-        contract.setState(ContractState.EXPIRED);
-        repository.update(contract);
+    public Boolean expire(final Contract contract) {
+        if(contract.isValid()) {
+            contract.setState(ContractState.EXPIRED);
+            repository.update(contract);
+            return true;
+        }
+
+        return false;
     }
 
-    public void prolong(final Contract contract, final History history) {
-        if(contract.getState() != ContractState.WITHDRAWN && contract.getState() != ContractState.TAKEN_OUT) {
+    public Boolean prolong(final Contract contract, final History history) {
+        if (!contract.isWithdrawn() && !contract.isTakenOut() && history.getToDate().compareTo(contract.getExpireDateCurr()) > 0) {
             contract.addHistory(history);
             repository.update(contract);
-        } else {
-            //TODO some shit - prolong method should return Bool - same shit for epixe, takeOUt, withdraw
+            return true;
         }
+
+        return false;
     }
 }

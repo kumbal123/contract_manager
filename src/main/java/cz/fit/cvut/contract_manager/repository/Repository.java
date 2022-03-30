@@ -36,4 +36,5 @@ public abstract class Repository<K, E> {
 
     public abstract E getById(final K id);
     public abstract List<E> getAll();
+    public abstract void deleteAll();
 }

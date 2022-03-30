@@ -1,5 +1,6 @@
 package cz.fit.cvut.contract_manager.controller;
 
+import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
 import javafx.collections.FXCollections;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,9 +53,15 @@ public class ContractController extends Controller {
 
     @FXML
     public void deleteContract(final MouseEvent event) {
-        contractService.removeCustomer(contract);
-        contractService.deleteByEntity(contract);
-        showContracts();
+        if(contract != null) {
+            contractService.removeCustomer(contract);
+            contractService.deleteByEntity(contract);
+            showContracts();
+            Notification.showPopupMessageOk("Successfully deleted contract with id: " + contract.getContractId() + "!", (Stage) mainPane.getScene().getWindow());
+            contract = null;
+        } else {
+            Notification.showPopupMessageErr("Could not delete. Pick a contract by clicking on it first!", (Stage) mainPane.getScene().getWindow());
+        }
     }
 
     @FXML
@@ -105,7 +113,7 @@ public class ContractController extends Controller {
                     return true;
                 } else if(Contract.getName().toLowerCase().contains(searchKeyword)) {
                     return true;
-                } else if(Contract.getCreationDate().toString().toLowerCase().contains(searchKeyword)) {
+                } else if(getStringFromDate(Contract.getCreationDate()).contains(searchKeyword)) {
                     return true;
                 } else {
                     return Contract.getContractId().toLowerCase().contains(searchKeyword);

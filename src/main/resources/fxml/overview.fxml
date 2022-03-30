@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -11,7 +12,7 @@
         <center>
          <Pane>
             <children>
-                  <TableView fx:id="tvContracts" layoutX="31.0" layoutY="34.0" onMouseClicked="#handleMouseEvent" prefHeight="632.0" prefWidth="953.0">
+                  <TableView fx:id="tvContracts" layoutX="31.0" layoutY="72.0" onMouseClicked="#handleMouseEvent" prefHeight="595.0" prefWidth="953.0">
                       <columns>
                           <TableColumn fx:id="colName" prefWidth="117.0" text="Name" />
                           <TableColumn fx:id="colCreationDate" prefWidth="89.0" text="CreationDate" />
@@ -24,6 +25,7 @@
                           <TableColumn fx:id="colDiff" prefWidth="65.0" text="Diff" />
                       </columns>
                   </TableView>
+               <TextField fx:id="searchBar" layoutX="31.0" layoutY="38.0" prefHeight="25.0" prefWidth="952.0" promptText="search" />
             </children>
          </Pane>
         </center>

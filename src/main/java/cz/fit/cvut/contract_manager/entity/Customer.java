@@ -3,12 +3,13 @@ package cz.fit.cvut.contract_manager.entity;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
 
     private String name;
@@ -20,8 +21,9 @@ public class Customer {
     private String meu;
     private String nationality;
     private Date dateOfBirth;
+    private Integer numOfContracts;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Contract> contracts;
 
     public Customer() {
@@ -40,7 +42,36 @@ public class Customer {
         this.meu = meu;
         this.nationality = nationality;
         this.dateOfBirth = dateOfBirth;
+        this.numOfContracts = 0;
         this.contracts = new HashSet<>();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) {
+            return true;
+        }
+
+        if(o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.id) &&
+                Objects.equals(name, customer.name) &&
+                Objects.equals(gender, customer.gender) &&
+                Objects.equals(address, customer.address) &&
+                Objects.equals(city, customer.city) &&
+                Objects.equals(personalNumber, customer.personalNumber) &&
+                Objects.equals(cardIdNumber, customer.cardIdNumber) &&
+                Objects.equals(meu, customer.meu) &&
+                Objects.equals(nationality, customer.nationality) &&
+                Objects.equals(dateOfBirth, customer.dateOfBirth);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, gender, address, city, personalNumber, cardIdNumber, meu, nationality, dateOfBirth);
     }
 
     public Integer getId() {
@@ -88,7 +119,8 @@ public class Customer {
     }
 
     public int getNumberOfContracts() {
-        return contracts.size();
+        return numOfContracts;
+
     }
 
     public void setName(final String name) {
@@ -127,7 +159,10 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void assignContract(Contract contract) {
-        this.contracts.add(contract);
+    public void assignContract(final Contract contract) {
+        contract.setCustomer(this);
+        this.numOfContracts += 1;
     }
+
+
 }

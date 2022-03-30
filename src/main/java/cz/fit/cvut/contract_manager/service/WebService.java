@@ -6,7 +6,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Price;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,22 +39,19 @@ public class WebService implements Service {
         return Integer.parseInt(str.split("Kč")[0].replaceAll("[^0-9]",""));
     }
 
-    public List<Price> getPrices(final String productName) {
+    public List<Price> getPrices(final String productName, final Stage stage) {
         List<Price> prices = new ArrayList<>();
 
         try {
             String webLink = "https://www.google.com/search?q=";
             String link = webLink + productName.replaceAll(" ", "+");
-            System.out.println(link);
+
             HtmlPage page = webClient.getPage(link);
 
             webClient.getCurrentWindow().getJobManager().removeAllJobs();
             webClient.close();
 
             List<HtmlDivision> anchors = page.getByXPath("//div[contains(@class, 'rwVHAc')]");
-            System.out.println("Size: " + anchors.size());
-
-
 
             for (HtmlElement anchor : anchors) {
                 HtmlAnchor name = anchor.getFirstByXPath("./div[@role='heading']/a[contains(@class, 'plantl pla-unit-title-link')]");
@@ -62,6 +61,7 @@ public class WebService implements Service {
             }
         } catch (IOException e) {
             System.out.println("An error occurred: " + e);
+            Notification.showPopupMessageErr("Something went wrong while searching prices!", stage);
         }
 
         prices.sort(Comparator.comparing(Price::getPrice));

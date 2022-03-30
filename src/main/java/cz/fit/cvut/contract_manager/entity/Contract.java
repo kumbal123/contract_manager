@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 public class Contract implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
 
     private String contractId;
@@ -23,15 +23,32 @@ public class Contract implements Serializable {
     private Integer totalPriceOrig;
     private Integer totalPriceCurr;
     private ContractState state;
+    private Integer numberOfProlongs;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
-    @OneToMany(mappedBy = "contract", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<History> history;
 
     public Contract() {
 
+    }
+
+    public Contract(final String contractId, final Date creationDate, final Integer lendPrice, final Date expireDateOrig,
+                    final String itemInfo, final String itemSpecification, final Integer totalPriceOrig) {
+        this.contractId = contractId;
+        this.creationDate = creationDate;
+        this.lendPrice = lendPrice;
+        this.expireDateOrig = expireDateOrig;
+        this.expireDateCurr = expireDateOrig;
+        this.itemInfo = itemInfo;
+        this.itemSpecification = itemSpecification;
+        this.totalPriceOrig = totalPriceOrig;
+        this.totalPriceCurr = totalPriceOrig;
+        this.state = ContractState.VALID;
+        this.numberOfProlongs = 0;
+        this.history = new HashSet<>();
     }
 
     public Contract(final String contractId, final Date creationDate, final Integer lendPrice, final Date expireDateOrig,
@@ -47,6 +64,7 @@ public class Contract implements Serializable {
         this.totalPriceOrig = totalPriceOrig;
         this.totalPriceCurr = totalPriceOrig;
         this.state = ContractState.VALID;
+        this.numberOfProlongs = 0;
         this.customer = customer;
         this.history = new HashSet<>();
     }
@@ -63,20 +81,16 @@ public class Contract implements Serializable {
 
         Contract contract = (Contract) o;
         return id.equals(contract.id) &&
-                expireDateOrig.equals(contract.expireDateOrig) &&
                 lendPrice.equals(contract.lendPrice) &&
-                creationDate.equals(contract.creationDate) &&
                 contractId.equals(contract.contractId) &&
                 itemInfo.equals(contract.itemInfo) &&
                 itemSpecification.equals(contract.itemSpecification) &&
-                totalPriceOrig.equals(contract.totalPriceOrig) &&
-                customer.equals(contract.customer);
+                totalPriceOrig.equals(contract.totalPriceOrig);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, expireDateOrig, lendPrice, creationDate, contractId, itemInfo, itemSpecification,
-                totalPriceOrig, customer);
+        return Objects.hash(id, lendPrice, contractId, itemInfo, itemSpecification, totalPriceCurr);
     }
 
     @Override
@@ -183,7 +197,23 @@ public class Contract implements Serializable {
     }
 
     public int getNumberOfProlongs() {
-        return history.size();
+        return numberOfProlongs;
+    }
+
+    public Boolean isValid() {
+        return state == ContractState.VALID;
+    }
+
+    public Boolean isExpired() {
+        return state == ContractState.EXPIRED;
+    }
+
+    public Boolean isWithdrawn() {
+        return state == ContractState.WITHDRAWN;
+    }
+
+    public Boolean isTakenOut() {
+        return state == ContractState.TAKEN_OUT;
     }
 
     public void setExpireDateOrig(final Date date) {
@@ -216,6 +246,16 @@ public class Contract implements Serializable {
 
     public void setState(final ContractState state) {
         this.state = state;
+
+        if(state == ContractState.WITHDRAWN) {
+            this.totalPriceCurr = History.computeInterest(this.lendPrice, this.creationDate, new Date()) + this.lendPrice;
+        } else if(state == ContractState.TAKEN_OUT) {
+            this.totalPriceCurr = 0;
+        }
+    }
+
+    public void setCustomer(final Customer customer) {
+        this.customer = customer;
     }
 
     public void removeCustomer() {
@@ -223,9 +263,9 @@ public class Contract implements Serializable {
     }
 
     public void addHistory(final History history) {
-        this.history.add(history);
         this.expireDateCurr = history.getToDate();
         this.totalPriceCurr = history.getTotalPrice();
         this.state = ContractState.VALID;
+        this.numberOfProlongs += 1;
     }
 }

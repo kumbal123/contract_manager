@@ -10,11 +10,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="cz.fit.cvut.contract_manager.controller.ViewContractController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ViewContractController">
     <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0">
       <right>
-         <Pane fx:id="rightPane" visible="false" prefHeight="700.0" prefWidth="660.0" BorderPane.alignment="CENTER">
+         <Pane fx:id="rightPane" prefHeight="700.0" prefWidth="660.0" visible="false" BorderPane.alignment="CENTER">
             <children>
                <TableView fx:id="tvHistory" layoutX="14.0" layoutY="30.0" prefHeight="400.0" prefWidth="618.0">
                  <columns>
@@ -30,7 +29,7 @@
                      <Font name="System Bold" size="28.0" />
                   </font>
                </Label>
-               <Label layoutX="409.0" layoutY="454.0" prefHeight="53.0" prefWidth="80.0" text="Total:">
+               <Label layoutX="385.0" layoutY="454.0" prefHeight="53.0" prefWidth="104.0" text="Total:">
                   <font>
                      <Font name="System Bold" size="28.0" />
                   </font>
@@ -57,7 +56,7 @@
                 <TextField fx:id="itemSpecificationField" layoutX="45.0" layoutY="406.0" prefHeight="25.0" prefWidth="373.0" promptText="s. number, weight" />
                 <TextField fx:id="totalPriceField" layoutX="282.0" layoutY="464.0" prefHeight="39.0" prefWidth="135.0" promptText="total price" />
                 <Button layoutX="356.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#takeOut" text="take out" />
-            <Button layoutX="295.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#fulfill" text="fufill" />
+            <Button layoutX="295.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#withdraw" text="fufill" />
             </Pane>
       </left>
     </BorderPane>

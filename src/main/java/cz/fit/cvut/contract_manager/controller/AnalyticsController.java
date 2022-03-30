@@ -1,7 +1,7 @@
 package cz.fit.cvut.contract_manager.controller;
 
+import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Contract;
-import cz.fit.cvut.contract_manager.entity.ContractState;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.text.ParseException;
@@ -40,10 +41,12 @@ public class AnalyticsController extends Controller {
 
     @FXML
     public void analyzeContracts(final MouseEvent event) throws ParseException {
-        Date fromDate = getDateFromString(fromField.getText().trim());
-        Date toDate = getDateFromString(toField.getText().trim());
+        String fromDateStr = fromField.getText().trim();
+        String toDateStr = toField.getText().trim();
 
-        if(!"".equals(fromDate.toString()) && !"".equals(toDate.toString())) {
+        if(isDate(fromDateStr) && isDate(toDateStr)) {
+            Date fromDate = getDateFromString(fromDateStr);
+            Date toDate = getDateFromString(toDateStr);
             List<Contract> contractList = contractRepositoryService.getAll();
 
             contractList.removeIf(contract -> contract.getCreationDate().compareTo(fromDate) < 0 || contract.getCreationDate().compareTo(toDate) > 0);
@@ -53,7 +56,7 @@ public class AnalyticsController extends Controller {
 
             for(Contract contract: contractList) {
                 expense += contract.getLendPrice();
-                income += contract.getState() == ContractState.WITHDRAWN ? contract.getTotalPriceCurr() : 0;
+                income += contract.isWithdrawn() ? contract.getTotalPriceCurr() : 0;
             }
 
             labelTotalContracts.setText(Integer.toString(contractList.size()));
@@ -74,6 +77,8 @@ public class AnalyticsController extends Controller {
             }
 
             tvContracts.setItems(FXCollections.observableArrayList(contractList));
+        } else {
+            Notification.showPopupMessageErr("Entered dates are not dates!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -83,8 +88,6 @@ public class AnalyticsController extends Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Here");
-
         colContractId.setCellValueFactory(new PropertyValueFactory<>("contractId"));
         colLendPrice.setCellValueFactory(new PropertyValueFactory<>("lendPrice"));
         colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("totalPriceCurr"));
@@ -95,27 +98,27 @@ public class AnalyticsController extends Controller {
         });
 
         colCreationDate.setCellValueFactory(
-                cellData -> getStringPropertyFromDate(cellData.getValue().getCreationDate())
+            cellData -> getStringPropertyFromDate(cellData.getValue().getCreationDate())
         );
 
         colExpireDate.setCellValueFactory(
-                cellData -> getStringPropertyFromDate(cellData.getValue().getExpireDateCurr())
+            cellData -> getStringPropertyFromDate(cellData.getValue().getExpireDateCurr())
         );
 
         tvContracts.setRowFactory(tv -> new TableRow<>() {
             @Override
             protected void updateItem(Contract contract, boolean empty) {
-                super.updateItem(contract, empty);
+            super.updateItem(contract, empty);
 
-                if (contract == null || contract.getState() == ContractState.VALID) {
-                    setStyle("");
-                } else if (contract.getState() == ContractState.EXPIRED) {
-                    setStyle("-fx-background-color: #ffb561;");
-                } else if (contract.getState() == ContractState.WITHDRAWN) {
-                    setStyle("-fx-background-color: #64ff61;");
-                } else {
-                    setStyle("-fx-background-color: #ff6161;");
-                }
+            if (contract == null || contract.isValid()) {
+                setStyle("");
+            } else if (contract.isExpired()) {
+                setStyle("-fx-background-color: #ffb561;");
+            } else if (contract.isWithdrawn()) {
+                setStyle("-fx-background-color: #64ff61;");
+            } else {
+                setStyle("-fx-background-color: #ff6161;");
+            }
             }
         });
     }

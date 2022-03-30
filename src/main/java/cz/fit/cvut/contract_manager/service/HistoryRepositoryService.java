@@ -3,8 +3,10 @@ package cz.fit.cvut.contract_manager.service;
 import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.repository.HistoryRepository;
 
+import java.util.List;
+
 public class HistoryRepositoryService extends RepositoryService<Integer, History, HistoryRepository> {
-    protected HistoryRepositoryService(HistoryRepository repository) {
+    protected HistoryRepositoryService(final HistoryRepository repository) {
         super(repository);
     }
 
@@ -14,5 +16,9 @@ public class HistoryRepositoryService extends RepositoryService<Integer, History
 
     private static class HistoryServiceHolder {
         private static final HistoryRepositoryService INSTANCE = new HistoryRepositoryService(HistoryRepository.getInstance());
+    }
+
+    public List<History> getAllFromContractId(final Integer id) {
+        return repository.getAllFromContractId(id);
     }
 }
