@@ -14,6 +14,7 @@ public class Customer {
 
     private String name;
     private String gender;
+    private String birthPlace;
     private String address;
     private String city;
     private String personalNumber;
@@ -30,11 +31,12 @@ public class Customer {
 
     }
 
-    public Customer(final String name, final String gender, final String address, final String city,
+    public Customer(final String name, final String gender, final String birthPlace, final String address, final String city,
                     final String personalNumber, final String cardIdNumber, final String meu,
                     final String nationality, final Date dateOfBirth) {
         this.name = name;
         this.gender = gender;
+        this.birthPlace = birthPlace;
         this.address = address;
         this.city = city;
         this.personalNumber = personalNumber;
@@ -60,6 +62,7 @@ public class Customer {
         return Objects.equals(id, customer.id) &&
                 Objects.equals(name, customer.name) &&
                 Objects.equals(gender, customer.gender) &&
+                Objects.equals(birthPlace, customer.birthPlace) &&
                 Objects.equals(address, customer.address) &&
                 Objects.equals(city, customer.city) &&
                 Objects.equals(personalNumber, customer.personalNumber) &&
@@ -71,7 +74,7 @@ public class Customer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, gender, address, city, personalNumber, cardIdNumber, meu, nationality, dateOfBirth);
+        return Objects.hash(id, name, gender, birthPlace, address, city, personalNumber, cardIdNumber, meu, nationality, dateOfBirth);
     }
 
     public Integer getId() {
@@ -84,6 +87,10 @@ public class Customer {
 
     public String getGender() {
         return gender;
+    }
+
+    public String getBirthPlace() {
+        return birthPlace;
     }
 
     public String getAddress() {
@@ -131,6 +138,10 @@ public class Customer {
         this.gender = gender;
     }
 
+    public void setBirthPlace(final String birthPlace) {
+        this.birthPlace = birthPlace;
+    }
+
     public void setAddress(final String address) {
         this.address = address;
     }
@@ -163,6 +174,4 @@ public class Customer {
         contract.setCustomer(this);
         this.numOfContracts += 1;
     }
-
-
 }

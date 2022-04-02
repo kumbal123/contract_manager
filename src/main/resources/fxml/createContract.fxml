@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,33 +12,88 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.CreateContractController">
-   <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0">
+    <stylesheets>
+        <URL value="@../css/style.css" />
+    </stylesheets>
+    <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1078.0">
       <center>
             <Pane prefHeight="597.0" prefWidth="505.0" BorderPane.alignment="CENTER">
-            <Pane fx:id="contractDataPane" layoutX="45.0" layoutY="57.0">
+            <Pane fx:id="contractDataPane" layoutX="20.0" layoutY="57.0" prefHeight="524.0" prefWidth="409.0">
                <children>
-                        <TextField fx:id="nameField" prefHeight="25.0" prefWidth="238.0" promptText="name" />
-                        <TextField fx:id="genderField" layoutX="249.0" prefHeight="25.0" prefWidth="122.0" promptText="gender" />
-                        <TextField fx:id="addressField" layoutY="36.0" prefHeight="25.0" prefWidth="238.0" promptText="address" />
-                        <TextField fx:id="cityField" layoutY="73.0" prefHeight="25.0" prefWidth="373.0" promptText="city" />
-                        <TextField fx:id="personalNumberField" layoutY="107.0" prefHeight="25.0" prefWidth="179.0" promptText="personal number" />
-                        <TextField fx:id="cardIdNumberField" layoutX="194.0" layoutY="107.0" prefHeight="25.0" prefWidth="179.0" promptText="card id number" />
-                        <TextField fx:id="meuField" layoutX="1.0" layoutY="139.0" prefHeight="25.0" prefWidth="179.0" promptText="MeU" />
-                        <TextField fx:id="nationalityField" layoutX="194.0" layoutY="139.0" prefHeight="25.0" prefWidth="179.0" promptText="nationality" />
-                        <TextField fx:id="dateOfBirthField" layoutX="249.0" layoutY="36.0" prefHeight="25.0" prefWidth="122.0" promptText="date of birth" />
-                        <TextField fx:id="creationDateField" layoutX="30.0" layoutY="175.0" prefHeight="25.0" prefWidth="122.0" promptText="date of issue" />
-                        <TextField fx:id="lendPriceField" layoutX="119.0" layoutY="220.0" prefHeight="39.0" prefWidth="135.0" promptText="lend price" />
-                        <TextField fx:id="expireDateField" layoutX="119.0" layoutY="268.0" prefHeight="25.0" prefWidth="135.0" promptText="expire date" />
-                        <TextField fx:id="contractIdField" layoutX="271.0" layoutY="200.0" prefHeight="53.0" prefWidth="103.0" promptText="id" />
-                        <TextField fx:id="itemInfoField" layoutY="311.0" prefHeight="25.0" prefWidth="373.0" promptText="what - model, brand" />
-                        <TextField fx:id="itemSpecificationField" layoutY="348.0" prefHeight="25.0" prefWidth="373.0" promptText="s. number, weight" />
-                        <TextField fx:id="totalPriceField" layoutX="242.0" layoutY="383.0" prefHeight="39.0" prefWidth="135.0" promptText="total price" />
+                        <TextField fx:id="nationalityField" layoutX="226.0" layoutY="181.0" prefHeight="5.0" prefWidth="159.0" promptText="nationality">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="creationDateField" disable="true" layoutX="90.0" layoutY="206.0" prefHeight="5.0" prefWidth="122.0" promptText="date of issue">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="expireDateField" layoutX="170.0" layoutY="298.0" prefHeight="18.0" prefWidth="90.0" promptText="expire date">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="contractIdField" layoutX="268.0" layoutY="210.0" prefHeight="18.0" prefWidth="90.0" promptText="id">
+                     <font>
+                        <Font size="27.0" />
+                     </font></TextField>
+                        <TextField fx:id="itemSpecificationField" layoutX="35.0" layoutY="356.0" prefHeight="5.0" prefWidth="350.0" promptText="s. number, weight">
+                     <font>
+                        <Font size="12.0" />
+                     </font></TextField>
+                        <TextField fx:id="totalPriceField" layoutX="275.0" layoutY="386.0" prefHeight="20.0" prefWidth="110.0" promptText="total price">
+                     <font>
+                        <Font size="16.0" />
+                     </font></TextField>
+                        <TextField fx:id="lendPriceField" layoutX="170.0" layoutY="271.0" prefHeight="5.0" prefWidth="90.0" promptText="lend price">
+                     <font>
+                        <Font size="16.0" />
+                     </font></TextField>
+                        <TextField fx:id="itemInfoField" layoutX="35.0" layoutY="333.0" prefHeight="18.0" prefWidth="350.0" promptText="what - model, brand">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="meuField" layoutX="35.0" layoutY="181.0" prefHeight="5.0" prefWidth="185.0" promptText="MeU" styleClass="spacingField">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="personalNumberField" layoutX="35.0" layoutY="159.0" prefHeight="5.0" prefWidth="185.0" promptText="personal number" styleClass="spacingField">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="cardIdNumberField" layoutX="226.0" layoutY="159.0" prefHeight="18.0" prefWidth="159.0" promptText="card id number">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="cityField" layoutX="35.0" layoutY="137.0" prefHeight="5.0" prefWidth="350.0" promptText="city" styleClass="spacingField">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="addressField" layoutX="35.0" layoutY="115.0" prefHeight="5.0" prefWidth="350.0" promptText="address" styleClass="spacingField">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="birthPlaceField" layoutX="35.0" layoutY="93.0" prefHeight="5.0" prefWidth="233.0" promptText="birth place" styleClass="spacingField">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="dateOfBirthField" layoutX="273.0" layoutY="93.0" prefHeight="5.0" prefWidth="112.0" promptText="date of birth">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="nameField" layoutX="35.0" layoutY="71.0" prefHeight="5.0" prefWidth="270.0" promptText="name" styleClass="spacingField">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                        <TextField fx:id="genderField" layoutX="310.0" layoutY="71.0" prefHeight="5.0" prefWidth="74.0" promptText="gender">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
                </children>
             </Pane>
-                  <Button layoutX="435.0" layoutY="368.0" mnemonicParsing="false" onMouseClicked="#searchPrices" text="research" />
-                  <Button fx:id="updateButton" disable="true" layoutX="46.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#updateContract" text="update" />
-                  <Button layoutX="367.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#printContract" text="print" />
-                  <Button layoutX="302.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#createContract" text="create" />
+                  <Button layoutX="417.0" layoutY="386.0" mnemonicParsing="false" onMouseClicked="#searchPrices" text="research" />
+                  <Button fx:id="updateButton" disable="true" layoutX="54.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#updateContract" text="update" />
+                  <Button layoutX="363.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#printContract" text="print" />
+                  <Button layoutX="298.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#createContract" text="create" />
             </Pane>
       </center>
       <right>

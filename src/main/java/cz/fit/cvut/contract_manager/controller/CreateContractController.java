@@ -40,6 +40,7 @@ public class CreateContractController extends Controller {
 
     public TextField nameField;
     public TextField genderField;
+    public TextField birthPlaceField;
     public TextField addressField;
     public TextField cityField;
     public TextField personalNumberField;
@@ -137,6 +138,7 @@ public class CreateContractController extends Controller {
 
         nameField.setText(customer.getName());
         genderField.setText(customer.getGender());
+        birthPlaceField.setText(customer.getBirthPlace());
         addressField.setText(customer.getAddress());
         cityField.setText(customer.getCity());
         personalNumberField.setText(customer.getPersonalNumber());
@@ -147,6 +149,7 @@ public class CreateContractController extends Controller {
 
         nameField.setDisable(true);
         genderField.setDisable(true);
+        birthPlaceField.setDisable(true);
         addressField.setDisable(true);
         cityField.setDisable(true);
         personalNumberField.setDisable(true);
@@ -161,6 +164,7 @@ public class CreateContractController extends Controller {
         if(customer == null) {
             String name = nameField.getText().trim();
             String gender = genderField.getText().trim();
+            String birthPlace = birthPlaceField.getText().trim();
             String address = addressField.getText().trim();
             String city = cityField.getText().trim();
             String personalNumber = personalNumberField.getText().trim();
@@ -170,7 +174,7 @@ public class CreateContractController extends Controller {
             String dateOfBirth = dateOfBirthField.getText().trim();
 
             if(setErrColorCustomer(name, personalNumber, dateOfBirth)) {
-                customer = new Customer(name, gender, address, city, personalNumber, cardIdNumber, meu,
+                customer = new Customer(name, gender, birthPlace, address, city, personalNumber, cardIdNumber, meu,
                         nationality, getDateFromString(dateOfBirth));
                 customerService.create(customer);
             }

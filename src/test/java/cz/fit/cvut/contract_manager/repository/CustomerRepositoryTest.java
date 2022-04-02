@@ -23,8 +23,8 @@ public class CustomerRepositoryTest {
     @Test
     void shouldGetAll() {
         List<Customer> expectedCustomers = new ArrayList<>();
-        Customer customer1 = new Customer("Mike", "m", "fast1", "velocity", "123l123", "a24234", "V", "vn", new Date(332342342));
-        Customer customer2 = new Customer("Annie", "f", "slow1", "velocity", "jjg435li", "afl44l", "V", "vn", new Date(4432342));
+        Customer customer1 = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", new Date(332342342));
+        Customer customer2 = new Customer("Annie", "f", "Prague", "slow1", "velocity", "jjg435li", "afl44l", "V", "vn", new Date(4432342));
 
         customerRepository.save(customer1);
         customerRepository.save(customer2);
@@ -37,8 +37,8 @@ public class CustomerRepositoryTest {
 
     @Test
     void shouldDeleteAll() {
-        Customer customer1 = new Customer("Mike", "m", "fast1", "velocity", "123l123", "a24234", "V", "vn", new Date(332342342));
-        Customer customer2 = new Customer("Annie", "f", "slow1", "velocity", "jjg435li", "afl44l", "V", "vn", new Date(4432342));
+        Customer customer1 = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", new Date(332342342));
+        Customer customer2 = new Customer("Annie", "f", "Prague", "slow1", "velocity", "jjg435li", "afl44l", "V", "vn", new Date(4432342));
 
         customerRepository.save(customer1);
         customerRepository.save(customer2);
