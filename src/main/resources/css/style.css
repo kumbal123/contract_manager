@@ -37,8 +37,12 @@
 }
 
 .text-field:focused {
-    -fx-border-color: #006edb;
-    -fx-border-width: 2;
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: #ffff #ffff #006edb #ffff;
+}
+
+.text-field {
+    -fx-padding: 0px 0px 0px 10px;
 }
 
 .table-view {
@@ -64,3 +68,6 @@
     -fx-background-color: #e7e7e5;
 }
 
+.spacingField {
+    -fx-padding: 0px 0px 0px 18px;
+}

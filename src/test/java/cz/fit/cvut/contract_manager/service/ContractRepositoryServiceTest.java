@@ -61,8 +61,8 @@ class ContractRepositoryServiceTest {
 
     @Test
     void shouldRemoveCustomer() {
-        Customer customer = new Customer("Mike", "m", "fast1", "velocity", "123l123", "a24234", "V", "vn", new Date(332342342));
-        Contract contract = new Contract("R12", new Date(10), 1000, new Date(20), "Mobile", "j123", 1000);
+        Customer customer = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", new Date(332342342));
+        Contract contract = new Contract("R12", new Date(10), 1000, new Date(20), "Mobile", "j123", 1000, customer);
         contractRepositoryService.removeCustomer(contract);
 
         assertNull(contract.getCustomer());

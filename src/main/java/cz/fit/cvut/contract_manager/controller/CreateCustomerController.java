@@ -26,6 +26,7 @@ import java.util.*;
 public class CreateCustomerController extends Controller {
     public TextField nameField;
     public TextField genderField;
+    public TextField birthPlaceField;
     public TextField addressField;
     public TextField cityField;
     public TextField personalNumberField;
@@ -186,6 +187,7 @@ public class CreateCustomerController extends Controller {
 
         nameField.setText(customer.getName());
         genderField.setText(customer.getGender());
+        birthPlaceField.setText(customer.getBirthPlace());
         addressField.setText(customer.getAddress());
         cityField.setText(customer.getCity());
         personalNumberField.setText(customer.getPersonalNumber());
@@ -206,6 +208,7 @@ public class CreateCustomerController extends Controller {
     public void createCustomer(final MouseEvent event) throws IOException, ParseException {
         String name = nameField.getText().trim();
         String gender = genderField.getText().trim();
+        String birthPlace = birthPlaceField.getText().trim();
         String address = addressField.getText().trim();
         String city = cityField.getText().trim();
         String personalNumber = personalNumberField.getText().trim();
@@ -215,7 +218,7 @@ public class CreateCustomerController extends Controller {
         String dateOfBirth = dateOfBirthField.getText().trim();
 
         if(setErrColorCustomer(name, personalNumber, dateOfBirth)) {
-            customer = new Customer(name, gender, address, city, personalNumber, cardIdNumber, meu,
+            customer = new Customer(name, gender, birthPlace, address, city, personalNumber, cardIdNumber, meu,
                     nationality, getDateFromString(dateOfBirth));
 
             customerService.create(customer);
@@ -231,6 +234,7 @@ public class CreateCustomerController extends Controller {
     public void updateCustomer(final MouseEvent event) throws IOException, ParseException {
         String name = nameField.getText().trim();
         String gender = genderField.getText().trim();
+        String birthPlace = birthPlaceField.getText().trim();
         String address = addressField.getText().trim();
         String city = cityField.getText().trim();
         String personalNumber = personalNumberField.getText().trim();
@@ -242,6 +246,7 @@ public class CreateCustomerController extends Controller {
         if(setErrColorCustomer(name, personalNumber, dateOfBirth)) {
             customer.setName(name);
             customer.setGender(gender);
+            customer.setBirthPlace(birthPlace);
             customer.setAddress(address);
             customer.setCity(city);
             customer.setPersonalNumber(personalNumber);
