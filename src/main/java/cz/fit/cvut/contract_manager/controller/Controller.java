@@ -17,11 +17,11 @@ public abstract class Controller implements Initializable {
     }
 
     public Date getDateFromString(final String str) throws ParseException {
-        return new SimpleDateFormat("dd.MM.yyyy").parse(str);
+        return new SimpleDateFormat("dd.MM.yy").parse(str);
     }
 
     public String getStringFromDate(final Date date) {
-        return new SimpleDateFormat("dd.MM.yyyy").format(date);
+        return new SimpleDateFormat("dd.MM.yy").format(date);
     }
 
     public SimpleStringProperty getStringPropertyFromDate(final Date date) {

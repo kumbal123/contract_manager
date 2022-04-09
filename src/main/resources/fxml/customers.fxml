@@ -18,7 +18,7 @@
                     <Button layoutX="989.0" layoutY="176.0" mnemonicParsing="false" onMouseClicked="#deleteCustomer" prefHeight="25.0" prefWidth="84.0" text="Delete" />
                     <Pane layoutX="46.0" layoutY="81.0" prefHeight="579.0" prefWidth="907.0">
                   <children>
-                     <TableView fx:id="tvCustomers" onMouseClicked="#editCustomer" prefHeight="579.0" prefWidth="909.0">
+                     <TableView fx:id="tvCustomers" onMouseClicked="#handleMouseEvent" prefHeight="579.0" prefWidth="909.0">
                        <columns>
                          <TableColumn fx:id="colName" prefWidth="234.0" text="Name" />
                          <TableColumn fx:id="colPersonalNumber" prefWidth="166.0" text="PersonalNumber" />

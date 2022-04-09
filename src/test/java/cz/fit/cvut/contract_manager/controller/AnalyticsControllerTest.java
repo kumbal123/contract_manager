@@ -26,7 +26,7 @@ class AnalyticsControllerTest {
     private AnalyticsController controller;
 
     private Date getDateFromString(final String str) throws ParseException {
-        return new SimpleDateFormat("dd.MM.yyyy").parse(str);
+        return new SimpleDateFormat("dd.MM.yy").parse(str);
     }
 
     @Test

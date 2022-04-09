@@ -20,8 +20,8 @@ public class Util {
     }
 
     public static boolean isToday(final Date date) {
-        String x = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-        String y = new SimpleDateFormat("dd.MM.yyyy").format(date);
+        String x = new SimpleDateFormat("dd.MM.yy").format(new Date());
+        String y = new SimpleDateFormat("dd.MM.yy").format(date);
 
         return x.equals(y);
     }

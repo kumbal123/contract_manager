@@ -236,15 +236,25 @@ public class CreateContractController extends Controller {
     @FXML
     public void printContract(final MouseEvent event) {
         PrinterJob job = PrinterJob.createPrinterJob();
-        if (job != null) {
+        if(job != null) {
             PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.A5, PageOrientation.PORTRAIT, 0, 0, 0, 0);
+
+            String lendPrice = lendPriceField.getText().trim(), totalPrice = totalPriceField.getText().trim();
+
+            lendPriceField.appendText(",-");
+            totalPriceField.appendText(",-");
+
             boolean printed = job.printPage(pageLayout, contractDataPane);
-            if (printed) {
+
+            if(printed) {
                 job.endJob();
-            } else {
+            }else {
                 System.out.println("Printing failed.");
             }
-        } else {
+
+            lendPriceField.setText(lendPrice);
+            totalPriceField.setText(totalPrice);
+        }else {
             System.out.println("Could not create a printer job.");
         }
     }
@@ -277,7 +287,7 @@ public class CreateContractController extends Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        creationDateField.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
+        creationDateField.setText(new SimpleDateFormat("dd.MM.yy").format(new Date()));
 
         lendPriceField.textProperty().addListener((observable, oldVal, newVal) -> {
             if(!"".equals(expireDateField.getText()) && !newVal.isEmpty() && isInteger(newVal)) {

@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -57,16 +58,26 @@ public class CustomerController extends Controller {
     }
 
     @FXML
-    public void editCustomer(final MouseEvent event) throws IOException {
+    public void handleMouseEvent(final MouseEvent event) throws IOException {
         customer = tvCustomers.getSelectionModel().getSelectedItem();
 
         if(event.getClickCount() > 1 && customer != null) {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/createCustomer.fxml"));
-            Pane pane = loader.load();
+            Pane pane;
 
-            CreateCustomerController createCustomerController = loader.getController();
-            createCustomerController.initUpdateCustomer(customer);
+            if(event.getButton() == MouseButton.PRIMARY) {
+                loader.setLocation(getClass().getResource("/fxml/createCustomer.fxml"));
+                pane = loader.load();
+
+                CreateCustomerController createCustomerController = loader.getController();
+                createCustomerController.initUpdateCustomer(customer);
+            } else {
+                loader.setLocation(getClass().getResource("/fxml/createContract.fxml"));
+                pane = loader.load();
+
+                CreateContractController createContractController = loader.getController();
+                createContractController.initCustomerData(customer);
+            }
 
             mainPane.setCenter(pane);
         }
