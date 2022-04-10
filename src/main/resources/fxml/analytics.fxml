@@ -16,23 +16,23 @@
             <center>
                 <Pane prefHeight="600.0" prefWidth="901.0">
                     <children>
-                        <TextField fx:id="fromField" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="185.0" promptText="from" />
-                        <Button layoutX="456.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#analyzeContracts" prefHeight="25.0" prefWidth="84.0" text="Analyze" />
+                        <TextField fx:id="fromField" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="185.0" promptText="Tu Ngay" />
+                        <Button layoutX="456.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#analyzeContracts" prefHeight="25.0" prefWidth="84.0" text="Thong Ke" />
                         <Pane layoutX="46.0" layoutY="81.0" prefHeight="594.0" prefWidth="494.0">
                             <children>
                                 <TableView fx:id="tvContracts" layoutY="-2.0" onMouseClicked="#handleMouseEvent" prefHeight="597.0" prefWidth="493.0">
                                     <columns>
-                                        <TableColumn fx:id="colContractId" prefWidth="74.0" text="ContractId" />
-                                        <TableColumn fx:id="colCreationDate" minWidth="0.0" prefWidth="93.0" text="CreationDate" />
-                                        <TableColumn fx:id="colExpireDate" prefWidth="88.0" text="ExpireDate" />
-                                        <TableColumn fx:id="colLendPrice" prefWidth="72.0" text="LendPrice" />
-                              <TableColumn fx:id="colInterest" prefWidth="69.0" text="Interest" />
-                              <TableColumn fx:id="colTotalPrice" prefWidth="75.0" text="TotalPrice" />
+                                        <TableColumn fx:id="colContractId" prefWidth="87.0" text="So hop Dong" />
+                                        <TableColumn fx:id="colCreationDate" minWidth="0.0" text="Ngay Cam" />
+                                        <TableColumn fx:id="colExpireDate" prefWidth="88.0" text="Ngay Lay" />
+                                        <TableColumn fx:id="colLendPrice" prefWidth="72.0" text="Tien Muon" />
+                              <TableColumn fx:id="colInterest" prefWidth="69.0" text="Lai" />
+                              <TableColumn fx:id="colTotalPrice" prefWidth="75.0" text="Tien Tra" />
                                     </columns>
                                 </TableView>
                             </children></Pane>
-                  <TextField fx:id="toField" layoutX="249.0" layoutY="43.0" prefHeight="25.0" prefWidth="185.0" promptText="to" />
-                  <Label layoutX="583.0" layoutY="81.0" prefHeight="54.0" prefWidth="237.0" text="Total Contracts: ">
+                  <TextField fx:id="toField" layoutX="249.0" layoutY="43.0" prefHeight="25.0" prefWidth="185.0" promptText="Den Ngay" />
+                  <Label layoutX="583.0" layoutY="81.0" prefHeight="54.0" prefWidth="237.0" text="Tong So:">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -42,17 +42,17 @@
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="583.0" layoutY="135.0" prefHeight="54.0" prefWidth="196.0" text="Expenses: ">
+                  <Label layoutX="583.0" layoutY="135.0" prefHeight="54.0" prefWidth="196.0" text="Tong so vay:">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="583.0" layoutY="189.0" prefHeight="54.0" prefWidth="196.0" text="Income:">
+                  <Label layoutX="583.0" layoutY="189.0" prefHeight="54.0" prefWidth="196.0" text="Thu ve:">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="583.0" layoutY="243.0" prefHeight="54.0" prefWidth="196.0" text="Profit/Loss:">
+                  <Label layoutX="583.0" layoutY="243.0" prefHeight="54.0" prefWidth="196.0" text="Lai:">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>

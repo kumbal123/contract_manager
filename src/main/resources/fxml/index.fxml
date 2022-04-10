@@ -19,7 +19,7 @@
       <URL value="@../css/style.css" />
    </stylesheets>
    <children>
-      <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="frontPane">
+      <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1175.0" styleClass="frontPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <VBox prefHeight="700.0" prefWidth="63.0" styleClass="sidepane" BorderPane.alignment="CENTER">
                <children>
@@ -97,36 +97,36 @@
          <center>
             <Pane prefHeight="700.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="35.0" layoutY="105.0" prefHeight="185.0" prefWidth="257.0" styleClass="infobox" stylesheets="@../css/style.css">
+                  <Pane layoutX="35.0" layoutY="105.0" prefHeight="108.0" prefWidth="319.0" styleClass="infobox" stylesheets="@../css/style.css">
                      <children>
-                        <Label layoutX="14.0" prefHeight="46.0" prefWidth="118.0" text="Expenses:">
+                        <Label layoutX="14.0" prefHeight="46.0" prefWidth="113.0" text="Tien Vay:">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelTotalExpenses" layoutX="138.0" prefHeight="46.0" prefWidth="84.0">
+                        <Label fx:id="labelTotalExpenses" layoutX="130.0" prefHeight="46.0" prefWidth="100.0">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="119.0" text="Total Contracts:">
+                        <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="111.0" text="Tong So:">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelTotalNewContracts" layoutX="138.0" layoutY="31.0" prefHeight="46.0" prefWidth="94.0">
+                        <Label fx:id="labelTotalNewContracts" layoutX="130.0" layoutY="31.0" prefHeight="46.0" prefWidth="100.0">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
-                  <Button layoutX="156.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#withdrawContract" prefHeight="25.0" prefWidth="84.0" text="withdraw" />
-                  <TextField fx:id="contractIdField" layoutX="35.0" layoutY="55.0" prefHeight="25.0" prefWidth="110.0" promptText="id" />
-                  <TextField fx:id="dateField" layoutX="355.0" layoutY="55.0" prefHeight="25.0" prefWidth="188.0" promptText="date" />
-                  <Button layoutX="560.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="Prolong" />
-                  <Button layoutX="255.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#takeOutContract" prefHeight="25.0" prefWidth="84.0" text="take out" />
-                  <Pane layoutX="310.0" layoutY="105.0" prefHeight="185.0" prefWidth="279.0" styleClass="infobox" stylesheets="@../css/style.css">
+                  <Button layoutX="156.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#withdrawContract" prefHeight="25.0" prefWidth="84.0" text="khach lay" />
+                  <TextField fx:id="contractIdField" layoutX="35.0" layoutY="55.0" prefHeight="25.0" prefWidth="110.0" promptText="so hop dong" />
+                  <TextField fx:id="dateField" layoutX="355.0" layoutY="55.0" prefHeight="25.0" prefWidth="188.0" promptText="ngay" />
+                  <Button layoutX="560.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="gia han" />
+                  <Button layoutX="255.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#takeOutContract" prefHeight="25.0" prefWidth="84.0" text="bo" />
+                  <Pane layoutX="355.0" layoutY="105.0" prefHeight="102.0" prefWidth="279.0" styleClass="infobox" stylesheets="@../css/style.css">
                      <children>
                         <Label layoutX="14.0" prefHeight="46.0" prefWidth="103.0" text="Income:">
                            <font>
@@ -144,6 +144,30 @@
                            </font>
                         </Label>
                         <Label fx:id="labelTotalWithdrawnContracts" layoutX="128.0" layoutY="31.0" prefHeight="46.0" prefWidth="94.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="39.0" layoutY="225.0" prefHeight="185.0" prefWidth="319.0" styleClass="infobox" stylesheets="@../css/style.css">
+                     <children>
+                        <Label layoutX="14.0" prefHeight="46.0" prefWidth="126.0" text="Tien Vay (0):">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelTotalExpenses0" layoutX="150.0" prefHeight="46.0" prefWidth="100.0">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="111.0" text="Tong So:">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelTotalNewContracts0" layoutX="150.0" layoutY="31.0" prefHeight="46.0" prefWidth="100.0">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>

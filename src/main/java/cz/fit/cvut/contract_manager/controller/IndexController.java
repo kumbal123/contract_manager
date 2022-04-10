@@ -28,6 +28,8 @@ public class IndexController extends Controller {
 
     public Label labelTotalExpenses;
     public Label labelTotalNewContracts;
+    public Label labelTotalExpenses0;
+    public Label labelTotalNewContracts0;
     public Label labelTotalIncome;
     public Label labelTotalWithdrawnContracts;
 
@@ -153,12 +155,18 @@ public class IndexController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         List<Contract> contractList = contractService.getAll();
 
+        int totalExpenses0 = 0, totalNewContracts0 = 0;
         int totalExpenses = 0, totalNewContracts = 0, totalIncome = 0, totalWithdrawnContracts = 0;
 
         for(Contract contract : contractList) {
             if(Util.isToday(contract.getCreationDate())) {
-                totalExpenses += contract.getLendPrice();
-                totalNewContracts += 1;
+                if(contract.getContractId().charAt(1) != '0') {
+                    totalExpenses += contract.getLendPrice();
+                    totalNewContracts += 1;
+                } else {
+                    totalExpenses0 += contract.getLendPrice();
+                    totalNewContracts0 += 1;
+                }
             } else if(Util.isToday(contract.getExpireDateCurr()) && contract.isWithdrawn()) {
                 totalIncome += contract.getTotalPriceCurr();
                 totalWithdrawnContracts += 1;
@@ -167,6 +175,8 @@ public class IndexController extends Controller {
 
         labelTotalExpenses.setText(String.valueOf(totalExpenses));
         labelTotalNewContracts.setText(String.valueOf(totalNewContracts));
+        labelTotalExpenses0.setText(String.valueOf(totalExpenses0));
+        labelTotalNewContracts0.setText(String.valueOf(totalNewContracts0));
         labelTotalIncome.setText(String.valueOf(totalIncome));
         labelTotalWithdrawnContracts.setText(String.valueOf(totalWithdrawnContracts));
     }

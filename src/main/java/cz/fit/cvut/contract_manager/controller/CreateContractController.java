@@ -120,6 +120,20 @@ public class CreateContractController extends Controller {
         return sum / prices.size();
     }
 
+    private void setDisableProperty(Boolean bool) {
+        nameField.setDisable(bool);
+        genderField.setDisable(bool);
+        birthPlaceField.setDisable(bool);
+        addressField.setDisable(bool);
+        cityField.setDisable(bool);
+        personalNumberField.setDisable(bool);
+        cardIdNumberField.setDisable(bool);
+        meuField.setDisable(bool);
+        nationalityField.setDisable(bool);
+        dateOfBirthField.setDisable(bool);
+        creationDateField.setDisable(bool);
+    }
+
     public void initContractData(final Contract src) {
         contract = src;
 
@@ -147,16 +161,7 @@ public class CreateContractController extends Controller {
         nationalityField.setText(customer.getNationality());
         dateOfBirthField.setText(getStringFromDate(customer.getDateOfBirth()));
 
-        nameField.setDisable(true);
-        genderField.setDisable(true);
-        birthPlaceField.setDisable(true);
-        addressField.setDisable(true);
-        cityField.setDisable(true);
-        personalNumberField.setDisable(true);
-        cardIdNumberField.setDisable(true);
-        meuField.setDisable(true);
-        nationalityField.setDisable(true);
-        dateOfBirthField.setDisable(true);
+        setDisableProperty(true);
     }
 
     @FXML
@@ -244,6 +249,8 @@ public class CreateContractController extends Controller {
             lendPriceField.appendText(",-");
             totalPriceField.appendText(",-");
 
+            setDisableProperty(false);
+
             boolean printed = job.printPage(pageLayout, contractDataPane);
 
             if(printed) {
@@ -254,6 +261,7 @@ public class CreateContractController extends Controller {
 
             lendPriceField.setText(lendPrice);
             totalPriceField.setText(totalPrice);
+            setDisableProperty(true);
         }else {
             System.out.println("Could not create a printer job.");
         }

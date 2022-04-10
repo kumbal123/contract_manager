@@ -13,18 +13,18 @@
         <center>
             <Pane prefHeight="400.0" prefWidth="833.0">
                 <children>
-                    <TextField fx:id="searchBar" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="907.0" promptText="search" />
-                    <Button layoutX="989.0" layoutY="134.0" mnemonicParsing="false" onMouseClicked="#switchToCreateCustomer" prefHeight="25.0" prefWidth="84.0" text="Create" />
-                    <Button layoutX="989.0" layoutY="176.0" mnemonicParsing="false" onMouseClicked="#deleteCustomer" prefHeight="25.0" prefWidth="84.0" text="Delete" />
+                    <TextField fx:id="searchBar" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="907.0" promptText="tim" />
+                    <Button layoutX="989.0" layoutY="134.0" mnemonicParsing="false" onMouseClicked="#switchToCreateCustomer" prefHeight="25.0" prefWidth="84.0" text="Lam Moi" />
+                    <Button layoutX="989.0" layoutY="176.0" mnemonicParsing="false" onMouseClicked="#deleteCustomer" prefHeight="25.0" prefWidth="84.0" text="Xoa" />
                     <Pane layoutX="46.0" layoutY="81.0" prefHeight="579.0" prefWidth="907.0">
                   <children>
                      <TableView fx:id="tvCustomers" onMouseClicked="#handleMouseEvent" prefHeight="579.0" prefWidth="909.0">
                        <columns>
-                         <TableColumn fx:id="colName" prefWidth="234.0" text="Name" />
-                         <TableColumn fx:id="colPersonalNumber" prefWidth="166.0" text="PersonalNumber" />
-                           <TableColumn fx:id="colAddress" prefWidth="232.0" text="Address" />
-                           <TableColumn fx:id="colNumOfContracts" prefWidth="134.0" text="Number of contracts" />
-                           <TableColumn fx:id="colDateOfBirth" prefWidth="116.0" text="DateOfBirth" />
+                         <TableColumn fx:id="colName" prefWidth="234.0" text="Ten" />
+                         <TableColumn fx:id="colPersonalNumber" prefWidth="166.0" text="So Sinh" />
+                           <TableColumn fx:id="colAddress" prefWidth="232.0" text="Dia Chi" />
+                           <TableColumn fx:id="colNumOfContracts" prefWidth="134.0" text="Tong So" />
+                           <TableColumn fx:id="colDateOfBirth" prefWidth="116.0" text="Ngay Sinh" />
                        </columns>
                      </TableView>
                   </children></Pane>

@@ -259,6 +259,7 @@ public class Contract implements Serializable {
     }
 
     public void removeCustomer() {
+        customer.removeContract();
         customer = null;
     }
 
