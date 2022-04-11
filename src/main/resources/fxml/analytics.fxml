@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.AnalyticsController">
+<HBox id="analyticsHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.AnalyticsController">
     <children>
         <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1101.0">
             <center>
                 <Pane prefHeight="600.0" prefWidth="901.0">
                     <children>
                         <TextField fx:id="fromField" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="185.0" promptText="from" />
-                        <Button layoutX="456.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#analyzeContracts" prefHeight="25.0" prefWidth="84.0" text="Analyze" />
+                        <Button fx:id="analyzeButton" layoutX="456.0" layoutY="43.0" mnemonicParsing="false" onMouseClicked="#analyzeContracts" prefHeight="25.0" prefWidth="84.0" text="Analyze" />
                         <Pane layoutX="46.0" layoutY="81.0" prefHeight="594.0" prefWidth="494.0">
                             <children>
                                 <TableView fx:id="tvContracts" layoutY="-2.0" onMouseClicked="#handleMouseEvent" prefHeight="597.0" prefWidth="493.0">
@@ -26,8 +26,8 @@
                                         <TableColumn fx:id="colCreationDate" minWidth="0.0" prefWidth="93.0" text="CreationDate" />
                                         <TableColumn fx:id="colExpireDate" prefWidth="88.0" text="ExpireDate" />
                                         <TableColumn fx:id="colLendPrice" prefWidth="72.0" text="LendPrice" />
-                              <TableColumn fx:id="colInterest" prefWidth="69.0" text="Interest" />
-                              <TableColumn fx:id="colTotalPrice" prefWidth="75.0" text="TotalPrice" />
+                                        <TableColumn fx:id="colInterest" prefWidth="69.0" text="Interest" />
+                                        <TableColumn fx:id="colTotalPrice" prefWidth="75.0" text="TotalPrice" />
                                     </columns>
                                 </TableView>
                             </children></Pane>

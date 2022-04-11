@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 public class AnalyticsController extends Controller {
     public TextField fromField;
     public TextField toField;
+    public Button analyzeButton;
 
     public TableView<Contract> tvContracts;
     public TableColumn<Contract, String> colContractId;

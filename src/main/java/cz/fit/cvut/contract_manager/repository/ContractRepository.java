@@ -1,11 +1,10 @@
 package cz.fit.cvut.contract_manager.repository;
 
 import cz.fit.cvut.contract_manager.entity.Contract;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.jboss.logging.Logger;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,54 +17,90 @@ public class ContractRepository extends Repository<Integer, Contract> {
     }
 
     public Contract getMostRecentByContractId(final String id) {
-        Session session = FACTORY.openSession();
-        Transaction trans = session.beginTransaction();
+        List<Contract> contracts = new ArrayList<>();
 
-        Query<Contract> query = session.createQuery("from Contract where contractId=:contractId", Contract.class);
-        query.setParameter("contractId", id);
+        try {
+            session = FACTORY.openSession();
+            session.beginTransaction();
 
-        List<Contract> contracts = query.list();
-        contracts.sort(Comparator.comparing(Contract::getCreationDate).reversed());
+            Query<Contract> query = session.createQuery("from Contract where contractId=:contractId", Contract.class);
+            query.setParameter("contractId", id);
 
-        trans.commit();
-        session.close();
+            contracts = query.list();
+            contracts.sort(Comparator.comparing(Contract::getCreationDate).reversed());
+
+            session.getTransaction().commit();
+        } catch(final Exception e) {
+            if(session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
 
         return contracts.isEmpty() ? null : contracts.get(0);
     }
 
     @Override
     public Contract getById(final Integer id) {
-        Session session = FACTORY.openSession();
-        Transaction trans = session.beginTransaction();
+        Contract contract = null;
 
-        Contract contract = session.get(Contract.class, id);
+        try {
+            session = FACTORY.openSession();
+            session.beginTransaction();
 
-        trans.commit();
-        session.close();
+            contract = session.get(Contract.class, id);
+
+            session.getTransaction().commit();
+        } catch(final Exception e) {
+            if(session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
 
         return contract;
     }
 
     @Override
     public List<Contract> getAll() {
-        Session session = FACTORY.openSession();
-        Transaction trans = session.beginTransaction();
+        List<Contract> contracts = new ArrayList<>();
 
-        List<Contract> contracts = session.createQuery("from Contract", Contract.class).list();
+        try {
+            session = FACTORY.openSession();
+            session.beginTransaction();
 
-        trans.commit();
-        session.close();
+            contracts = session.createQuery("from Contract", Contract.class).list();
+
+            session.getTransaction().commit();
+        } catch(final Exception e) {
+            if(session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
 
         return contracts;
     }
 
     @Override
     public void deleteAll() {
-        Session session = FACTORY.openSession();
-        Transaction trans = session.beginTransaction();
-        session.createQuery("delete from Contract").executeUpdate();
-        trans.commit();
-        session.close();
+        List<Contract> contracts = getAll();
+
+        for(Contract contract : contracts) {
+            deleteByEntity(contract);
+        }
     }
 
 
