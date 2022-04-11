@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ViewContractController">
+<AnchorPane id="viewContractAnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ViewContractController">
     <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0">
       <right>
          <Pane fx:id="rightPane" prefHeight="700.0" prefWidth="660.0" visible="false" BorderPane.alignment="CENTER">
@@ -55,10 +55,9 @@
                 <TextField fx:id="itemInfoField" layoutX="45.0" layoutY="368.0" prefHeight="25.0" prefWidth="373.0" promptText="what - model, brand" />
                 <TextField fx:id="itemSpecificationField" layoutX="45.0" layoutY="406.0" prefHeight="25.0" prefWidth="373.0" promptText="s. number, weight" />
                 <TextField fx:id="totalPriceField" layoutX="282.0" layoutY="464.0" prefHeight="39.0" prefWidth="135.0" promptText="total price" />
-                <Button layoutX="356.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#takeOut" prefHeight="26.0" prefWidth="60.0" text="bo" />
-            <Button layoutX="273.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#withdraw" text="khach lay" />
+                <Button id="takeOutButton" layoutX="356.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#takeOut" prefHeight="26.0" prefWidth="60.0" text="bo" />
+                <Button id="withdrawButton" layoutX="273.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#withdraw" text="khach lay" />
             </Pane>
       </left>
     </BorderPane>
-
 </AnchorPane>

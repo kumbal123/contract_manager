@@ -126,9 +126,9 @@ public class CreateCustomerController extends Controller {
 
         if(totalContracts != 0) {
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Bo - " + left + " - " + (left * 100/totalContracts) + "%", left),
-                new PieChart.Data("Da Lay - " + withdrawn + " - " + (withdrawn * 100/totalContracts) + "%", withdrawn),
-                new PieChart.Data("Con han - " + stillValid + " - " + (stillValid * 100/totalContracts) + "%", stillValid)
+                new PieChart.Data("Bo - " + left + " - " + String.format("%.02f", left * 100.0/totalContracts) + "%", left),
+                new PieChart.Data("Da Lay - " + withdrawn + " - " + String.format("%.02f", withdrawn * 100.0/totalContracts) + "%", withdrawn),
+                new PieChart.Data("Con han - " + stillValid + " - " + String.format("%.02f", stillValid * 100.0/totalContracts) + "%", stillValid)
             );
 
             pieChart.setData(pieChartData);

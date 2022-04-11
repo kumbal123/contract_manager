@@ -27,6 +27,10 @@ public abstract class RepositoryService<K, E, R extends Repository<K, E>> implem
         repository.deleteByEntity(entity);
     }
 
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
     public List<E> getAll() {
         return repository.getAll();
     }

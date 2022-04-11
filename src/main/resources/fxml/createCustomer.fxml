@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.CreateCustomerController">
+<AnchorPane id="createCustomerAnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.CreateCustomerController">
     <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0">
         <center>
             <Pane prefHeight="352.0" prefWidth="1128.0">
@@ -20,16 +20,15 @@
                 <TextField fx:id="genderField" layoutX="295.0" layoutY="34.0" prefHeight="25.0" prefWidth="122.0" promptText="gioi tinh" />
                 <TextField fx:id="birthPlaceField" layoutX="45.0" layoutY="80.0" prefHeight="25.0" prefWidth="238.0" promptText="noi sinh" />
                 <TextField fx:id="dateOfBirthField" layoutX="295.0" layoutY="80.0" prefHeight="25.0" prefWidth="122.0" promptText="ngay sinh" />
-            <TextField fx:id="addressField" layoutX="45.0" layoutY="122.0" prefHeight="26.0" prefWidth="373.0" promptText="dia chi" />
+                <TextField fx:id="addressField" layoutX="45.0" layoutY="122.0" prefHeight="26.0" prefWidth="373.0" promptText="dia chi" />
                 <TextField fx:id="cityField" layoutX="45.0" layoutY="163.0" prefHeight="25.0" prefWidth="373.0" promptText="thanh pho" />
                 <TextField fx:id="personalNumberField" layoutX="45.0" layoutY="203.0" prefHeight="25.0" prefWidth="179.0" promptText="so sinh" />
                 <TextField fx:id="cardIdNumberField" layoutX="239.0" layoutY="203.0" prefHeight="25.0" prefWidth="179.0" promptText="co CM" />
                 <TextField fx:id="nationalityField" layoutX="45.0" layoutY="237.0" prefHeight="25.0" prefWidth="179.0" promptText="quoc tich" />
                 <TextField fx:id="meuField" layoutX="239.0" layoutY="237.0" prefHeight="25.0" prefWidth="179.0" promptText="MeU" />
-
-                <Button layoutX="363.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#createCustomer" prefHeight="26.0" prefWidth="55.0" text="luu" />
+                <Button id="createButton" layoutX="363.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#createCustomer" prefHeight="26.0" prefWidth="55.0" text="luu" />
                 <Button fx:id="updateButton" disable="true" layoutX="295.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#updateCustomer" prefHeight="26.0" prefWidth="58.0" text="sua" />
-            <Button fx:id="createContractButton" disable="true" layoutX="45.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#createContract" text="tao  moi" />
+                <Button fx:id="createContractButton" disable="true" layoutX="45.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#createContract" text="tao  moi" />
             <PieChart fx:id="pieChart" layoutX="462.0" layoutY="34.0" legendSide="LEFT" prefHeight="337.0" prefWidth="618.0" />
             <Label layoutX="460.0" layoutY="30.0" prefHeight="34.0" prefWidth="141.0" text="Tong So:">
                <font>
@@ -98,5 +97,4 @@
             </Pane>
         </center>
     </BorderPane>
-
 </AnchorPane>

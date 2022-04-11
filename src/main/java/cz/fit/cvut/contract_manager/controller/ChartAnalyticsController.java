@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -25,13 +26,17 @@ public class ChartAnalyticsController extends Controller {
     public TextField fromYearField;
     public TextField toYearField;
 
+    public Button monthsButton;
+    public Button yearsButton;
+    public Button clearButton;
+
     public LineChart<String, Integer> lineChartIncome;
     public Label labelTotalIncome;
 
     public LineChart<String, Integer> lineChartProfitLoss;
     public Label labelTotalProfitLoss;
 
-    public LineChart<String, Integer> lineChartExpense;
+    public LineChart<String, Integer> lineChartExpenses;
     public Label labelTotalExpenses;
 
     public Label labelTotalContracts;
@@ -88,9 +93,9 @@ public class ChartAnalyticsController extends Controller {
 
         if(totalContracts != 0) {
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Bo - " + left + " - " + (left * 100/totalContracts) + "%", left),
-                new PieChart.Data("Da Lay - " + withdrawn + " - " + (withdrawn * 100/totalContracts) + "%", withdrawn),
-                new PieChart.Data("Con Han - " + stillValid + " - " + (stillValid * 100/totalContracts) + "%", stillValid)
+                new PieChart.Data("Bo - " + left + " - " + String.format("%.02f", left * 100.0/totalContracts) + "%", left),
+                new PieChart.Data("Da Lay - " + withdrawn + " - " + String.format("%.02f", withdrawn * 100.0/totalContracts) + "%", withdrawn),
+                new PieChart.Data("Con Han - " + stillValid + " - " + String.format("%.02f", stillValid * 100.0/totalContracts) + "%", stillValid)
             );
 
             pieChart.setData(pieChartData);
@@ -99,7 +104,7 @@ public class ChartAnalyticsController extends Controller {
         ObservableList<XYChart.Data<String, Integer>> lineChartExpenseData = FXCollections.observableArrayList(listExpensesData);
         XYChart.Series<String, Integer> expenseSeries = new XYChart.Series<>(lineChartExpenseData);
         expenseSeries.setName(year);
-        lineChartExpense.getData().add(expenseSeries);
+        lineChartExpenses.getData().add(expenseSeries);
         labelTotalExpenses.setText(String.valueOf(totalExpenses));
 
         ObservableList<XYChart.Data<String, Integer>> lineChartIncomeData = FXCollections.observableArrayList(listIncomeData);
@@ -157,9 +162,9 @@ public class ChartAnalyticsController extends Controller {
 
         if(totalContracts != 0) {
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Bo - " + left + " - " + (left * 100/totalContracts) + "%", left),
-                new PieChart.Data("Da Lay - " + withdrawn + " - " + (withdrawn * 100/totalContracts) + "%", withdrawn),
-                new PieChart.Data("Con Han - " + stillValid + " - " + (stillValid * 100/totalContracts) + "%", stillValid)
+                new PieChart.Data("Bo - " + left + " - " + String.format("%.02f", left * 100.0/totalContracts) + "%", left),
+                new PieChart.Data("Da Lay - " + withdrawn + " - " + String.format("%.02f", withdrawn * 100.0/totalContracts) + "%", withdrawn),
+                new PieChart.Data("Con Han - " + stillValid + " - " + String.format("%.02f", stillValid * 100.0/totalContracts) + "%", stillValid)
             );
 
             pieChart.setData(pieChartData);
@@ -167,7 +172,7 @@ public class ChartAnalyticsController extends Controller {
 
 
         ObservableList<XYChart.Data<String, Integer>> lineChartExpenseData = FXCollections.observableArrayList(listExpensesData);
-        lineChartExpense.getData().add(new XYChart.Series<>(lineChartExpenseData));
+        lineChartExpenses.getData().add(new XYChart.Series<>(lineChartExpenseData));
         labelTotalExpenses.setText(String.valueOf(totalExpenses));
 
         ObservableList<XYChart.Data<String, Integer>> lineChartIncomeData = FXCollections.observableArrayList(listIncomeData);
@@ -220,7 +225,7 @@ public class ChartAnalyticsController extends Controller {
         labelTotalProfitLoss.setText("0");
 
         pieChart.getData().clear();
-        lineChartExpense.getData().clear();
+        lineChartExpenses.getData().clear();
         lineChartIncome.getData().clear();
         lineChartProfitLoss.getData().clear();
     }

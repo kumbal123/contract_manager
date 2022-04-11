@@ -8,16 +8,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ContractController">
+<HBox id="contractsHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ContractController">
     <children>
       <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1101.0">
          <center>
-              <Pane prefHeight="600.0" prefWidth="901.0">
+              <Pane fx:id="contractsPane" prefHeight="600.0" prefWidth="901.0">
                   <children>
                       <TextField fx:id="searchBar" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="914.0" promptText="tim" />
-                      <Button layoutX="993.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#switchToCreateContract" prefHeight="25.0" prefWidth="84.0" text="Lam Moi" />
-                      <Button layoutX="993.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="25.0" prefWidth="84.0" text="Xem So" />
-                  <Button layoutX="993.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#deleteContract" prefHeight="25.0" prefWidth="84.0" text="Xoa" />
+                      <Button id="createButton" layoutX="993.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#switchToCreateContract" prefHeight="25.0" prefWidth="84.0" text="Lam Moi" />
+                      <Button id="overviewButton" layoutX="993.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="25.0" prefWidth="84.0" text="Xem So" />
+                      <Button id="deleteButton" layoutX="993.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#deleteContract" prefHeight="25.0" prefWidth="84.0" text="Xoa" />
                       <Pane layoutX="46.0" layoutY="81.0" prefHeight="594.0" prefWidth="914.0">
                      <children>
                         <TableView fx:id="tvContracts" layoutX="1.0" onMouseClicked="#handleMouseEvent" prefHeight="595.0" prefWidth="916.0">

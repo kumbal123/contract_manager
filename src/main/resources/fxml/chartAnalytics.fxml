@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ChartAnalyticsController">
+<HBox id="chartHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ChartAnalyticsController">
     <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0">
         <center>
             <Pane prefHeight="352.0" prefWidth="1128.0">
@@ -65,7 +65,7 @@
                   <TextField fx:id="toYearField" layoutX="234.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="Den nam" />
                   <Button layoutX="356.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeContractsInYears" text="Tinh nam" />
                   <Button layoutX="492.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#clearCharts" text="xoa" />
-            <LineChart fx:id="lineChartExpense" animated="false" layoutX="547.0" layoutY="67.0" prefHeight="300.0" prefWidth="550.0" styleClass="chartAnalytics">
+                <LineChart fx:id="lineChartExpense" animated="false" layoutX="547.0" layoutY="67.0" prefHeight="300.0" prefWidth="550.0" styleClass="chartAnalytics">
                <xAxis>
                   <CategoryAxis side="BOTTOM" />
                </xAxis>
