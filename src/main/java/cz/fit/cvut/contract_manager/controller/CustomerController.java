@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class CustomerController extends Controller {
@@ -50,10 +51,10 @@ public class CustomerController extends Controller {
         if(customer != null) {
             customerService.deleteByEntity(customer);
             showCustomers();
-            Notification.showPopupMessageOk("Successfully deleted customer: " + customer.getName() + "!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Khach voi ten: " + customer.getName() + "da xoa xong!", (Stage) mainPane.getScene().getWindow());
             customer = null;
         } else {
-            Notification.showPopupMessageErr("Could not delete. Pick a customer by clicking on it first!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Khach chua xoa duoc. Bam vao khach da, roi xoa!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -95,7 +96,13 @@ public class CustomerController extends Controller {
         );
 
         colDateOfBirth.setCellValueFactory(
-            cellData -> getStringPropertyFromDate(cellData.getValue().getDateOfBirth())
+            cellData -> {
+                Date date = cellData.getValue().getDateOfBirth();
+                if(date == null) {
+                    return new SimpleStringProperty("null");
+                }
+                return getStringPropertyFromDate(date);
+            }
         );
 
         tvCustomers.setItems(customerList);

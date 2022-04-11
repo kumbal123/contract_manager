@@ -79,7 +79,7 @@ public class AnalyticsController extends Controller {
 
             tvContracts.setItems(FXCollections.observableArrayList(contractList));
         } else {
-            Notification.showPopupMessageErr("Entered dates are not dates!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Ngay thanh viet khong dung theo dd.mm.yyyy", (Stage) mainPane.getScene().getWindow());
         }
     }
 

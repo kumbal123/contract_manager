@@ -82,15 +82,15 @@ public class IndexController extends Controller {
         Contract contract = contractService.getMostRecentByContractId(contractId);
 
         if(contract != null && contractService.withdraw(contract)) {
-            Notification.showPopupMessageOk("Withdraw was successful!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Hop dong lay xong!", (Stage) mainPane.getScene().getWindow());
         } else if(contract != null) {
             Notification.showPopupMessageErr(
-                "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                "Hop dong da " + (contract.isWithdrawn() ? "lay roi" : "bo roi"),
                 (Stage) mainPane.getScene().getWindow()
             );
         } else {
             Notification.showPopupMessageErr(
-                "Contract with " + contractId + " id does not exist!",
+                "Hop dong voi so " + contractId + " khong co!",
                 (Stage) mainPane.getScene().getWindow()
             );
         }
@@ -102,15 +102,15 @@ public class IndexController extends Controller {
         Contract contract = contractService.getMostRecentByContractId(contractId);
 
         if(contract != null && contractService.takeOut(contract)) {
-            Notification.showPopupMessageOk("Takeout was successful!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Hop dong bo xong!", (Stage) mainPane.getScene().getWindow());
         } else if(contract != null) {
             Notification.showPopupMessageErr(
-                "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                "Hop dong da " + (contract.isWithdrawn() ? "lay roi" : "bo roi"),
                 (Stage) mainPane.getScene().getWindow()
             );
         } else {
             Notification.showPopupMessageErr(
-                "Contract with " + contractId + " id does not exist!",
+                "Hop dong voi so " + contractId + " khong co!",
                 (Stage) mainPane.getScene().getWindow()
             );
         }
@@ -126,7 +126,7 @@ public class IndexController extends Controller {
 
             if(contract == null) {
                 Notification.showPopupMessageErr(
-                    "Contract with " + contractId + " id does not exist!",
+                    "Hop dong voi so " + contractId + " khong co!",
                     (Stage) mainPane.getScene().getWindow()
                 );
             } else {
@@ -135,17 +135,17 @@ public class IndexController extends Controller {
 
                 if(contractService.prolong(contract, history)) {
                     historyService.create(history);
-                    Notification.showPopupMessageOk("Prolong was successful!", (Stage) mainPane.getScene().getWindow());
+                    Notification.showPopupMessageOk("Gia han xong!", (Stage) mainPane.getScene().getWindow());
                 } else {
                     Notification.showPopupMessageErr(
-                        "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                        "Hop dong da " + (contract.isWithdrawn() ? "lay roi" : "bo roi"),
                         (Stage) mainPane.getScene().getWindow()
                     );
                 }
             }
         } else {
             Notification.showPopupMessageErr(
-                "Date is not actually date!",
+                "Nhay thang khog dung theo dd.mm.yyyy!",
                 (Stage) mainPane.getScene().getWindow()
             );
         }

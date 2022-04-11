@@ -61,7 +61,7 @@ public class WebService implements Service {
             }
         } catch (IOException e) {
             System.out.println("An error occurred: " + e);
-            Notification.showPopupMessageErr("Something went wrong while searching prices!", stage);
+            Notification.showPopupMessageErr("Khong tim gia duoc!", stage);
         }
 
         prices.sort(Comparator.comparing(Price::getPrice));

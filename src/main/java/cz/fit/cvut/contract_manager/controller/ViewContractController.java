@@ -115,10 +115,10 @@ public class ViewContractController extends Controller {
     @FXML
     public void takeOut(final MouseEvent event) {
         if(contractService.takeOut(contract)) {
-            Notification.showPopupMessageOk("Takeout was successful!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Hop dong bo xong!", (Stage) mainPane.getScene().getWindow());
         } else {
             Notification.showPopupMessageErr(
-                "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                "Hop dong da " + (contract.isWithdrawn() ? "lay roi" : "bo roi"),
                 (Stage) mainPane.getScene().getWindow()
             );
         }
@@ -127,10 +127,10 @@ public class ViewContractController extends Controller {
     @FXML
     public void withdraw(final MouseEvent event) {
         if(contractService.withdraw(contract)) {
-            Notification.showPopupMessageOk("Withdraw was successful!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Hop dong lay xong!", (Stage) mainPane.getScene().getWindow());
         } else {
             Notification.showPopupMessageErr(
-                "Contract is already " + (contract.isWithdrawn() ? "withdrawn" : "taken out"),
+                "Hop dong da " + (contract.isWithdrawn() ? "lay roi" : "bo roi"),
                 (Stage) mainPane.getScene().getWindow()
             );
         }

@@ -32,7 +32,6 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <minimizeJar>true</minimizeJar>
               <filters>
                 <filter>
                   <artifact>*:*</artifact>
@@ -54,31 +53,15 @@
   </build>
   <dependencies>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.5.1</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>apiguardian-api</artifactId>
-          <groupId>org.apiguardian</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>opentest4j</artifactId>
-          <groupId>org.opentest4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>junit-platform-commons</artifactId>
-          <groupId>org.junit.platform</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
       <groupId>org.testfx</groupId>
       <artifactId>testfx-core</artifactId>
       <version>4.0.16-alpha</version>
       <scope>test</scope>
       <exclusions>
+        <exclusion>
+          <artifactId>hamcrest-core</artifactId>
+          <groupId>org.hamcrest</groupId>
+        </exclusion>
         <exclusion>
           <artifactId>assertj-core</artifactId>
           <groupId>org.assertj</groupId>
@@ -91,10 +74,23 @@
       <version>4.0.16-alpha</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>hamcrest-core</artifactId>
+          <groupId>org.hamcrest</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
   </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javafx.version>17</javafx.version>
+    <javafx.version>17.0.2</javafx.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <testfx.version>4.0.16-alpha</testfx.version>
   </properties>
 </project>

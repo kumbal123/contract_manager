@@ -17,7 +17,7 @@ public abstract class Controller implements Initializable {
     }
 
     public static Date getDateFromString(final String str) throws ParseException {
-        return new SimpleDateFormat("dd.MM.yyyy").parse(str);
+        return new SimpleDateFormat("dd.MM.yy").parse(str);
     }
 
     public static String getStringFromDate(final Date date) {

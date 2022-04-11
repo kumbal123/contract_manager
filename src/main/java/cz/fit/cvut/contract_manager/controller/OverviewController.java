@@ -1,7 +1,10 @@
 package cz.fit.cvut.contract_manager.controller;
 
+import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Contract;
+import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
+import cz.fit.cvut.contract_manager.service.HistoryRepositoryService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,9 +20,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 
 public class OverviewController extends Controller {
@@ -35,10 +40,16 @@ public class OverviewController extends Controller {
     public TableColumn<Contract, String> colTotalPrice;
     public TableColumn<Contract, String> colDiff;
 
+    public TextField contractIdField;
+    public TextField dateField;
+
     public TextField searchBar;
     public BorderPane mainPane;
 
     private final ContractRepositoryService contractService = ContractRepositoryService.getInstance();
+    private final HistoryRepositoryService historyService = HistoryRepositoryService.getInstance();
+
+    private Contract contract;
 
     public void showContracts() {
         ObservableList<Contract> contractList = FXCollections.observableArrayList(contractService.getAll());
@@ -113,18 +124,85 @@ public class OverviewController extends Controller {
 
     @FXML
     public void handleMouseEvent(final MouseEvent event) throws IOException {
-        Contract contract = tvContracts.getSelectionModel().getSelectedItem();
+        contract = tvContracts.getSelectionModel().getSelectedItem();
 
-        if(event.getClickCount() > 1 && contract != null) {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/viewContract.fxml"));
-            Pane pane = loader.load();
+        if(contract != null) {
+            contractIdField.setText(contract.getContractId());
+            dateField.setText(getStringFromDate(contract.getExpireDateCurr()));
 
-            ViewContractController viewContractController = loader.getController();
-            viewContractController.initContractData(contract);
+            if(event.getClickCount() > 1) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/fxml/viewContract.fxml"));
+                Pane pane = loader.load();
 
-            mainPane.setCenter(pane);
+                ViewContractController viewContractController = loader.getController();
+                viewContractController.initContractData(contract);
+
+                mainPane.setCenter(pane);
+            }
         }
+    }
+
+    @FXML
+    public void prolongContract(final MouseEvent event) throws ParseException {
+        String dateStr = dateField.getText().trim();
+
+        if(isDate(dateStr) && contract != null) {
+            History history = new History(contract.getTotalPriceCurr(), contract.getExpireDateCurr(),
+                getDateFromString(dateStr), contract);
+
+            if(contractService.prolong(contract, history)) {
+                historyService.create(history);
+                Notification.showPopupMessageOk("Gia han xong!", (Stage) mainPane.getScene().getWindow());
+            } else {
+                Notification.showPopupMessageErr(
+                    "Hop dong da " + (contract.isWithdrawn() ? "lay roi" : "bo roi"),
+                    (Stage) mainPane.getScene().getWindow()
+                );
+            }
+        } else {
+            Notification.showPopupMessageErr(
+                "Chua bam vao hop dong hoac la ngay thang khog dung theo dd.mm.yyyy!",
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
+        showContracts();
+    }
+
+    @FXML
+    public void takeOutContract(final MouseEvent event) {
+        if(contract != null && contractService.takeOut(contract)) {
+            Notification.showPopupMessageOk("Hop dong bo xong!", (Stage) mainPane.getScene().getWindow());
+        } else if(contract != null) {
+            Notification.showPopupMessageErr(
+                "Hop dong da " + (contract.isWithdrawn() ? "lay roi" : "bo roi"),
+                (Stage) mainPane.getScene().getWindow()
+            );
+        } else {
+            Notification.showPopupMessageErr(
+                "Hop dong chua bo duoc. Bam vao hop dong da, roi hai bo!",
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
+        showContracts();
+    }
+
+    @FXML
+    public void withdrawContract(final MouseEvent event) {
+        if(contract != null && contractService.withdraw(contract)) {
+            Notification.showPopupMessageOk("Hop dong lay xong!", (Stage) mainPane.getScene().getWindow());
+        } else if(contract != null) {
+            Notification.showPopupMessageErr(
+                "Hop dong da " + (contract.isWithdrawn() ? "lay roi" : "bo roi"),
+                (Stage) mainPane.getScene().getWindow()
+            );
+        } else {
+            Notification.showPopupMessageErr(
+                "Hop dong chua lay duoc. Bam vao hop dong da, roi hai lay!",
+                (Stage) mainPane.getScene().getWindow()
+            );
+        }
+        showContracts();
     }
 
     @Override

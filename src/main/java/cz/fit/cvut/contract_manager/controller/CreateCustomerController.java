@@ -115,20 +115,23 @@ public class CreateCustomerController extends Controller {
     }
 
     private void initPieChart() {
-        int withdrawn = 0, left = 0, totalContracts = customer.getNumberOfContracts();
+        int withdrawn = 0, left = 0, expired = 0, totalContracts = customer.getNumberOfContracts();
 
         for(Contract contract : contracts) {
             withdrawn += contract.isWithdrawn() ? 1 : 0;
             left += contract.isTakenOut() ? 1 : 0;
+            expired += contract.isExpired() ? 1 : 0;
         }
 
-        int stillValid = totalContracts - left - withdrawn;
+        int stillValid = totalContracts - left - withdrawn - expired;
 
         if(totalContracts != 0) {
+            double percentage = 100.0/totalContracts;
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Bo - " + left + " - " + String.format("%.02f", left * 100.0/totalContracts) + "%", left),
-                new PieChart.Data("Da Lay - " + withdrawn + " - " + String.format("%.02f", withdrawn * 100.0/totalContracts) + "%", withdrawn),
-                new PieChart.Data("Con han - " + stillValid + " - " + String.format("%.02f", stillValid * 100.0/totalContracts) + "%", stillValid)
+                new PieChart.Data("Bo - " + left + " (" + String.format("%.02f", left * percentage) + "%)", left),
+                new PieChart.Data("Da Lay - " + withdrawn + " (" + String.format("%.02f", withdrawn * percentage) + "%)", withdrawn),
+                new PieChart.Data("Con Han - " + stillValid + " (" + String.format("%.02f", stillValid * percentage) + "%)", stillValid),
+                new PieChart.Data("Het Han - " + expired + " (" + String.format("%.02f", expired * percentage) + "%)", expired)
             );
 
             pieChart.setData(pieChartData);
@@ -224,9 +227,9 @@ public class CreateCustomerController extends Controller {
             customerService.create(customer);
             mainPane.setCenter(getPage("customers.fxml"));
 
-            Notification.showPopupMessageOk("Contract successfully created!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Khach da luu xong!", (Stage) mainPane.getScene().getWindow());
         } else {
-            Notification.showPopupMessageErr("Some required fields are empty!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Chua khai het!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -258,9 +261,9 @@ public class CreateCustomerController extends Controller {
             customerService.update(customer);
             mainPane.setCenter(getPage("customers.fxml"));
 
-            Notification.showPopupMessageOk("Contract successfully created!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Khach da sua xong!", (Stage) mainPane.getScene().getWindow());
         } else {
-            Notification.showPopupMessageErr("Some required fields are empty!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Chua khai het!", (Stage) mainPane.getScene().getWindow());
         }
 
     }
@@ -302,7 +305,7 @@ public class CreateCustomerController extends Controller {
 
             lineChartMoney.getData().add(series);
         } else {
-            Notification.showPopupMessageErr("Enter a valid year", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("So nam da nhap khong dung!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -327,7 +330,7 @@ public class CreateCustomerController extends Controller {
             labelTotalMoney.setText(String.valueOf(total));
             lineChartMoney.getData().add(new XYChart.Series<>(lineChartContractData));
         } else {
-            Notification.showPopupMessageErr("Enter valid years", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("So nam da nhap khong dung!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -356,7 +359,7 @@ public class CreateCustomerController extends Controller {
 
             lineChartContracts.getData().add(series);
         } else {
-            Notification.showPopupMessageErr("Enter a valid year", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("So nam da nhap khong dung!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -381,7 +384,7 @@ public class CreateCustomerController extends Controller {
             labelTotalContractInterval.setText(String.valueOf(total));
             lineChartContracts.getData().add(new XYChart.Series<>(lineChartContractData));
         } else {
-            Notification.showPopupMessageErr("Enter valid years", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("So nam da nhap khong dung!", (Stage) mainPane.getScene().getWindow());
         }
     }
 

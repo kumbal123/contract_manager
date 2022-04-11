@@ -120,20 +120,6 @@ public class CreateContractController extends Controller {
         return sum / prices.size();
     }
 
-    private void setDisableProperty(Boolean bool) {
-        nameField.setDisable(bool);
-        genderField.setDisable(bool);
-        birthPlaceField.setDisable(bool);
-        addressField.setDisable(bool);
-        cityField.setDisable(bool);
-        personalNumberField.setDisable(bool);
-        cardIdNumberField.setDisable(bool);
-        meuField.setDisable(bool);
-        nationalityField.setDisable(bool);
-        dateOfBirthField.setDisable(bool);
-        creationDateField.setDisable(bool);
-    }
-
     public void initContractData(final Contract src) {
         contract = src;
 
@@ -161,7 +147,17 @@ public class CreateContractController extends Controller {
         nationalityField.setText(customer.getNationality());
         dateOfBirthField.setText(getStringFromDate(customer.getDateOfBirth()));
 
-        setDisableProperty(true);
+        nameField.setDisable(true);
+        genderField.setDisable(true);
+        birthPlaceField.setDisable(true);
+        addressField.setDisable(true);
+        cityField.setDisable(true);
+        personalNumberField.setDisable(true);
+        cardIdNumberField.setDisable(true);
+        meuField.setDisable(true);
+        nationalityField.setDisable(true);
+        dateOfBirthField.setDisable(true);
+        creationDateField.setDisable(true);
     }
 
     @FXML
@@ -203,9 +199,9 @@ public class CreateContractController extends Controller {
             mainPane.getChildren().removeAll();
             mainPane.setCenter(getPage("contracts.fxml"));
 
-            Notification.showPopupMessageOk("Contract successfully created!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Hop dong da luu xong!", (Stage) mainPane.getScene().getWindow());
         } else {
-            Notification.showPopupMessageErr("Some required fields are empty!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Chua khai het!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -232,9 +228,9 @@ public class CreateContractController extends Controller {
             mainPane.getChildren().removeAll();
             mainPane.setCenter(getPage("contracts.fxml"));
 
-            Notification.showPopupMessageOk("Contract successfully created!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Hop dong da sua xong!", (Stage) mainPane.getScene().getWindow());
         } else {
-            Notification.showPopupMessageErr("Some required fields are empty!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Chua khai het!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -249,21 +245,24 @@ public class CreateContractController extends Controller {
             lendPriceField.appendText(",-");
             totalPriceField.appendText(",-");
 
-            setDisableProperty(false);
+            contractDataPane.setScaleY(1);
+            contractDataPane.setScaleX(1);
 
             boolean printed = job.printPage(pageLayout, contractDataPane);
 
             if(printed) {
                 job.endJob();
+                Notification.showPopupMessageOk("Dang in!", (Stage) mainPane.getScene().getWindow());
             }else {
-                System.out.println("Printing failed.");
+                Notification.showPopupMessageErr("Khong in duoc!", (Stage) mainPane.getScene().getWindow());
             }
 
             lendPriceField.setText(lendPrice);
             totalPriceField.setText(totalPrice);
-            setDisableProperty(true);
+            contractDataPane.setScaleY(1.2);
+            contractDataPane.setScaleX(1.2);
         }else {
-            System.out.println("Could not create a printer job.");
+            Notification.showPopupMessageErr("Khong in duoc!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -296,6 +295,8 @@ public class CreateContractController extends Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         creationDateField.setText(new SimpleDateFormat("dd.MM.yy").format(new Date()));
+        contractDataPane.setScaleY(1.2);
+        contractDataPane.setScaleX(1.2);
 
         lendPriceField.textProperty().addListener((observable, oldVal, newVal) -> {
             if(!"".equals(expireDateField.getText()) && !newVal.isEmpty() && isInteger(newVal)) {

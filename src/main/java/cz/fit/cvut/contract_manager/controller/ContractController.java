@@ -57,10 +57,10 @@ public class ContractController extends Controller {
             contractService.removeCustomer(contract);
             contractService.deleteByEntity(contract);
             showContracts();
-            Notification.showPopupMessageOk("Successfully deleted contract with id: " + contract.getContractId() + "!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Hop dong voi so: " + contract.getContractId() + " da xoa xong!", (Stage) mainPane.getScene().getWindow());
             contract = null;
         } else {
-            Notification.showPopupMessageErr("Could not delete. Pick a contract by clicking on it first!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Khong xoa duoc. Bam vao hop dong trouc khi xoa!", (Stage) mainPane.getScene().getWindow());
         }
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -26,6 +27,11 @@
                       </columns>
                   </TableView>
                <TextField fx:id="searchBar" layoutX="31.0" layoutY="38.0" prefHeight="25.0" prefWidth="952.0" promptText="tim" />
+                <TextField fx:id="contractIdField" disable="true" layoutX="1000.0" layoutY="115.0" prefHeight="26.0" prefWidth="84.0" promptText="so hop dong" />
+                <TextField fx:id="dateField" layoutX="1000.0" layoutY="253.0" prefHeight="26.0" prefWidth="84.0" promptText="ngay" />
+                <Button id="prolongButton" layoutX="1000.0" layoutY="289.0" mnemonicParsing="false" onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="gia han" />
+                <Button id="takeOutButton" layoutX="1000.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#takeOutContract" prefHeight="25.0" prefWidth="84.0" text="bo" />
+                <Button id="withdrawButton" layoutX="1000.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#withdrawContract" prefHeight="25.0" prefWidth="84.0" text="khach lay" />
             </children>
          </Pane>
         </center>

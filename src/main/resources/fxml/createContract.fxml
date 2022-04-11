@@ -48,7 +48,7 @@
                      <font>
                         <Font size="11.0" />
                      </font></TextField>
-                        <TextField fx:id="cardIdNumberField" layoutX="226.0" layoutY="147.0" prefHeight="18.0" prefWidth="159.0" promptText="so CM">
+                        <TextField fx:id="cardIdNumberField" layoutX="226.0" layoutY="147.0" prefHeight="5.0" prefWidth="159.0" promptText="so CM">
                      <font>
                         <Font size="11.0" />
                      </font></TextField>
@@ -74,32 +74,32 @@
                      </font></TextField>
                         <TextField fx:id="expireDateField" layoutX="170.0" layoutY="286.0" prefHeight="18.0" prefWidth="90.0" promptText="ngay lay">
                      <font>
-                        <Font size="11.0" />
+                        <Font size="12.0" />
                      </font></TextField>
                         <TextField fx:id="itemInfoField" layoutX="67.0" layoutY="321.0" prefHeight="18.0" prefWidth="318.0" promptText="ten hang">
                      <font>
                         <Font size="11.0" />
                      </font></TextField>
-                        <TextField fx:id="itemSpecificationField" layoutX="49.0" layoutY="342.0" prefHeight="14.0" prefWidth="336.0" promptText="so hang">
+                        <TextField fx:id="itemSpecificationField" layoutX="67.0" layoutY="342.0" prefHeight="14.0" prefWidth="318.0" promptText="so hang">
                      <font>
-                        <Font size="11.0" />
+                        <Font size="10.0" />
                      </font></TextField>
                         <TextField fx:id="totalPriceField" layoutX="275.0" layoutY="374.0" prefHeight="20.0" prefWidth="110.0" promptText="tien tra">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
+                        <Button layoutX="390.0" layoutY="317.0" mnemonicParsing="false" onMouseClicked="#searchPrices" text="tim gia" />
                </children>
             </Pane>
-                  <Button layoutX="417.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#searchPrices" text="tim gia" />
                   <Button fx:id="updateButton" disable="true" layoutX="54.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#updateContract" prefHeight="26.0" prefWidth="52.0" text="sua" />
                   <Button layoutX="363.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#printContract" prefHeight="26.0" prefWidth="48.0" text="in" />
-                  <Button layoutX="298.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#createContract" prefHeight="26.0" prefWidth="52.0" text="luu" />
+                  <Button id="createButton" layoutX="298.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#createContract" prefHeight="26.0" prefWidth="52.0" text="luu" />
             </Pane>
       </center>
       <right>
          <Pane fx:id="rightPane" prefHeight="700.0" prefWidth="595.0" visible="false" BorderPane.alignment="CENTER">
             <children>
-               <TableView fx:id="tvPrices" layoutX="24.0" layoutY="32.0" onMouseClicked="#handleMouseEvent" prefHeight="471.0" prefWidth="549.0">
+               <TableView fx:id="tvPrices" layoutX="32.0" layoutY="32.0" onMouseClicked="#handleMouseEvent" prefHeight="471.0" prefWidth="549.0">
                  <columns>
                    <TableColumn fx:id="colName" prefWidth="452.0" text="Ten" />
                      <TableColumn fx:id="colPrice" prefWidth="76.0" text="Gia" />
