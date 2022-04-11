@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.CreateContractController">
+<AnchorPane id="createContractAnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.CreateContractController">
     <stylesheets>
         <URL value="@../css/style.css" />
     </stylesheets>
@@ -93,7 +93,7 @@
                   <Button layoutX="417.0" layoutY="386.0" mnemonicParsing="false" onMouseClicked="#searchPrices" text="research" />
                   <Button fx:id="updateButton" disable="true" layoutX="54.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#updateContract" text="update" />
                   <Button layoutX="363.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#printContract" text="print" />
-                  <Button layoutX="298.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#createContract" text="create" />
+                  <Button fx:id="createButton" layoutX="298.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#createContract" text="create" />
             </Pane>
       </center>
       <right>

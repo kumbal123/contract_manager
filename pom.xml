@@ -10,7 +10,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <javafx.version>17</javafx.version>
+        <javafx.version>17.0.2</javafx.version>
+        <testfx.version>4.0.16-alpha</testfx.version>
     </properties>
 
     <dependencies>
@@ -60,9 +61,21 @@
             <version>2.23.0</version>
         </dependency>
         <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-core</artifactId>
+            <version>${testfx.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>2.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit5</artifactId>
+            <version>${testfx.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

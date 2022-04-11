@@ -1,8 +1,6 @@
 package cz.fit.cvut.contract_manager.repository;
 
 import cz.fit.cvut.contract_manager.entity.History;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.jboss.logging.Logger;
 
@@ -17,52 +15,84 @@ public class HistoryRepository extends Repository<Integer, History> {
 
     @Override
     public History getById(final Integer id) {
-        Session session = FACTORY.openSession();
-        Transaction trans = session.beginTransaction();
+        History history = null;
 
-        History history = session.get(History.class, id);
-
-        trans.commit();
-        session.close();
+        try {
+            session = FACTORY.openSession();
+            session.beginTransaction();
+            history = session.get(History.class, id);
+            session.getTransaction().commit();
+        } catch(final Exception e) {
+            if(session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
 
         return history;
     }
 
     @Override
     public List<History> getAll() {
-        Session session = FACTORY.openSession();
-        Transaction trans = session.beginTransaction();
+        List<History> histories = null;
 
-        List<History> history = session.createQuery("from History", History.class).list();
+        try {
+            session = FACTORY.openSession();
+            session.beginTransaction();
+            histories = session.createQuery("from History", History.class).list();
+            session.getTransaction().commit();
+        } catch(final Exception e) {
+            if(session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
 
-        trans.commit();
-        session.close();
-
-        return history;
+        return histories;
     }
 
     @Override
     public void deleteAll() {
-        Session session = FACTORY.openSession();
-        Transaction trans = session.beginTransaction();
-        session.createQuery("delete History").executeUpdate();
-        trans.commit();
-        session.close();
+        List<History> histories = getAll();
+
+        for(History history: histories) {
+            deleteByEntity(history);
+        }
     }
 
     public List<History> getAllFromContractId(final Integer id) {
-        Session session = FACTORY.openSession();
-        Transaction trans = session.beginTransaction();
+        List<History> histories = null;
 
-        Query<History> query = session.createQuery("from History where contract.id=:dbId", History.class);
-        query.setParameter("dbId", id);
+        try {
+            session = FACTORY.openSession();
+            session.beginTransaction();
 
-        List<History> history = query.list();
+            Query<History> query = session.createQuery("from History where contract.id=:dbId", History.class);
+            query.setParameter("dbId", id);
 
-        trans.commit();
-        session.close();
+            histories = query.list();
 
-        return history;
+            session.getTransaction().commit();
+        } catch(final Exception e) {
+            if(session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+
+        return histories;
     }
 
     private static class HistoryRepositoryHolder {
