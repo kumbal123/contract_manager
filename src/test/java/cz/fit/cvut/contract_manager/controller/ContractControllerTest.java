@@ -40,6 +40,8 @@ class ContractControllerTest {
     public void start(final Stage stage) throws Exception {
         Customer customer = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", new Date(332342342));
 
+        customerService.create(customer);
+
         Contract contract1 = new Contract("A3", getDateFromString("10.06.2022"), 2500, getDateFromString("15.08.2022"), "Mobile", "j123", 4150, customer);
         Contract contract2 = new Contract("A4", getDateFromString("04.09.2022"), 5500, getDateFromString("20.09.2022"), "Mobile", "j123", 6380, customer);
         Contract contract3 = new Contract("A5", getDateFromString("28.09.2022"), 3400, getDateFromString("01.11.2022"), "Mobile", "j123", 4556, customer);
@@ -54,7 +56,7 @@ class ContractControllerTest {
     }
 
     @Test
-    void initializeTest(final FxRobot robot) {
+    void initializeTest() {
         verifyThat("#tvContracts", TableViewMatchers.hasNumRows(3));
         verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A3", "Mobile", 2500, "10.06.2022", "15.08.2022", null));
         verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A4", "Mobile", 5500, "04.09.2022", "20.09.2022", null));

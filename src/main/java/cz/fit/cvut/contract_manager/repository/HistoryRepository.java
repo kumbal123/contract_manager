@@ -43,7 +43,7 @@ public class HistoryRepository extends Repository<Integer, History> {
         try {
             session = FACTORY.openSession();
             session.beginTransaction();
-            histories = session.createQuery("from History", History.class).list();
+            histories = session.createQuery("select h from History h join fetch h.contract", History.class).list();
             session.getTransaction().commit();
         } catch(final Exception e) {
             if(session != null && session.getTransaction() != null) {

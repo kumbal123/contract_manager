@@ -1,14 +1,15 @@
 package cz.fit.cvut.contract_manager.controller;
 
 import cz.fit.cvut.contract_manager.entity.Contract;
+import cz.fit.cvut.contract_manager.entity.Customer;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
+import cz.fit.cvut.contract_manager.service.CustomerRepositoryService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -21,11 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(ApplicationExtension.class)
 class CreateContractControllerTest {
 
-    private ContractRepositoryService service = ContractRepositoryService.getInstance();
+    private ContractRepositoryService contractService = ContractRepositoryService.getInstance();
+    private CustomerRepositoryService customerService = CustomerRepositoryService.getInstance();
 
     @AfterEach
     void tearDown() {
-        service.deleteAll();
+        contractService.deleteAll();
+        customerService.deleteAll();
     }
 
     @Start
@@ -77,7 +80,7 @@ class CreateContractControllerTest {
         robot.clickOn("#createButton");
         robot.clickOn("#notification");
 
-        Contract contract = service.getMostRecentByContractId("A1");
+        Contract contract = contractService.getMostRecentByContractId("A1");
 
         assertEquals(name, contract.getName());
         assertEquals(dateOfBirth, getStringFromDate(contract.getDateOfBirth()));

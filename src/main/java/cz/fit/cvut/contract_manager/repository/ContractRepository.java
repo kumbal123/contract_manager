@@ -23,7 +23,7 @@ public class ContractRepository extends Repository<Integer, Contract> {
             session = FACTORY.openSession();
             session.beginTransaction();
 
-            Query<Contract> query = session.createQuery("from Contract where contractId=:contractId", Contract.class);
+            Query<Contract> query = session.createQuery("select c from Contract c join fetch c.customer where c.contractId=:contractId", Contract.class);
             query.setParameter("contractId", id);
 
             contracts = query.list();
@@ -77,7 +77,7 @@ public class ContractRepository extends Repository<Integer, Contract> {
             session = FACTORY.openSession();
             session.beginTransaction();
 
-            contracts = session.createQuery("from Contract", Contract.class).list();
+            contracts = session.createQuery("select c from Contract c join fetch c.customer", Contract.class).list();
 
             session.getTransaction().commit();
         } catch(final Exception e) {

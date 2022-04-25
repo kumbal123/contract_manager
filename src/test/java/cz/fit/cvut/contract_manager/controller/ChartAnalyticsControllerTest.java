@@ -1,7 +1,9 @@
 package cz.fit.cvut.contract_manager.controller;
 
 import cz.fit.cvut.contract_manager.entity.Contract;
+import cz.fit.cvut.contract_manager.entity.Customer;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
+import cz.fit.cvut.contract_manager.service.CustomerRepositoryService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,36 +28,40 @@ import static org.testfx.api.FxAssert.verifyThat;
 @ExtendWith(ApplicationExtension.class)
 class ChartAnalyticsControllerTest {
 
-    private ContractRepositoryService service = ContractRepositoryService.getInstance();
+    private ContractRepositoryService contractService = ContractRepositoryService.getInstance();
+    private CustomerRepositoryService customerService = CustomerRepositoryService.getInstance();
 
     @AfterEach
     void tearDown() {
-        service.deleteAll();
+        customerService.deleteAll();
     }
 
     @Start
     public void start(final Stage stage) throws Exception {
-
         System.setProperty("testfx.robot", "glass");
         System.setProperty("testfx.headless", "true");
         System.setProperty("prism.order", "sw");
         System.setProperty("prism.text", "t2k");
         System.setProperty("java.awt.headless", "true");
 
-        service.create(new Contract("A1", getDateFromString("20.04.2019"), 1500, getDateFromString("10.06.2022"), "Mobile", "j123", 2265, null));
+        Customer customer = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", getDateFromString("12.12.2000"));
 
-        service.create(new Contract("A2", getDateFromString("01.02.2020"), 1000, getDateFromString("01.03.2022"), "Mobile", "j123", 1280, null));
+        customerService.create(customer);
 
-        Contract contract3 = new Contract("A3", getDateFromString("10.06.2022"), 2500, getDateFromString("15.08.2022"), "Mobile", "j123", 4150, null);
-        service.create(contract3);
-        service.takeOut(contract3);
+        contractService.create(new Contract("A1", getDateFromString("20.04.2019"), 1500, getDateFromString("10.06.2022"), "Mobile", "j123", 2265, customer));
 
-        service.create(new Contract("A4", getDateFromString("04.09.2022"), 5500, getDateFromString("20.09.2022"), "Mobile", "j123", 6380, null));
-        service.create(new Contract("A5", getDateFromString("28.09.2022"), 3400, getDateFromString("01.11.2022"), "Mobile", "j123", 4556, null));
+        contractService.create(new Contract("A2", getDateFromString("01.02.2020"), 1000, getDateFromString("01.03.2022"), "Mobile", "j123", 1280, customer));
 
-        service.create(new Contract("A10", getDateFromString("10.06.2023"), 2500, getDateFromString("15.08.2023"), "Mobile", "j123", 4150, null));
-        service.create(new Contract("A21", getDateFromString("04.09.2023"), 5500, getDateFromString("20.09.2023"), "Mobile", "j123", 6380, null));
-        service.create(new Contract("A33", getDateFromString("28.09.2023"), 3400, getDateFromString("01.11.2023"), "Mobile", "j123", 4556, null));
+        Contract contract3 = new Contract("A3", getDateFromString("10.06.2022"), 2500, getDateFromString("15.08.2022"), "Mobile", "j123", 4150, customer);
+        contractService.create(contract3);
+        contractService.takeOut(contract3);
+
+        contractService.create(new Contract("A4", getDateFromString("04.09.2022"), 5500, getDateFromString("20.09.2022"), "Mobile", "j123", 6380, customer));
+        contractService.create(new Contract("A5", getDateFromString("28.09.2022"), 3400, getDateFromString("01.11.2022"), "Mobile", "j123", 4556, customer));
+
+        contractService.create(new Contract("A10", getDateFromString("10.06.2023"), 2500, getDateFromString("15.08.2023"), "Mobile", "j123", 4150, customer));
+        contractService.create(new Contract("A21", getDateFromString("04.09.2023"), 5500, getDateFromString("20.09.2023"), "Mobile", "j123", 6380, customer));
+        contractService.create(new Contract("A33", getDateFromString("28.09.2023"), 3400, getDateFromString("01.11.2023"), "Mobile", "j123", 4556, customer));
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/chartAnalytics.fxml"));
         stage.setScene(new Scene(root));

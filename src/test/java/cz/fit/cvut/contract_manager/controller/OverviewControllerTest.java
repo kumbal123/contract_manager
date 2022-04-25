@@ -18,6 +18,8 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.TableViewMatchers;
 
+import java.util.Date;
+
 import static cz.fit.cvut.contract_manager.controller.Controller.getDateFromString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -35,16 +37,12 @@ class OverviewControllerTest {
 
     @Start
     public void start(final Stage stage) throws Exception {
-
-        Customer customer = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", getDateFromString("12.12.2000"));
+        Customer customer = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", new Date(332342342));
 
         customerService.create(customer);
 
-        Contract contract1 = new Contract("A3", getDateFromString("10.07.2022"), 2500, getDateFromString("15.08.2022"), "Mobile", "j123", 4150);
-        Contract contract2 = new Contract("A4", getDateFromString("04.09.2022"), 5500, getDateFromString("20.09.2022"), "Mobile", "j123", 6380);
-
-        customerService.assignContract(customer, contract1);
-        customerService.assignContract(customer, contract2);
+        Contract contract1 = new Contract("A3", getDateFromString("10.07.2022"), 2500, getDateFromString("15.08.2022"), "Mobile", "j123", 4150, customer);
+        Contract contract2 = new Contract("A4", getDateFromString("04.09.2022"), 5500, getDateFromString("20.09.2022"), "Mobile", "j123", 6380, customer);
 
         contractService.create(contract1);
         contractService.create(contract2);

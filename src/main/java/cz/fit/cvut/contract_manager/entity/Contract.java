@@ -25,7 +25,7 @@ public class Contract implements Serializable {
     private ContractState state;
     private Integer numberOfProlongs;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
 
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -256,11 +256,6 @@ public class Contract implements Serializable {
 
     public void setCustomer(final Customer customer) {
         this.customer = customer;
-    }
-
-    public void removeCustomer() {
-        customer.removeContract();
-        customer = null;
     }
 
     public void addHistory(final History history) {
