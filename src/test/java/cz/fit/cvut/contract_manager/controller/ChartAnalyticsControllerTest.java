@@ -14,6 +14,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,8 +26,7 @@ import org.testfx.matcher.control.LabeledMatchers;
 import static cz.fit.cvut.contract_manager.controller.Controller.getDateFromString;
 import static org.testfx.api.FxAssert.verifyThat;
 
-@ExtendWith(ApplicationExtension.class)
-class ChartAnalyticsControllerTest {
+class ChartAnalyticsControllerTest extends JavaFxTest {
 
     private ContractRepositoryService contractService = ContractRepositoryService.getInstance();
     private CustomerRepositoryService customerService = CustomerRepositoryService.getInstance();
@@ -38,11 +38,6 @@ class ChartAnalyticsControllerTest {
 
     @Start
     public void start(final Stage stage) throws Exception {
-        System.setProperty("testfx.robot", "glass");
-        System.setProperty("testfx.headless", "true");
-        System.setProperty("prism.order", "sw");
-        System.setProperty("prism.text", "t2k");
-        System.setProperty("java.awt.headless", "true");
 
         Customer customer = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", getDateFromString("12.12.2000"));
 

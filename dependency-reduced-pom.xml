@@ -89,7 +89,7 @@
   </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javafx.version>17.0.2</javafx.version>
+    <javafx.version>11</javafx.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <testfx.version>4.0.16-alpha</testfx.version>
   </properties>

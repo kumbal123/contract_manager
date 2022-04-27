@@ -1,7 +1,6 @@
 package cz.fit.cvut.contract_manager.controller;
 
 import cz.fit.cvut.contract_manager.entity.Contract;
-import cz.fit.cvut.contract_manager.entity.Customer;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
 import cz.fit.cvut.contract_manager.service.CustomerRepositoryService;
 import javafx.fxml.FXMLLoader;
@@ -11,16 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
-import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import static cz.fit.cvut.contract_manager.controller.Controller.getStringFromDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ExtendWith(ApplicationExtension.class)
-class CreateContractControllerTest {
+class CreateContractControllerTest extends JavaFxTest {
 
     private ContractRepositoryService contractService = ContractRepositoryService.getInstance();
     private CustomerRepositoryService customerService = CustomerRepositoryService.getInstance();

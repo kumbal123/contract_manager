@@ -1,3 +1,7 @@
+* {
+    -fx-font-family: "Arial";
+}
+
 .sidepane {
     -fx-background-color: #006edb;
     -fx-pref-height: 100%;

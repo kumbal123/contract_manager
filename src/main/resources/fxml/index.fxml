@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="indexAnchorPane" prefHeight="700.0" prefWidth="1175.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.IndexController">
+<AnchorPane id="indexAnchorPane" prefHeight="700.0" prefWidth="1175.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.IndexController">
    <stylesheets>
       <URL value="@../css/style.css" />
    </stylesheets>

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="createContractAnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.CreateContractController">
+<AnchorPane id="createContractAnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.CreateContractController">
     <stylesheets>
         <URL value="@../css/style.css" />
     </stylesheets>

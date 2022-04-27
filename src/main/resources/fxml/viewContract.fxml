@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="viewContractAnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ViewContractController">
+<AnchorPane id="viewContractAnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ViewContractController">
     <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0">
       <right>
          <Pane fx:id="rightPane" prefHeight="700.0" prefWidth="660.0" visible="false" BorderPane.alignment="CENTER">
