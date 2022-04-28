@@ -38,8 +38,8 @@ class OverviewControllerTest extends JavaFxTest {
 
         customerService.create(customer);
 
-        Contract contract1 = new Contract("A3", getDateFromString("10.07.2022"), 2500, getDateFromString("15.08.2022"), "Mobile", "j123", 4150, customer);
-        Contract contract2 = new Contract("A4", getDateFromString("04.09.2022"), 5500, getDateFromString("20.09.2022"), "Mobile", "j123", 6380, customer);
+        Contract contract1 = new Contract("A3", getDateFromString("10.07.22"), 2500, getDateFromString("15.08.22"), "Mobile", "j123", 4150, customer);
+        Contract contract2 = new Contract("A4", getDateFromString("04.09.22"), 5500, getDateFromString("20.09.22"), "Mobile", "j123", 6380, customer);
 
         contractService.create(contract1);
         contractService.create(contract2);
@@ -52,8 +52,8 @@ class OverviewControllerTest extends JavaFxTest {
     @Test
     void showContracts() {
         verifyThat("#tvContracts", TableViewMatchers.hasNumRows(2));
-        verifyThat("#tvContracts", TableViewMatchers.containsRow("Mike", "10.07.2022", "15.08.2022", "15.08.2022", "Mobile", "A3", 2500, 4150, "1650"));
-        verifyThat("#tvContracts", TableViewMatchers.containsRow("Mike", "04.09.2022", "20.09.2022", "20.09.2022", "Mobile", "A4", 5500, 6380, "880"));
+        verifyThat("#tvContracts", TableViewMatchers.containsRow("Mike", "10.07.22", "15.08.22", "15.08.22", "Mobile", "A3", 2500, 4150, "1650"));
+        verifyThat("#tvContracts", TableViewMatchers.containsRow("Mike", "04.09.22", "20.09.22", "20.09.22", "Mobile", "A4", 5500, 6380, "880"));
     }
 
     @Test

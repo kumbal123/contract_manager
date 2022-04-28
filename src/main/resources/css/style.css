@@ -35,11 +35,19 @@
     -fx-background-color: #3b9eff;
 }
 
-.buttonPane {
-    -fx-pref-height: 40;
+.sideBarButton {
+    -fx-background-radius: 0;
+    -fx-background-color: #006edb;
+    -fx-text-fill: white;
+    -fx-pref-height: 45;
 }
 
-.buttonPane:hover {
+.sideBarButton:hover {
+    -fx-background-color: linear-gradient(to left, rgba(255,0,0,0), rgba(255,255,255,255));
+    -fx-border-width: 0px 0px 0px 3px;
+}
+
+.sideBarButton:focused {
     -fx-background-color: linear-gradient(to left, rgba(255,0,0,0), rgba(255,255,255,255));
     -fx-border-width: 0px 0px 0px 3px;
 }

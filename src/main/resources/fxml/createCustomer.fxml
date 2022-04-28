@@ -29,13 +29,13 @@
                 <Button id="createButton" layoutX="363.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#createCustomer" prefHeight="26.0" prefWidth="55.0" text="luu" />
                 <Button fx:id="updateButton" disable="true" layoutX="295.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#updateCustomer" prefHeight="26.0" prefWidth="58.0" text="sua" />
                 <Button fx:id="createContractButton" disable="true" layoutX="45.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#createContract" text="tao  moi" />
-            <PieChart fx:id="pieChart" layoutX="462.0" layoutY="34.0" legendSide="LEFT" prefHeight="337.0" prefWidth="618.0" />
-            <Label layoutX="460.0" layoutY="30.0" prefHeight="34.0" prefWidth="141.0" text="Tong So:">
+            <PieChart fx:id="pieChart" layoutX="464.0" layoutY="93.0" legendSide="LEFT" prefHeight="278.0" prefWidth="616.0" />
+            <Label layoutX="462.0" layoutY="70.0" prefHeight="34.0" prefWidth="141.0" text="Tong So:">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="labelTotalContracts" layoutX="601.0" layoutY="29.0" prefHeight="34.0" prefWidth="169.0">
+            <Label fx:id="labelTotalContracts" layoutX="603.0" layoutY="70.0" prefHeight="34.0" prefWidth="169.0">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -50,17 +50,12 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </LineChart>
-                  <TextField fx:id="fromYearMoneyField" layoutX="20.0" layoutY="35.0" prefHeight="25.0" prefWidth="113.0" promptText="tu nam" />
-                  <TextField fx:id="toYearMoneyField" layoutX="229.0" layoutY="35.0" prefHeight="25.0" prefWidth="113.0" promptText="den nam" />
-                  <Button layoutX="142.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#analyzeMoneyInMonths" text="tinh thang" />
-                  <Button layoutX="350.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#analyzeMoneyInYears" text="tinh nam" />
-                  <Button layoutX="491.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#clearMoneyChart" text="xoa" />
-                  <Label layoutX="20.0" layoutY="-10.0" prefHeight="34.0" prefWidth="125.0" text="Tien Tra:">
+                  <Label layoutX="20.0" layoutY="24.0" prefHeight="34.0" prefWidth="125.0" text="Tien Tra:">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelTotalMoney" layoutX="157.0" layoutY="-10.0" prefHeight="34.0" prefWidth="169.0">
+                  <Label fx:id="labelTotalMoney" layoutX="157.0" layoutY="24.0" prefHeight="34.0" prefWidth="169.0">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
@@ -77,23 +72,23 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </LineChart>
-                  <TextField fx:id="fromYearContractsField" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="113.0" promptText="tu nam" />
-                  <TextField fx:id="toYearContractsField" layoutX="236.0" layoutY="35.0" prefHeight="25.0" prefWidth="113.0" promptText="den nam" />
-                  <Button layoutX="139.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#analyzeContractCountInMonths" text="tinh thang" />
-                  <Button layoutX="359.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#analyzeContractCountInYears" text="tinh nam" />
-                  <Button layoutX="488.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#clearContractChart" text="xoa" />
-                  <Label layoutX="14.0" layoutY="-10.0" prefHeight="34.0" prefWidth="132.0" text="Tong So:">
+                  <Label layoutX="14.0" layoutY="24.0" prefHeight="34.0" prefWidth="132.0" text="Tong So:">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelTotalContractInterval" layoutX="152.0" layoutY="-10.0" prefHeight="34.0" prefWidth="169.0">
+                  <Label fx:id="labelTotalContractInterval" layoutX="146.0" layoutY="24.0" prefHeight="34.0" prefWidth="169.0">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
+            <TextField fx:id="fromYearField" layoutX="462.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="tu nam" />
+            <Button layoutX="583.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeInMonths" text="tinh thang" />
+            <TextField fx:id="toYearField" layoutX="688.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="den nam" />
+            <Button layoutX="809.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeInYears" text="tinh nam" />
+            <Button layoutX="904.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#clearChart" text="xoa" />
             </Pane>
         </center>
     </BorderPane>

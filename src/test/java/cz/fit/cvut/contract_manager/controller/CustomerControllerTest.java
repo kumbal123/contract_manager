@@ -33,7 +33,7 @@ class CustomerControllerTest extends JavaFxTest {
     @Start
     public void start(final Stage stage) throws Exception {
 
-        Customer customer = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", getDateFromString("12.12.2000"));
+        Customer customer = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", getDateFromString("12.12.00"));
 
         customerService.create(customer);
 
@@ -49,7 +49,7 @@ class CustomerControllerTest extends JavaFxTest {
         contractService.create(contract2);
         contractService.create(contract3);
 
-        Customer customer2 = new Customer("Annie", "f", "Brno", "slow 123", "velocity", "123445/12", "123f", "V", "vn", getDateFromString("10.12.2000"));
+        Customer customer2 = new Customer("Annie", "f", "Brno", "slow 123", "velocity", "123445/12", "123f", "V", "vn", getDateFromString("10.12.00"));
 
         customerService.create(customer2);
 
@@ -58,7 +58,7 @@ class CustomerControllerTest extends JavaFxTest {
         customerService.assignContract(customer2, contract4);
         contractService.create(contract4);
 
-        customerService.create(new Customer("Kimchi", "f", "Prague", "nitro 123", "velocity", "12343/12", "ff2343", "V", "vn", getDateFromString("01.01.2000")));
+        customerService.create(new Customer("Kimchi", "f", "Prague", "nitro 123", "velocity", "12343/12", "ff2343", "V", "vn", getDateFromString("01.01.00")));
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/customers.fxml"));
         stage.setScene(new Scene(root));
@@ -78,9 +78,9 @@ class CustomerControllerTest extends JavaFxTest {
     @Test
     void deleteCustomer(final FxRobot robot) {
         verifyThat("#tvCustomers", TableViewMatchers.hasNumRows(3));
-        verifyThat("#tvCustomers", TableViewMatchers.containsRow("Mike", "123l123", "fast1", "3", "12.12.2000"));
-        verifyThat("#tvCustomers", TableViewMatchers.containsRow("Annie", "123445/12", "slow 123", "1", "10.12.2000"));
-        verifyThat("#tvCustomers", TableViewMatchers.containsRow("Kimchi", "12343/12", "nitro 123", "0", "01.01.2000"));
+        verifyThat("#tvCustomers", TableViewMatchers.containsRow("Mike", "123l123", "fast1", "3", "12.12.00"));
+        verifyThat("#tvCustomers", TableViewMatchers.containsRow("Annie", "123445/12", "slow 123", "1", "10.12.00"));
+        verifyThat("#tvCustomers", TableViewMatchers.containsRow("Kimchi", "12343/12", "nitro 123", "0", "01.01.00"));
 
         Node node = robot.lookup("#colPersonalNumber").nth(1).query();
         robot.clickOn(node);
@@ -88,8 +88,8 @@ class CustomerControllerTest extends JavaFxTest {
         robot.clickOn("#notification");
 
         verifyThat("#tvCustomers", TableViewMatchers.hasNumRows(2));
-        verifyThat("#tvCustomers", TableViewMatchers.containsRow("Annie", "123445/12", "slow 123", "1", "10.12.2000"));
-        verifyThat("#tvCustomers", TableViewMatchers.containsRow("Kimchi", "12343/12", "nitro 123", "0", "01.01.2000"));
+        verifyThat("#tvCustomers", TableViewMatchers.containsRow("Annie", "123445/12", "slow 123", "1", "10.12.00"));
+        verifyThat("#tvCustomers", TableViewMatchers.containsRow("Kimchi", "12343/12", "nitro 123", "0", "01.01.00"));
     }
 
     @Test

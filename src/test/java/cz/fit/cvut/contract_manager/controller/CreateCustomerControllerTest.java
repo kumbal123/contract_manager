@@ -33,7 +33,7 @@ class CreateCustomerControllerTest extends JavaFxTest {
     @Test
     void createCustomer(final FxRobot robot) {
         String name = "Mike Adams";
-        String dateOfBirth = "12.10.1998";
+        String dateOfBirth = "12.10.98";
         String address = "Unknown 123";
         String personalNumber = "124312/4534";
 

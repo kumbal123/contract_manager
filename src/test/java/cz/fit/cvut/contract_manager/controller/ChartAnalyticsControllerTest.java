@@ -11,19 +11,18 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
-import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.LabeledMatchers;
 
 import static cz.fit.cvut.contract_manager.controller.Controller.getDateFromString;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
 
 class ChartAnalyticsControllerTest extends JavaFxTest {
@@ -64,7 +63,7 @@ class ChartAnalyticsControllerTest extends JavaFxTest {
     }
 
     @Test
-    void clearCharts(final FxRobot robot) {
+    void shouldClearCharts(final FxRobot robot) {
         robot.clickOn("#clearButton");
 
         verifyThat("#labelTotalContracts", LabeledMatchers.hasText("0"));
@@ -90,7 +89,7 @@ class ChartAnalyticsControllerTest extends JavaFxTest {
     }
 
     @Test
-    void analyzeContractsInMonths(final FxRobot robot) {
+    void shouldAnalyzeContractsInMonths(final FxRobot robot) {
         int totalContracts = 3, totalExpenses = 2500 + 3400 + 5500, totalIncome = 0, profitLoss = -1 * totalExpenses;
         int totalExpensesJun = 2500, totalExpensesSep = 8900;
 
@@ -155,7 +154,7 @@ class ChartAnalyticsControllerTest extends JavaFxTest {
     }
 
     @Test
-    void analyzeContractsInYears(final FxRobot robot) {
+    void shouldAnalyzeContractsInYears(final FxRobot robot) {
         int totalExpenses2019 = 1500, totalExpenses2020 = 1000, totalExpenses2022 = 2500 + 3400 + 5500;
         int totalContracts = 5, totalExpenses = totalExpenses2019 + totalExpenses2020 + totalExpenses2022;
         int totalIncome = 0, profitLoss = -1 * totalExpenses;
@@ -205,5 +204,140 @@ class ChartAnalyticsControllerTest extends JavaFxTest {
         Assert.assertEquals(-totalExpenses2020, profitLossData.get(1).getYValue(), delta);
         Assert.assertEquals(0, profitLossData.get(2).getYValue(), delta);
         Assert.assertEquals(-totalExpenses2022, profitLossData.get(3).getYValue(), delta);
+    }
+
+    @Test
+    void shouldNotAnalyzeInMonthsWhenGivenIncorrectYearFormat(final FxRobot robot) {
+        robot.clickOn("#clearButton");
+
+        TextField fromField = robot.lookup("#fromYearField").queryAs(TextField.class);
+        fromField.setText("wrongYearFormat");
+
+        robot.clickOn("#monthsButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        verifyThat("#labelTotalContracts", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalExpenses", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalIncome", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalProfitLoss", LabeledMatchers.hasText("0"));
+
+        ObservableList<PieChart.Data> pieChartData = robot.lookup("#pieChart").queryAs(PieChart.class).getData();
+
+        Assert.assertTrue(pieChartData.isEmpty());
+
+        LineChart<String, Integer> lineChartIncome = robot.lookup("#lineChartIncome").query();
+
+        Assert.assertTrue(lineChartIncome.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartExpenses = robot.lookup("#lineChartExpenses").query();
+
+        Assert.assertTrue(lineChartExpenses.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartProfitLoss = robot.lookup("#lineChartProfitLoss").query();
+
+        Assert.assertTrue(lineChartProfitLoss.getData().isEmpty());
+    }
+
+    @Test
+    void shouldNotAnalyzeInYearsWhenGivenIncorrectYearFormat(final FxRobot robot) {
+        robot.clickOn("#clearButton");
+
+        TextField fromField = robot.lookup("#fromYearField").queryAs(TextField.class);
+        fromField.setText("wrongYearFormat");
+
+        TextField toField = robot.lookup("#toYearField").queryAs(TextField.class);
+        toField.setText("wrongYearFormat");
+
+        robot.clickOn("#monthsButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        verifyThat("#labelTotalContracts", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalExpenses", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalIncome", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalProfitLoss", LabeledMatchers.hasText("0"));
+
+        ObservableList<PieChart.Data> pieChartData = robot.lookup("#pieChart").queryAs(PieChart.class).getData();
+
+        Assert.assertTrue(pieChartData.isEmpty());
+
+        LineChart<String, Integer> lineChartIncome = robot.lookup("#lineChartIncome").query();
+
+        Assert.assertTrue(lineChartIncome.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartExpenses = robot.lookup("#lineChartExpenses").query();
+
+        Assert.assertTrue(lineChartExpenses.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartProfitLoss = robot.lookup("#lineChartProfitLoss").query();
+
+        Assert.assertTrue(lineChartProfitLoss.getData().isEmpty());
+    }
+
+    @Test
+    void shouldNotAnalyzeInMonthsWhenGivenNoYear(final FxRobot robot) {
+        robot.clickOn("#clearButton");
+        robot.clickOn("#monthsButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        verifyThat("#labelTotalContracts", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalExpenses", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalIncome", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalProfitLoss", LabeledMatchers.hasText("0"));
+
+        ObservableList<PieChart.Data> pieChartData = robot.lookup("#pieChart").queryAs(PieChart.class).getData();
+
+        Assert.assertTrue(pieChartData.isEmpty());
+
+        LineChart<String, Integer> lineChartIncome = robot.lookup("#lineChartIncome").query();
+
+        Assert.assertTrue(lineChartIncome.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartExpenses = robot.lookup("#lineChartExpenses").query();
+
+        Assert.assertTrue(lineChartExpenses.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartProfitLoss = robot.lookup("#lineChartProfitLoss").query();
+
+        Assert.assertTrue(lineChartProfitLoss.getData().isEmpty());
+    }
+
+    @Test
+    void shouldNotAnalyzeInYearsWhenGivenNoYears(final FxRobot robot) {
+        robot.clickOn("#clearButton");
+        robot.clickOn("#yearsButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        verifyThat("#labelTotalContracts", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalExpenses", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalIncome", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalProfitLoss", LabeledMatchers.hasText("0"));
+
+        ObservableList<PieChart.Data> pieChartData = robot.lookup("#pieChart").queryAs(PieChart.class).getData();
+
+        Assert.assertTrue(pieChartData.isEmpty());
+
+        LineChart<String, Integer> lineChartIncome = robot.lookup("#lineChartIncome").query();
+
+        Assert.assertTrue(lineChartIncome.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartExpenses = robot.lookup("#lineChartExpenses").query();
+
+        Assert.assertTrue(lineChartExpenses.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartProfitLoss = robot.lookup("#lineChartProfitLoss").query();
+
+        Assert.assertTrue(lineChartProfitLoss.getData().isEmpty());
     }
 }

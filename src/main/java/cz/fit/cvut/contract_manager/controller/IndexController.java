@@ -8,6 +8,7 @@ import cz.fit.cvut.contract_manager.service.HistoryRepositoryService;
 import cz.fit.cvut.contract_manager.util.Util;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -41,8 +42,8 @@ public class IndexController extends Controller {
 
     @FXML
     private void switchToHome(final MouseEvent event) throws IOException {
-        Pane pane = (Pane) event.getSource();
-        Parent stage = pane.getScene().getRoot();
+        Button button = (Button) event.getSource();
+        Parent stage = button.getParent().getScene().getRoot();
         stage.getScene().setRoot(getPage("index.fxml"));
     }
 
@@ -69,11 +70,6 @@ public class IndexController extends Controller {
     @FXML
     public void switchToChartAnalytics(final MouseEvent event) throws IOException {
         mainPane.setCenter(getPage("chartAnalytics.fxml"));
-    }
-
-    @FXML
-    private void switchToSettings(final MouseEvent event) throws IOException {
-        //TODO
     }
 
     @FXML
@@ -145,7 +141,7 @@ public class IndexController extends Controller {
             }
         } else {
             Notification.showPopupMessageErr(
-                "Nhay thang khog dung theo dd.mm.yyyy!",
+                "Nhay thang khog dung theo dd.mm.yyyy hoac dd.mm.yy!",
                 (Stage) mainPane.getScene().getWindow()
             );
         }

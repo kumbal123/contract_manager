@@ -29,7 +29,7 @@
                      <Font name="System Bold" size="28.0" />
                   </font>
                </Label>
-               <Label layoutX="385.0" layoutY="454.0" prefHeight="53.0" prefWidth="104.0" text="Toan bo:">
+               <Label layoutX="354.0" layoutY="454.0" prefHeight="53.0" prefWidth="119.0" text="Toan bo:">
                   <font>
                      <Font name="System Bold" size="28.0" />
                   </font>

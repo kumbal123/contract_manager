@@ -37,19 +37,19 @@ public class CreateCustomerController extends Controller {
 
     public Button updateButton;
     public Button createContractButton;
-    public PieChart pieChart;
-    public Label labelTotalContracts;
     public Pane bottomLeftPane;
     public Pane bottomRightPane;
 
+    public TextField fromYearField;
+    public TextField toYearField;
+
+    public PieChart pieChart;
+    public Label labelTotalContracts;
+
     public LineChart<String, Integer> lineChartMoney;
-    public TextField fromYearMoneyField;
-    public TextField toYearMoneyField;
     public Label labelTotalMoney;
 
     public LineChart<String, Integer> lineChartContracts;
-    public TextField fromYearContractsField;
-    public TextField toYearContractsField;
     public Label labelTotalContractInterval;
 
     public BorderPane mainPane;
@@ -140,48 +140,40 @@ public class CreateCustomerController extends Controller {
         labelTotalContracts.setText(String.valueOf(totalContracts));
     }
 
-    private void initLineChartContractCount() {
-        List<XYChart.Data<String, Integer>> list = new ArrayList<>();
+    public void analyzeInMonths() {
+        String fromYearStr = fromYearField.getText().trim();
 
-        int year = Util.getYear(new Date()), total = 0;
+        if(isInteger(fromYearStr) && getInteger(fromYearStr) > 0) {
+            int year = getInteger(fromYearStr), totalSpent = 0, totalContracts = 0;
 
-        for(int i = 0; i < 12; i++) {
-            int contractCount = getContractCount(i, year);
-            list.add(new XYChart.Data<>(Util.months[i], contractCount));
-            total += contractCount;
+            List<XYChart.Data<String, Integer>> listMoney = new ArrayList<>();
+            List<XYChart.Data<String, Integer>> listContracts = new ArrayList<>();
+
+            for(int i = 0; i < 12; i++) {
+                int money = getMoneySpent(i, year);
+                listMoney.add(new XYChart.Data<>(Util.months[i], money));
+                totalSpent += money;
+
+                int numOfContracts = getContractCount(i, year);
+                listContracts.add(new XYChart.Data<>(Util.months[i], numOfContracts));
+                totalContracts += numOfContracts;
+            }
+
+            ObservableList<XYChart.Data<String, Integer>> lineChartMoneyData = FXCollections.observableArrayList(listMoney);
+            labelTotalMoney.setText(String.valueOf(totalSpent));
+            XYChart.Series<String, Integer> seriesMoney = new XYChart.Series<>(lineChartMoneyData);
+            seriesMoney.setName(String.valueOf(year));
+
+            ObservableList<XYChart.Data<String, Integer>> lineChartContractData = FXCollections.observableArrayList(listContracts);
+            labelTotalContractInterval.setText(String.valueOf(totalContracts));
+            XYChart.Series<String, Integer> seriesContracts = new XYChart.Series<>(lineChartContractData);
+            seriesContracts.setName(String.valueOf(year));
+
+            lineChartMoney.getData().add(seriesMoney);
+            lineChartContracts.getData().add(seriesContracts);
+        } else {
+            Notification.showPopupMessageErr("So nam da nhap khong dung!", (Stage) mainPane.getScene().getWindow());
         }
-
-        ObservableList<XYChart.Data<String, Integer>> lineChartContractData = FXCollections.observableArrayList(list);
-
-        fromYearContractsField.setText(String.valueOf(year));
-        labelTotalContractInterval.setText(String.valueOf(total));
-
-        XYChart.Series<String, Integer> series = new XYChart.Series<>(lineChartContractData);
-        series.setName(String.valueOf(year));
-
-        lineChartContracts.getData().add(series);
-    }
-
-    private void initLineChartMoney() {
-        List<XYChart.Data<String, Integer>> list = new ArrayList<>();
-
-        int year = Util.getYear(new Date()), total = 0;
-
-        for(int i = 0; i < 12; i++) {
-            int money = getMoneySpent(i, year);
-            list.add(new XYChart.Data<>(Util.months[i], money));
-            total += money;
-        }
-
-        ObservableList<XYChart.Data<String, Integer>> lineChartMoneyData = FXCollections.observableArrayList(list);
-
-        fromYearMoneyField.setText(String.valueOf(year));
-        labelTotalMoney.setText(String.valueOf(total));
-
-        XYChart.Series<String, Integer> series = new XYChart.Series<>(lineChartMoneyData);
-        series.setName(String.valueOf(year));
-
-        lineChartMoney.getData().add(series);
     }
 
     public void initUpdateCustomer(final Customer src) {
@@ -203,8 +195,9 @@ public class CreateCustomerController extends Controller {
         createContractButton.setDisable(false);
 
         initPieChart();
-        initLineChartContractCount();
-        initLineChartMoney();
+
+        fromYearField.setText(String.valueOf(Util.getYear(new Date())));
+        analyzeInMonths();
     }
 
     @FXML
@@ -281,122 +274,55 @@ public class CreateCustomerController extends Controller {
     }
 
     @FXML
-    public void analyzeMoneyInMonths(final MouseEvent event) {
-        String fromYearStr = fromYearMoneyField.getText().trim();
-
-        // check if not negative number
-        if(isInteger(fromYearStr)) {
-            int year = getInteger(fromYearStr), total = 0;
-
-            List<XYChart.Data<String, Integer>> list = new ArrayList<>();
-
-            for(int i = 0; i < 12; i++) {
-                int money = getMoneySpent(i, year);
-                list.add(new XYChart.Data<>(Util.months[i], money));
-                total += money;
-            }
-
-            ObservableList<XYChart.Data<String, Integer>> lineChartMoneyData = FXCollections.observableArrayList(list);
-
-            labelTotalMoney.setText(String.valueOf(total));
-
-            XYChart.Series<String, Integer> series = new XYChart.Series<>(lineChartMoneyData);
-            series.setName(String.valueOf(year));
-
-            lineChartMoney.getData().add(series);
-        } else {
-            Notification.showPopupMessageErr("So nam da nhap khong dung!", (Stage) mainPane.getScene().getWindow());
-        }
+    public void analyzeInMonths(final MouseEvent event) {
+        analyzeInMonths();
     }
 
     @FXML
-    public void analyzeMoneyInYears(final MouseEvent event) {
-        String fromYearStr = fromYearMoneyField.getText().trim();
-        String toYearStr = toYearMoneyField.getText().trim();
+    public void analyzeInYears(final MouseEvent event) {
+        String fromYearStr = fromYearField.getText().trim();
+        String toYearStr = toYearField.getText().trim();
 
-        if(isInteger(fromYearStr) && isInteger(toYearStr)) {
-            int fromYear = getInteger(fromYearStr), toYear = getInteger(toYearStr), total = 0;
+        if(isInteger(fromYearStr) && isInteger(toYearStr) && getInteger(fromYearStr) > 0 && getInteger(toYearStr) > 0) {
+            int fromYear = getInteger(fromYearStr), toYear = getInteger(toYearStr);
+            int totalSpent = 0, totalContracts = 0;
 
-            List<XYChart.Data<String, Integer>> list = new ArrayList<>();
+            List<XYChart.Data<String, Integer>> listMoney = new ArrayList<>();
+            List<XYChart.Data<String, Integer>> listContracts = new ArrayList<>();
 
             for(int i = fromYear; i <= toYear; i++) {
                 int money = getMoneySpent(i);
-                list.add(new XYChart.Data<>(String.valueOf(i), money));
-                total += money;
+                listMoney.add(new XYChart.Data<>(String.valueOf(i), money));
+                totalSpent += money;
+
+                int numOfContracts = getContractCount(i);
+                listContracts.add(new XYChart.Data<>(String.valueOf(i), numOfContracts));
+                totalContracts += numOfContracts;
             }
 
-            ObservableList<XYChart.Data<String, Integer>> lineChartContractData = FXCollections.observableArrayList(list);
+            ObservableList<XYChart.Data<String, Integer>> lineChartMoneyData = FXCollections.observableArrayList(listMoney);
+            labelTotalMoney.setText(String.valueOf(totalSpent));
+            XYChart.Series<String, Integer> seriesMoney = new XYChart.Series<>(lineChartMoneyData);
+            seriesMoney.setName(fromYear + "-" + toYear);
 
-            labelTotalMoney.setText(String.valueOf(total));
-            lineChartMoney.getData().add(new XYChart.Series<>(lineChartContractData));
+            ObservableList<XYChart.Data<String, Integer>> lineChartContractData = FXCollections.observableArrayList(listContracts);
+            labelTotalContractInterval.setText(String.valueOf(totalContracts));
+            XYChart.Series<String, Integer> seriesContracts = new XYChart.Series<>(lineChartContractData);
+            seriesContracts.setName(fromYear + "-" + toYear);
+
+            lineChartMoney.getData().add(seriesMoney);
+            lineChartContracts.getData().add(seriesContracts);
         } else {
             Notification.showPopupMessageErr("So nam da nhap khong dung!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
     @FXML
-    public void analyzeContractCountInMonths(final MouseEvent event) {
-        String fromYearStr = fromYearContractsField.getText().trim();
-
-        // check if not negative number
-        if(isInteger(fromYearStr)) {
-            int year = getInteger(fromYearStr), total = 0;
-
-            List<XYChart.Data<String, Integer>> list = new ArrayList<>();
-
-            for(int i = 0; i < 12; i++) {
-                int money = getContractCount(i, year);
-                list.add(new XYChart.Data<>(Util.months[i], money));
-                total += money;
-            }
-
-            ObservableList<XYChart.Data<String, Integer>> lineChartContractData = FXCollections.observableArrayList(list);
-
-            labelTotalContractInterval.setText(String.valueOf(total));
-
-            XYChart.Series<String, Integer> series = new XYChart.Series<>(lineChartContractData);
-            series.setName(String.valueOf(year));
-
-            lineChartContracts.getData().add(series);
-        } else {
-            Notification.showPopupMessageErr("So nam da nhap khong dung!", (Stage) mainPane.getScene().getWindow());
-        }
-    }
-
-    @FXML
-    public void analyzeContractCountInYears(final MouseEvent event) {
-        String fromYearStr = fromYearContractsField.getText().trim();
-        String toYearStr = toYearContractsField.getText().trim();
-
-        if(isInteger(fromYearStr) && isInteger(toYearStr)) {
-            int fromYear = getInteger(fromYearStr), toYear = getInteger(toYearStr), total = 0;
-
-            List<XYChart.Data<String, Integer>> list = new ArrayList<>();
-
-            for(int i = fromYear; i <= toYear; i++) {
-                int money = getContractCount(i);
-                list.add(new XYChart.Data<>(String.valueOf(i), money));
-                total += money;
-            }
-
-            ObservableList<XYChart.Data<String, Integer>> lineChartContractData = FXCollections.observableArrayList(list);
-
-            labelTotalContractInterval.setText(String.valueOf(total));
-            lineChartContracts.getData().add(new XYChart.Series<>(lineChartContractData));
-        } else {
-            Notification.showPopupMessageErr("So nam da nhap khong dung!", (Stage) mainPane.getScene().getWindow());
-        }
-    }
-
-    @FXML
-    public void clearMoneyChart(final MouseEvent event) {
+    public void clearChart(final MouseEvent event) {
         labelTotalMoney.setText("0");
-        lineChartMoney.getData().clear();
-    }
-
-    @FXML
-    public void clearContractChart(final MouseEvent event) {
         labelTotalContractInterval.setText("0");
+
+        lineChartMoney.getData().clear();
         lineChartContracts.getData().clear();
     }
 

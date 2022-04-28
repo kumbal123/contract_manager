@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -23,9 +22,9 @@
          <left>
             <VBox prefHeight="700.0" prefWidth="63.0" styleClass="sidepane" BorderPane.alignment="CENTER">
                <children>
-                  <Pane id="homeButton" onMouseClicked="#switchToHome" prefHeight="65.0" prefWidth="96.0" styleClass="buttonPane">
-                     <children>
-                        <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="18.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                  <Button id="homeButton" mnemonicParsing="false" onMouseClicked="#switchToHome" prefHeight="25.0" prefWidth="63.0" styleClass="sideBarButton">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                            <image>
                               <Image url="@../pics/home_icon.png" />
                            </image>
@@ -33,65 +32,53 @@
                               <Glow level="1.0" />
                            </effect>
                         </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane id="contractsButton" onMouseClicked="#switchToContracts" prefHeight="35.0" prefWidth="156.0" styleClass="buttonPane">
-                     <children>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="21.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                     </graphic>
+                  </Button>
+                  <Button id="contractsButton" mnemonicParsing="false" onMouseClicked="#switchToContracts" prefHeight="25.0" prefWidth="63.0" styleClass="sideBarButton">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                            <image>
                               <Image url="@../pics/contract_white.png" />
                            </image>
                         </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane id="customersButton" onMouseClicked="#switchToCustomers" prefHeight="39.0" prefWidth="156.0" styleClass="buttonPane">
-                     <children>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="19.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                     </graphic>
+                  </Button>
+                  <Button id="customersButton" mnemonicParsing="false" onMouseClicked="#switchToCustomers" prefHeight="25.0" prefWidth="63.0" styleClass="sideBarButton">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                            <image>
                               <Image url="@../pics/customer_white.png" />
                            </image>
                         </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane id="overviewButton" onMouseClicked="#switchToOverview" styleClass="buttonPane">
-                     <children>
-                        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="19.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                     </graphic>
+                  </Button>
+                  <Button id="overviewButton" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="25.0" prefWidth="63.0" styleClass="sideBarButton">
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                            <image>
                               <Image url="@../pics/overview_white.png" />
                            </image>
                         </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane id="analyticsButton" onMouseClicked="#switchToAnalytics" styleClass="buttonPane">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <children>
-                        <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="18.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                     </graphic>
+                  </Button>
+                  <Button id="analyticsButton" mnemonicParsing="false" onMouseClicked="#switchToAnalytics" prefHeight="25.0" prefWidth="63.0" styleClass="sideBarButton">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../pics/money_white.png" />
                            </image>
                         </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane id="chartButton" onMouseClicked="#switchToChartAnalytics" styleClass="buttonPane">
-                     <children>
-                        <ImageView fitHeight="21.0" fitWidth="22.0" layoutX="20.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     </graphic>
+                  </Button>
+                  <Button id="chartButton" mnemonicParsing="false" onMouseClicked="#switchToChartAnalytics" prefHeight="25.0" prefWidth="63.0" styleClass="sideBarButton">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../pics/chart_white.png" />
                            </image>
                         </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane onMouseClicked="#switchToSettings" styleClass="buttonPane">
-                     <children>
-                        <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="18.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../pics/settings_white.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
+                     </graphic>
+                  </Button>
                </children></VBox>
          </left>
          <center>

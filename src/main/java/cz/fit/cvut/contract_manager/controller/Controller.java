@@ -21,7 +21,7 @@ public abstract class Controller implements Initializable {
     }
 
     public static String getStringFromDate(final Date date) {
-        return new SimpleDateFormat("dd.MM.yyyy").format(date);
+        return new SimpleDateFormat("dd.MM.yy").format(date);
     }
 
     public SimpleStringProperty getStringPropertyFromDate(final Date date) {

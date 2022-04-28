@@ -162,7 +162,7 @@ public class OverviewController extends Controller {
             }
         } else {
             Notification.showPopupMessageErr(
-                "Chua bam vao hop dong hoac la ngay thang khog dung theo dd.mm.yyyy!",
+                "Chua bam vao hop dong hoac la ngay thang khog dung theo dd.mm.yyyy hoac dd.mm.yy!",
                 (Stage) mainPane.getScene().getWindow()
             );
         }
