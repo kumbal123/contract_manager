@@ -11,29 +11,34 @@
 <AnchorPane id="overviewAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.OverviewController">
     <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1101.0">
         <center>
-         <Pane id="overviewPane">
-            <children>
-                  <TableView fx:id="tvContracts" layoutX="31.0" layoutY="72.0" onMouseClicked="#handleMouseEvent" prefHeight="595.0" prefWidth="953.0">
-                      <columns>
-                          <TableColumn fx:id="colName" prefWidth="117.0" text="Ten" />
-                          <TableColumn fx:id="colCreationDate" prefWidth="89.0" text="Ngay Cam" />
-                          <TableColumn fx:id="colExpireDateOrig" prefWidth="97.0" text="Ngay Lay" />
-                          <TableColumn fx:id="colExpireDateCurr" prefWidth="111.0" text="Ngay Lay Hien Tai" />
-                          <TableColumn fx:id="colItemInfo" prefWidth="219.0" text="Ten Hang" />
-                          <TableColumn fx:id="colContractId" text="So Hop Dong" />
-                          <TableColumn fx:id="colLendPrice" text="Tien Vay" />
-                          <TableColumn fx:id="colTotalPrice" prefWidth="79.0" text="Tien Tra" />
-                          <TableColumn fx:id="colDiff" prefWidth="56.0" text="Lai" />
-                      </columns>
-                  </TableView>
-               <TextField fx:id="searchBar" layoutX="31.0" layoutY="38.0" prefHeight="25.0" prefWidth="952.0" promptText="tim" />
-                <TextField fx:id="contractIdField" disable="true" layoutX="1000.0" layoutY="115.0" prefHeight="26.0" prefWidth="84.0" promptText="so hop dong" />
-                <TextField fx:id="dateField" layoutX="1000.0" layoutY="253.0" prefHeight="26.0" prefWidth="84.0" promptText="ngay" />
-                <Button id="prolongButton" layoutX="1000.0" layoutY="289.0" mnemonicParsing="false" onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="gia han" />
-                <Button id="takeOutButton" layoutX="1000.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#takeOutContract" prefHeight="25.0" prefWidth="84.0" text="bo" />
-                <Button id="withdrawButton" layoutX="1000.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#withdrawContract" prefHeight="25.0" prefWidth="84.0" text="khach lay" />
-            </children>
-         </Pane>
+            <Pane id="overviewPane">
+                <TableView fx:id="tvContracts" layoutX="31.0" layoutY="72.0" onMouseClicked="#handleMouseEvent"
+                           prefHeight="595.0" prefWidth="953.0">
+                    <columns>
+                        <TableColumn fx:id="colName" prefWidth="117.0" text="Ten"/>
+                        <TableColumn fx:id="colCreationDate" prefWidth="89.0" text="Ngay Cam"/>
+                        <TableColumn fx:id="colExpireDateOrig" prefWidth="97.0" text="Ngay Lay"/>
+                        <TableColumn fx:id="colExpireDateCurr" prefWidth="111.0" text="Ngay Lay Hien Tai"/>
+                        <TableColumn fx:id="colItemInfo" prefWidth="219.0" text="Ten Hang"/>
+                        <TableColumn fx:id="colContractId" text="So Hop Dong"/>
+                        <TableColumn fx:id="colLendPrice" text="Tien Vay"/>
+                        <TableColumn fx:id="colTotalPrice" prefWidth="79.0" text="Tien Tra"/>
+                        <TableColumn fx:id="colDiff" prefWidth="56.0" text="Lai"/>
+                    </columns>
+                </TableView>
+                <TextField fx:id="searchBar" layoutX="31.0" layoutY="38.0" prefHeight="25.0" prefWidth="952.0"
+                           promptText="tim"/>
+                <TextField fx:id="contractIdField" disable="true" layoutX="1000.0" layoutY="115.0" prefHeight="26.0"
+                           prefWidth="84.0" promptText="so hop dong"/>
+                <TextField fx:id="dateField" layoutX="1000.0" layoutY="253.0" prefHeight="26.0" prefWidth="84.0"
+                           promptText="ngay"/>
+                <Button id="prolongButton" layoutX="1000.0" layoutY="289.0" mnemonicParsing="false"
+                        onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="gia han"/>
+                <Button id="takeOutButton" layoutX="1000.0" layoutY="192.0" mnemonicParsing="false"
+                        onMouseClicked="#takeOutContract" prefHeight="25.0" prefWidth="84.0" text="bo"/>
+                <Button id="withdrawButton" layoutX="1000.0" layoutY="154.0" mnemonicParsing="false"
+                        onMouseClicked="#withdrawContract" prefHeight="25.0" prefWidth="84.0" text="khach lay"/>
+            </Pane>
         </center>
     </BorderPane>
 </AnchorPane>

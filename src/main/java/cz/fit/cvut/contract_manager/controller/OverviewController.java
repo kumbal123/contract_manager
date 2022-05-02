@@ -94,7 +94,7 @@ public class OverviewController extends Controller {
             }
         });
 
-        FilteredList<Contract> filteredList = new FilteredList<>(contractList, b -> true);
+        FilteredList<Contract> filteredList = new FilteredList<>(contractList, c -> true);
 
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(Contract -> {

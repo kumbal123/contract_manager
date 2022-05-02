@@ -7,6 +7,7 @@ import cz.fit.cvut.contract_manager.service.CustomerRepositoryService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -55,7 +56,7 @@ class IndexControllerTest extends JavaFxTest {
     }
 
     @Test
-    void initTest() {
+    void shouldCalculateDailyIncomeAndExpensesWhenPageIsLoaded() {
         verifyThat("#labelTotalExpenses", LabeledMatchers.hasText("2500"));
         verifyThat("#labelTotalNewContracts", LabeledMatchers.hasText("1"));
         verifyThat("#labelTotalIncome", LabeledMatchers.hasText("0"));
@@ -63,7 +64,7 @@ class IndexControllerTest extends JavaFxTest {
     }
 
     @Test
-    void switchToHome(final FxRobot robot) {
+    void shouldSwitchToHomeWhenHomeButtonIsPressed(final FxRobot robot) {
         BorderPane mainPane = robot.lookup("#mainPane").queryAs(BorderPane.class);
         assertEquals("indexCenterPane", mainPane.getCenter().getId());
 
@@ -73,7 +74,7 @@ class IndexControllerTest extends JavaFxTest {
     }
 
     @Test
-    void switchToContracts(final FxRobot robot) {
+    void shouldSwitchToContractsWhenContractsButtonIsPressed(final FxRobot robot) {
         BorderPane mainPane = robot.lookup("#mainPane").queryAs(BorderPane.class);
         assertEquals("indexCenterPane", mainPane.getCenter().getId());
 
@@ -83,7 +84,7 @@ class IndexControllerTest extends JavaFxTest {
     }
 
     @Test
-    void switchToCustomers(final FxRobot robot) {
+    void shouldSwitchToCustomersWhenCustomersButtonIsPressed(final FxRobot robot) {
         BorderPane mainPane = robot.lookup("#mainPane").queryAs(BorderPane.class);
         assertEquals("indexCenterPane", mainPane.getCenter().getId());
 
@@ -93,7 +94,7 @@ class IndexControllerTest extends JavaFxTest {
     }
 
     @Test
-    void switchToOverview(final FxRobot robot) {
+    void shouldSwitchToOverviewWhenOverviewButtonIsPressed(final FxRobot robot) {
         BorderPane mainPane = robot.lookup("#mainPane").queryAs(BorderPane.class);
         assertEquals("indexCenterPane", mainPane.getCenter().getId());
 
@@ -103,7 +104,7 @@ class IndexControllerTest extends JavaFxTest {
     }
 
     @Test
-    void switchToAnalytics(final FxRobot robot) {
+    void shouldSwitchToAnalyticsWhenAnalyticsButtonIsPressed(final FxRobot robot) {
         BorderPane mainPane = robot.lookup("#mainPane").queryAs(BorderPane.class);
         assertEquals("indexCenterPane", mainPane.getCenter().getId());
 
@@ -113,7 +114,7 @@ class IndexControllerTest extends JavaFxTest {
     }
 
     @Test
-    void switchToChartAnalytics(final FxRobot robot) {
+    void shouldSwitchToChartAnalyticsWhenChartButtonIsPressed(final FxRobot robot) {
         BorderPane mainPane = robot.lookup("#mainPane").queryAs(BorderPane.class);
         assertEquals("indexCenterPane", mainPane.getCenter().getId());
 
@@ -123,33 +124,39 @@ class IndexControllerTest extends JavaFxTest {
     }
 
     @Test
-    void withdrawContract(final FxRobot robot) {
+    void shouldWithdrawContractWhenGivenCorrectInformation(final FxRobot robot) {
         TextField contractIdField = robot.lookup("#contractIdField").queryAs(TextField.class);
         contractIdField.setText("A3");
 
         assertFalse(contractService.getMostRecentByContractId("A3").isWithdrawn());
 
         robot.clickOn("#withdrawButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_ok"));
         robot.clickOn("#notification");
 
         assertTrue(contractService.getMostRecentByContractId("A3").isWithdrawn());
     }
 
     @Test
-    void takeOutContract(final FxRobot robot) {
+    void shouldTakeOutContractWhenGivenCorrectInformation(final FxRobot robot) {
         TextField contractIdField = robot.lookup("#contractIdField").queryAs(TextField.class);
         contractIdField.setText("A4");
 
         assertFalse(contractService.getMostRecentByContractId("A4").isTakenOut());
 
         robot.clickOn("#takeOutButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_ok"));
         robot.clickOn("#notification");
 
         assertTrue(contractService.getMostRecentByContractId("A4").isTakenOut());
     }
 
     @Test
-    void prolongContract(final FxRobot robot) throws ParseException {
+    void shouldProlongContractWhenGivenCorrectInformation(final FxRobot robot) throws ParseException {
         TextField contractIdField = robot.lookup("#contractIdField").queryAs(TextField.class);
         contractIdField.setText("A4");
 
@@ -159,8 +166,65 @@ class IndexControllerTest extends JavaFxTest {
         assertEquals(getDateFromString("20.09.2022"), contractService.getMostRecentByContractId("A4").getExpireDateCurr());
 
         robot.clickOn("#prolongButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_ok"));
         robot.clickOn("#notification");
 
         assertEquals(getDateFromString("10.10.2022"), contractService.getMostRecentByContractId("A4").getExpireDateCurr());
+    }
+
+    @Test
+    void shouldNotWithdrawOrTakeOutOrProlongWhenGivenWrongContractId(final FxRobot robot) {
+        TextField contractIdField = robot.lookup("#contractIdField").queryAs(TextField.class);
+        contractIdField.setText("A00");
+
+        robot.clickOn("#takeOutButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        robot.clickOn("#withdrawButton");
+
+        popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        TextField dateField = robot.lookup("#dateField").queryAs(TextField.class);
+        dateField.setText("10.10.2022");
+
+        robot.clickOn("#prolongButton");
+
+        popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+    }
+
+    @Test
+    void shouldNotProlongWhenGivenWrongDate(final FxRobot robot) throws ParseException {
+        TextField contractIdField = robot.lookup("#contractIdField").queryAs(TextField.class);
+        contractIdField.setText("A4");
+
+        assertEquals(getDateFromString("20.09.2022"), contractService.getMostRecentByContractId("A4").getExpireDateCurr());
+
+        robot.clickOn("#prolongButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        assertEquals(getDateFromString("20.09.2022"), contractService.getMostRecentByContractId("A4").getExpireDateCurr());
+
+        TextField dateField = robot.lookup("#dateField").queryAs(TextField.class);
+        dateField.setText("10.10");
+
+        robot.clickOn("#prolongButton");
+
+        popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        assertEquals(getDateFromString("20.09.2022"), contractService.getMostRecentByContractId("A4").getExpireDateCurr());
     }
 }

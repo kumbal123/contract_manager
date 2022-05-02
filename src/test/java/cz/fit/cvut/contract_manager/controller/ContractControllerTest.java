@@ -112,6 +112,31 @@ class ContractControllerTest extends JavaFxTest {
     }
 
     @Test
+    void shouldUpdateContractInformation(final FxRobot robot) {
+        BorderPane mainPane = robot.lookup("#mainPane").queryAs(BorderPane.class);
+        assertEquals("contractsPane", mainPane.getCenter().getId());
+
+        Node node = robot.lookup("#colPersonalNumber").nth(1).query();
+        robot.doubleClickOn(node);
+
+        assertEquals("createContractAnchorPane", mainPane.getCenter().getId());
+
+        TextField itemInfoField = robot.lookup("#itemInfoField").queryAs(TextField.class);
+        itemInfoField.setText("New item information");
+
+        robot.clickOn("#updateButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_ok"));
+        robot.clickOn("#notification");
+
+        verifyThat("#tvContracts", TableViewMatchers.hasNumRows(3));
+        verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A3", "New item information", 2500, "10.06.22", "15.08.22", null));
+        verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A4", "Mobile", 5500, "04.09.22", "20.09.22", null));
+        verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A5", "Laptop", 3400, "28.09.22", "01.11.22", null));
+    }
+
+    @Test
     void shouldFindContractByContractId(final FxRobot robot) {
         TextField searchBar = robot.lookup("#searchBar").queryAs(TextField.class);
         searchBar.setText("A3");
@@ -155,11 +180,6 @@ class ContractControllerTest extends JavaFxTest {
 
     @Test
     void shouldDeleteContractWhenSelectedContractIsDeleted(final FxRobot robot) {
-        verifyThat("#tvContracts", TableViewMatchers.hasNumRows(3));
-        verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A3", "Mobile", 2500, "10.06.22", "15.08.22", null));
-        verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A4", "Mobile", 5500, "04.09.22", "20.09.22", null));
-        verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A5", "Laptop", 3400, "28.09.22", "01.11.22", null));
-
         Node node = robot.lookup("#colPersonalNumber").nth(1).query();
         robot.clickOn(node);
         robot.clickOn("#deleteButton");
@@ -175,11 +195,6 @@ class ContractControllerTest extends JavaFxTest {
 
     @Test
     void shouldNotDeleteContractWhenNoContractIsSelected(final FxRobot robot) {
-        verifyThat("#tvContracts", TableViewMatchers.hasNumRows(3));
-        verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A3", "Mobile", 2500, "10.06.22", "15.08.22", null));
-        verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A4", "Mobile", 5500, "04.09.22", "20.09.22", null));
-        verifyThat("#tvContracts", TableViewMatchers.containsRow("123l123", "Mike", "A5", "Laptop", 3400, "28.09.22", "01.11.22", null));
-
         robot.clickOn("#deleteButton");
 
         Label popUp = robot.lookup("#notification").queryAs(Label.class);

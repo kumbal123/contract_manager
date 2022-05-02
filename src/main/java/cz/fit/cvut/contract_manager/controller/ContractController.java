@@ -39,7 +39,6 @@ public class ContractController extends Controller {
 
     private Contract contract;
 
-    private final Integer contractLimitDisplay = 20;
     private final ContractRepositoryService contractService = ContractRepositoryService.getInstance();
     private final CustomerRepositoryService customerService = CustomerRepositoryService.getInstance();
 
@@ -100,8 +99,7 @@ public class ContractController extends Controller {
             cellData -> getStringPropertyFromDate(cellData.getValue().getExpireDateOrig())
         );
 
-        FilteredList<Contract> filteredList =
-            new FilteredList<>(contractList, contract -> contractList.indexOf(contract) < contractLimitDisplay);
+        FilteredList<Contract> filteredList = new FilteredList<>(contractList, c -> true);
 
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(Contract -> {

@@ -43,6 +43,9 @@ public class CreateCustomerController extends Controller {
     public TextField fromYearField;
     public TextField toYearField;
 
+    public Button monthsButton;
+    public Button yearsButton;
+
     public PieChart pieChart;
     public Label labelTotalContracts;
 
@@ -193,6 +196,8 @@ public class CreateCustomerController extends Controller {
 
         updateButton.setDisable(false);
         createContractButton.setDisable(false);
+        monthsButton.setDisable(false);
+        yearsButton.setDisable(false);
 
         initPieChart();
 

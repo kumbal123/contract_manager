@@ -2,7 +2,6 @@ package cz.fit.cvut.contract_manager.service;
 
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.ContractState;
-import cz.fit.cvut.contract_manager.entity.Customer;
 import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.repository.ContractRepository;
 import org.junit.jupiter.api.Test;

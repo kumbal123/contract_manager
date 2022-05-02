@@ -18,84 +18,118 @@
     <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1078.0">
       <center>
             <Pane prefHeight="597.0" prefWidth="505.0" BorderPane.alignment="CENTER">
-            <Pane fx:id="contractDataPane" layoutX="20.0" layoutY="57.0" prefHeight="524.0" prefWidth="409.0">
-               <children>
-                  <TextField layoutX="35.0" layoutY="33.0" opacity="0.0" prefHeight="18.0" prefWidth="270.0" promptText="ten" styleClass="spacingField" visible="true">
+               <Pane fx:id="contractDataPane" layoutX="20.0" layoutY="57.0" prefHeight="524.0" prefWidth="409.0">
+                  <TextField layoutX="35.0" layoutY="33.0" opacity="0.0" prefHeight="18.0" prefWidth="270.0"
+                             promptText="ten" styleClass="spacingField">
                      <font>
-                        <Font size="10.0" />
+                        <Font size="10.0"/>
                      </font>
                   </TextField>
-                        <TextField fx:id="nameField" layoutX="35.0" layoutY="58.0" prefHeight="18.0" prefWidth="270.0" promptText="ten" styleClass="spacingField">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="genderField" layoutX="310.0" layoutY="58.0" prefHeight="18.0" prefWidth="74.0" promptText="gioi tinh">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="birthPlaceField" layoutX="35.0" layoutY="80.0" prefHeight="18.0" prefWidth="233.0" promptText="noi sinh" styleClass="spacingField">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="dateOfBirthField" layoutX="273.0" layoutY="80.0" prefHeight="18.0" prefWidth="112.0" promptText="ngay sinh">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="addressField" layoutX="35.0" layoutY="103.0" prefHeight="18.0" prefWidth="350.0" promptText="dia chi" styleClass="spacingField">
-                     <font>
-                        <Font size="8.0" />
-                     </font></TextField>
-                        <TextField fx:id="cityField" layoutX="35.0" layoutY="125.0" prefHeight="18.0" prefWidth="350.0" promptText="thanh pho" styleClass="spacingField">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="personalNumberField" layoutX="35.0" layoutY="146.0" prefHeight="18.0" prefWidth="185.0" promptText="so sinh" styleClass="spacingField">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="cardIdNumberField" layoutX="226.0" layoutY="146.0" prefHeight="18.0" prefWidth="159.0" promptText="so CM">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="nationalityField" layoutX="35.0" layoutY="168.0" prefHeight="18.0" prefWidth="185.0" promptText="quoc tich" styleClass="spacingField">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="meuField" layoutX="226.0" layoutY="168.0" prefHeight="18.0" prefWidth="159.0" promptText="MeU">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="creationDateField" disable="true" layoutX="90.0" layoutY="193.0" prefHeight="18.0" prefWidth="86.0">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="contractIdField" layoutX="268.0" layoutY="198.0" prefHeight="20.0" prefWidth="104.0" promptText="so hop dong">
-                     <font>
-                        <Font size="15.0" />
-                     </font></TextField>
-                        <TextField fx:id="lendPriceField" layoutX="170.0" layoutY="252.0" prefHeight="22.0" prefWidth="90.0" promptText="tien vay">
-                     <font>
-                        <Font size="14.0" />
-                     </font></TextField>
-                        <TextField fx:id="expireDateField" layoutX="170.0" layoutY="286.0" prefHeight="18.0" prefWidth="90.0" promptText="ngay lay">
-                     <font>
-                        <Font size="11.0" />
-                     </font></TextField>
-                        <TextField fx:id="itemInfoField" layoutX="67.0" layoutY="321.0" prefHeight="18.0" prefWidth="318.0" promptText="ten hang">
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="itemSpecificationField" layoutX="67.0" layoutY="342.0" prefHeight="14.0" prefWidth="318.0" promptText="so hang">
-                     <font>
-                        <Font size="9.0" />
-                     </font></TextField>
-                        <TextField fx:id="totalPriceField" layoutX="275.0" layoutY="374.0" prefHeight="20.0" prefWidth="110.0" promptText="tien tra">
-                     <font>
-                        <Font size="14.0" />
-                     </font></TextField>
-                        <Button layoutX="390.0" layoutY="317.0" mnemonicParsing="false" onMouseClicked="#searchPrices" text="tim gia" />
-               </children>
-            </Pane>
+                  <TextField fx:id="nameField" layoutX="35.0" layoutY="58.0" prefHeight="18.0" prefWidth="270.0"
+                             promptText="ten" styleClass="spacingField">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="genderField" layoutX="310.0" layoutY="58.0" prefHeight="18.0" prefWidth="74.0"
+                             promptText="gioi tinh">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="birthPlaceField" layoutX="35.0" layoutY="80.0" prefHeight="18.0" prefWidth="233.0"
+                             promptText="noi sinh" styleClass="spacingField">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="dateOfBirthField" layoutX="273.0" layoutY="80.0" prefHeight="18.0" prefWidth="112.0"
+                             promptText="ngay sinh">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="addressField" layoutX="35.0" layoutY="103.0" prefHeight="18.0" prefWidth="350.0"
+                             promptText="dia chi" styleClass="spacingField">
+               <font>
+                  <Font size="8.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="cityField" layoutX="35.0" layoutY="125.0" prefHeight="18.0" prefWidth="350.0"
+                             promptText="thanh pho" styleClass="spacingField">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="personalNumberField" layoutX="35.0" layoutY="146.0" prefHeight="18.0"
+                             prefWidth="185.0" promptText="so sinh" styleClass="spacingField">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="cardIdNumberField" layoutX="226.0" layoutY="146.0" prefHeight="18.0"
+                             prefWidth="159.0" promptText="so CM">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="nationalityField" layoutX="35.0" layoutY="168.0" prefHeight="18.0" prefWidth="185.0"
+                             promptText="quoc tich" styleClass="spacingField">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="meuField" layoutX="226.0" layoutY="168.0" prefHeight="18.0" prefWidth="159.0"
+                             promptText="MeU">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="creationDateField" disable="true" layoutX="90.0" layoutY="193.0" prefHeight="18.0"
+                             prefWidth="86.0">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="contractIdField" layoutX="268.0" layoutY="198.0" prefHeight="20.0" prefWidth="104.0"
+                             promptText="so hop dong">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="lendPriceField" layoutX="170.0" layoutY="255.0" prefHeight="22.0" prefWidth="90.0"
+                             promptText="tien vay">
+               <font>
+                  <Font size="14.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="expireDateField" layoutX="170.0" layoutY="286.0" prefHeight="18.0" prefWidth="90.0"
+                             promptText="ngay lay">
+               <font>
+                  <Font size="11.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="itemInfoField" layoutX="67.0" layoutY="321.0" prefHeight="18.0" prefWidth="318.0"
+                             promptText="ten hang">
+               <font>
+                  <Font size="10.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="itemSpecificationField" layoutX="67.0" layoutY="342.0" prefHeight="14.0"
+                             prefWidth="318.0" promptText="so hang">
+               <font>
+                  <Font size="9.0"/>
+               </font>
+                  </TextField>
+                  <TextField fx:id="totalPriceField" layoutX="275.0" layoutY="374.0" prefHeight="20.0" prefWidth="110.0"
+                             promptText="tien tra">
+               <font>
+                  <Font size="14.0"/>
+               </font>
+                  </TextField>
+                  <Button layoutX="390.0" layoutY="317.0" mnemonicParsing="false" onMouseClicked="#searchPrices"
+                          text="tim gia"/>
+               </Pane>
                   <Button fx:id="updateButton" disable="true" layoutX="54.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#updateContract" prefHeight="26.0" prefWidth="52.0" text="sua" />
                   <Button layoutX="363.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#printContract" prefHeight="26.0" prefWidth="48.0" text="in" />
                   <Button id="createButton" layoutX="298.0" layoutY="627.0" mnemonicParsing="false" onMouseClicked="#createContract" prefHeight="26.0" prefWidth="52.0" text="luu" />
@@ -103,24 +137,23 @@
       </center>
       <right>
          <Pane fx:id="rightPane" prefHeight="700.0" prefWidth="595.0" visible="false" BorderPane.alignment="CENTER">
-            <children>
-               <TableView fx:id="tvPrices" layoutX="32.0" layoutY="32.0" onMouseClicked="#handleMouseEvent" prefHeight="471.0" prefWidth="549.0">
-                 <columns>
-                   <TableColumn fx:id="colName" prefWidth="452.0" text="Ten" />
-                     <TableColumn fx:id="colPrice" prefWidth="76.0" text="Gia" />
-                 </columns>
-               </TableView>
-               <Label layoutX="241.0" layoutY="524.0" prefHeight="34.0" prefWidth="166.0" text="Trung Binh:">
-                  <font>
-                     <Font name="System Bold" size="28.0" />
-                  </font>
-               </Label>
-               <Label fx:id="labelAvgPrice" layoutX="407.0" layoutY="524.0" prefHeight="34.0" prefWidth="158.0">
-                  <font>
-                     <Font name="System Bold" size="28.0" />
-                  </font>
-               </Label>
-            </children>
+            <TableView fx:id="tvPrices" layoutX="40.0" layoutY="32.0" onMouseClicked="#handleMouseEvent"
+                       prefHeight="471.0" prefWidth="549.0">
+               <columns>
+                  <TableColumn fx:id="colName" prefWidth="452.0" text="Ten"/>
+                  <TableColumn fx:id="colPrice" prefWidth="76.0" text="Gia"/>
+               </columns>
+            </TableView>
+            <Label layoutX="254.0" layoutY="524.0" prefHeight="34.0" prefWidth="180.0" text="Trung Binh:">
+               <font>
+                  <Font name="System Bold" size="28.0"/>
+               </font>
+            </Label>
+            <Label fx:id="labelAvgPrice" layoutX="434.0" layoutY="524.0" prefHeight="34.0" prefWidth="121.0">
+               <font>
+                  <Font name="System Bold" size="28.0"/>
+               </font>
+            </Label>
          </Pane>
       </right>
    </BorderPane>

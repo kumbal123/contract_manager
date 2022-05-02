@@ -42,7 +42,7 @@
               </filters>
               <transformers>
                 <transformer>
-                  <mainClass>cz.fit.cvut.contract_manager.SuperMain</mainClass>
+                  <mainClass>cz.fit.cvut.contract_manager.Main</mainClass>
                 </transformer>
               </transformers>
             </configuration>

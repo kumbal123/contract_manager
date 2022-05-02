@@ -107,7 +107,7 @@ public class CustomerController extends Controller {
 
         tvCustomers.setItems(customerList);
 
-        FilteredList<Customer> filteredList = new FilteredList<>(customerList, b -> true);
+        FilteredList<Customer> filteredList = new FilteredList<>(customerList, c -> true);
 
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(Customer -> {

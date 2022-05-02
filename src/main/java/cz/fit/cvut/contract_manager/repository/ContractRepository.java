@@ -2,15 +2,12 @@ package cz.fit.cvut.contract_manager.repository;
 
 import cz.fit.cvut.contract_manager.entity.Contract;
 import org.hibernate.query.Query;
-import org.jboss.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class ContractRepository extends Repository<Integer, Contract> {
-
-    private static final Logger LOG = Logger.getLogger(ContractRepository.class);
 
     public static ContractRepository getInstance() {
         return ContractRepositoryHolder.INSTANCE;

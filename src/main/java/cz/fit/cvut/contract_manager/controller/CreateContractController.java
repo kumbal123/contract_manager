@@ -221,7 +221,6 @@ public class CreateContractController extends Controller {
             contract.setItemInfo(itemInfo);
             contract.setItemSpecification(itemSpecification);
             contract.setTotalPriceOrig(getInteger(totalPrice));
-            contract.setCreationDate(getDateFromString(creationDateField.getText().trim()));
 
             contractService.update(contract);
 

@@ -77,38 +77,34 @@ public class ViewContractController extends Controller {
         itemSpecificationField.setText(contract.getItemSpecification());
         totalPriceField.setText(contract.getTotalPriceOrig().toString());
 
-        if(contract.getNumberOfProlongs() > 0) {
-            rightPane.setVisible(true);
+        ObservableList<History> historyList = FXCollections.observableArrayList(historyService.getAllFromContractId(contract.getId()));
 
-            ObservableList<History> historyList = FXCollections.observableArrayList(historyService.getAllFromContractId(contract.getId()));
+        historyList.sort(Comparator.comparing(History::getFromDate));
 
-            historyList.sort(Comparator.comparing(History::getFromDate));
+        colStartPrice.setCellValueFactory(new PropertyValueFactory<>("startPrice"));
+        colInterest.setCellValueFactory(new PropertyValueFactory<>("interest"));
+        colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 
-            colStartPrice.setCellValueFactory(new PropertyValueFactory<>("startPrice"));
-            colInterest.setCellValueFactory(new PropertyValueFactory<>("interest"));
-            colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        colFromDate.setCellValueFactory(
+            cellData -> getStringPropertyFromDate(cellData.getValue().getFromDate())
+        );
 
-            colFromDate.setCellValueFactory(
-                cellData -> getStringPropertyFromDate(cellData.getValue().getFromDate())
-            );
+        colToDate.setCellValueFactory(
+            cellData -> getStringPropertyFromDate(cellData.getValue().getToDate())
+        );
 
-            colToDate.setCellValueFactory(
-                cellData -> getStringPropertyFromDate(cellData.getValue().getToDate())
-            );
+        tvHistory.setItems(historyList);
 
-            tvHistory.setItems(historyList);
+        labelTotalPrice.setText(contract.getTotalPriceCurr().toString());
 
-            labelTotalPrice.setText(contract.getTotalPriceCurr().toString());
-
-            if(contract.isWithdrawn()) {
-                labelTotalPrice.setStyle("-fx-background-color: #64ff61;");
-            } else if(contract.isTakenOut()) {
-                labelTotalPrice.setStyle("-fx-background-color: #ff6161;");
-            } else if(contract.isExpired()) {
-                labelTotalPrice.setStyle("-fx-background-color: #ffb561;");
-            } else {
-                labelTotalPrice.setStyle("");
-            }
+        if(contract.isWithdrawn()) {
+            labelTotalPrice.setStyle("-fx-background-color: #64ff61;");
+        } else if(contract.isTakenOut()) {
+            labelTotalPrice.setStyle("-fx-background-color: #ff6161;");
+        } else if(contract.isExpired()) {
+            labelTotalPrice.setStyle("-fx-background-color: #ffb561;");
+        } else {
+            labelTotalPrice.setStyle("");
         }
     }
 

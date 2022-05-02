@@ -2,12 +2,10 @@ package cz.fit.cvut.contract_manager.repository;
 
 import cz.fit.cvut.contract_manager.entity.History;
 import org.hibernate.query.Query;
-import org.jboss.logging.Logger;
 
 import java.util.List;
 
 public class HistoryRepository extends Repository<Integer, History> {
-    private static final Logger LOG = Logger.getLogger(HistoryRepository.class);
 
     public static HistoryRepository getInstance() {
         return HistoryRepository.HistoryRepositoryHolder.INSTANCE;

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.TableViewMatchers;
+import org.testfx.matcher.control.TextInputControlMatchers;
 
 import java.util.Date;
 
@@ -50,14 +51,14 @@ class OverviewControllerTest extends JavaFxTest {
     }
 
     @Test
-    void showContracts() {
+    void shouldListContractWhenPageIsLoaded() {
         verifyThat("#tvContracts", TableViewMatchers.hasNumRows(2));
         verifyThat("#tvContracts", TableViewMatchers.containsRow("Mike", "10.07.22", "15.08.22", "15.08.22", "Mobile", "A3", 2500, 4150, "1650"));
         verifyThat("#tvContracts", TableViewMatchers.containsRow("Mike", "04.09.22", "20.09.22", "20.09.22", "Mobile", "A4", 5500, 6380, "880"));
     }
 
     @Test
-    void handleMouseEvent(final FxRobot robot) {
+    void shouldSwitchToViewContractWhenClickedOnContract(final FxRobot robot) {
         BorderPane mainPane = robot.lookup("#mainPane").queryAs(BorderPane.class);
         assertEquals("overviewPane", mainPane.getCenter().getId());
 
@@ -65,5 +66,14 @@ class OverviewControllerTest extends JavaFxTest {
         robot.doubleClickOn(node);
 
         assertEquals("viewContractAnchorPane", mainPane.getCenter().getId());
+    }
+
+    @Test
+    void shouldFillContractInformationWhenClickedOnContract(final FxRobot robot) {
+        Node node = robot.lookup("#colName").nth(1).query();
+        robot.clickOn(node);
+
+        verifyThat("#contractIdField", TextInputControlMatchers.hasText("A3"));
+        verifyThat("#dateField", TextInputControlMatchers.hasText("15.08.22"));
     }
 }
