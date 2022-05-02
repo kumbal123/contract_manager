@@ -21,7 +21,6 @@ import java.util.ResourceBundle;
 public class AnalyticsController extends Controller {
     public TextField fromField;
     public TextField toField;
-    public Button analyzeButton;
 
     public TableView<Contract> tvContracts;
     public TableColumn<Contract, String> colContractId;
@@ -79,7 +78,7 @@ public class AnalyticsController extends Controller {
 
             tvContracts.setItems(FXCollections.observableArrayList(contractList));
         } else {
-            Notification.showPopupMessageErr("Entered dates are not dates!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Ngay thanh viet khong dung theo dd.mm.yyyy hoac dd.mm.yy", (Stage) mainPane.getScene().getWindow());
         }
     }
 

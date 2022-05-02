@@ -22,10 +22,6 @@ public class ContractRepositoryService extends RepositoryService<Integer, Contra
         return repository.getMostRecentByContractId(contractId);
     }
 
-    public void removeCustomer(final Contract contract) {
-        contract.removeCustomer();
-    }
-
     public Boolean withdraw(final Contract contract) {
         if(!contract.isWithdrawn() && !contract.isTakenOut()) {
             contract.setState(ContractState.WITHDRAWN);

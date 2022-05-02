@@ -8,34 +8,36 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<HBox id="contractsHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ContractController">
-    <children>
-      <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1101.0">
-         <center>
-              <Pane fx:id="contractsPane" prefHeight="600.0" prefWidth="901.0">
-                  <children>
-                      <TextField fx:id="searchBar" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="914.0" promptText="search" />
-                      <Button id="createButton" layoutX="993.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#switchToCreateContract" prefHeight="25.0" prefWidth="84.0" text="Create" />
-                      <Button id="overviewButton" layoutX="993.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#switchToOverview" prefHeight="25.0" prefWidth="84.0" text="View" />
-                      <Button id="deleteButton" layoutX="993.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#deleteContract" prefHeight="25.0" prefWidth="84.0" text="Delete" />
-                      <Pane layoutX="46.0" layoutY="81.0" prefHeight="594.0" prefWidth="914.0">
-                     <children>
-                        <TableView fx:id="tvContracts" layoutX="1.0" onMouseClicked="#handleMouseEvent" prefHeight="595.0" prefWidth="916.0">
-                          <columns>
-                            <TableColumn fx:id="colPersonalNumber" prefWidth="104.0" text="PersonalNumber" />
-                            <TableColumn fx:id="colName" prefWidth="152.0" text="Name" />
-                              <TableColumn fx:id="colContractId" prefWidth="72.0" text="ContractId" />
-                              <TableColumn fx:id="colItemInfo" prefWidth="265.0" text="ItemInfo" />
-                              <TableColumn fx:id="colLendPrice" prefWidth="68.0" text="LendPrice" />
-                              <TableColumn fx:id="colCreationDate" minWidth="0.0" prefWidth="97.0" text="CreationDate" />
-                              <TableColumn fx:id="colExpireDate" prefWidth="89.0" text="ExpireDate" />
-                              <TableColumn fx:id="colDelete" prefWidth="38.0" />
-                          </columns>
-                        </TableView>
-                     </children></Pane>
-                  </children>
-              </Pane>
-         </center>
-      </BorderPane>
-    </children>
+<HBox id="contractsHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="cz.fit.cvut.contract_manager.controller.ContractController">
+    <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1101.0">
+        <center>
+            <Pane fx:id="contractsPane" prefHeight="600.0" prefWidth="901.0">
+                <TextField fx:id="searchBar" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="914.0"
+                           promptText="tim"/>
+                <Button id="createButton" layoutX="993.0" layoutY="111.0" mnemonicParsing="false"
+                        onMouseClicked="#switchToCreateContract" prefHeight="25.0" prefWidth="84.0" text="Lam Moi"/>
+                <Button id="overviewButton" layoutX="993.0" layoutY="192.0" mnemonicParsing="false"
+                        onMouseClicked="#switchToOverview" prefHeight="25.0" prefWidth="84.0" text="Xem So"/>
+                <Button id="deleteButton" layoutX="993.0" layoutY="152.0" mnemonicParsing="false"
+                        onMouseClicked="#deleteContract" prefHeight="25.0" prefWidth="84.0" text="Xoa"/>
+                <Pane layoutX="46.0" layoutY="81.0" prefHeight="594.0" prefWidth="914.0">
+                    <TableView fx:id="tvContracts" layoutX="1.0" onMouseClicked="#handleMouseEvent"
+                               prefHeight="595.0" prefWidth="916.0">
+                        <columns>
+                            <TableColumn fx:id="colPersonalNumber" prefWidth="104.0" text="So Sinh"/>
+                            <TableColumn fx:id="colName" prefWidth="138.0" text="Ten"/>
+                            <TableColumn fx:id="colContractId" prefWidth="86.0" text="So Hop Dong"/>
+                            <TableColumn fx:id="colItemInfo" prefWidth="265.0" text="Ten Hang"/>
+                            <TableColumn fx:id="colLendPrice" prefWidth="68.0" text="Tien Vay"/>
+                            <TableColumn fx:id="colCreationDate" minWidth="0.0" prefWidth="97.0" text="Ngay Cam"/>
+                            <TableColumn fx:id="colExpireDate" prefWidth="89.0" text="Ngay Lay"/>
+                            <TableColumn fx:id="colDelete" prefWidth="38.0"/>
+                        </columns>
+                    </TableView>
+                </Pane>
+            </Pane>
+        </center>
+    </BorderPane>
 </HBox>

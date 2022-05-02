@@ -157,6 +157,7 @@ public class CreateContractController extends Controller {
         meuField.setDisable(true);
         nationalityField.setDisable(true);
         dateOfBirthField.setDisable(true);
+        creationDateField.setDisable(true);
     }
 
     @FXML
@@ -198,9 +199,9 @@ public class CreateContractController extends Controller {
             mainPane.getChildren().removeAll();
             mainPane.setCenter(getPage("contracts.fxml"));
 
-            Notification.showPopupMessageOk("Contract successfully created!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Hop dong da luu xong!", (Stage) mainPane.getScene().getWindow());
         } else {
-            Notification.showPopupMessageErr("Some required fields are empty!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Chua khai het!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -220,32 +221,47 @@ public class CreateContractController extends Controller {
             contract.setItemInfo(itemInfo);
             contract.setItemSpecification(itemSpecification);
             contract.setTotalPriceOrig(getInteger(totalPrice));
-            contract.setCreationDate(getDateFromString(creationDateField.getText().trim()));
 
             contractService.update(contract);
 
             mainPane.getChildren().removeAll();
             mainPane.setCenter(getPage("contracts.fxml"));
 
-            Notification.showPopupMessageOk("Contract successfully created!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Hop dong da sua xong!", (Stage) mainPane.getScene().getWindow());
         } else {
-            Notification.showPopupMessageErr("Some required fields are empty!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Chua khai het!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
     @FXML
     public void printContract(final MouseEvent event) {
         PrinterJob job = PrinterJob.createPrinterJob();
-        if (job != null) {
+        if(job != null) {
             PageLayout pageLayout = job.getPrinter().createPageLayout(Paper.A5, PageOrientation.PORTRAIT, 0, 0, 0, 0);
+
+            String lendPrice = lendPriceField.getText().trim(), totalPrice = totalPriceField.getText().trim();
+
+            lendPriceField.appendText(",-");
+            totalPriceField.appendText(",-");
+
+            contractDataPane.setScaleY(1);
+            contractDataPane.setScaleX(1);
+
             boolean printed = job.printPage(pageLayout, contractDataPane);
-            if (printed) {
+
+            if(printed) {
                 job.endJob();
-            } else {
-                System.out.println("Printing failed.");
+                Notification.showPopupMessageOk("Dang in!", (Stage) mainPane.getScene().getWindow());
+            }else {
+                Notification.showPopupMessageErr("Khong in duoc!", (Stage) mainPane.getScene().getWindow());
             }
-        } else {
-            System.out.println("Could not create a printer job.");
+
+            lendPriceField.setText(lendPrice);
+            totalPriceField.setText(totalPrice);
+            contractDataPane.setScaleY(1.2);
+            contractDataPane.setScaleX(1.2);
+        }else {
+            Notification.showPopupMessageErr("Khong in duoc!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -277,7 +293,9 @@ public class CreateContractController extends Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        creationDateField.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date()));
+        creationDateField.setText(new SimpleDateFormat("dd.MM.yy").format(new Date()));
+        contractDataPane.setScaleY(1.2);
+        contractDataPane.setScaleX(1.2);
 
         lendPriceField.textProperty().addListener((observable, oldVal, newVal) -> {
             if(!"".equals(expireDateField.getText()) && !newVal.isEmpty() && isInteger(newVal)) {

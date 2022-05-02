@@ -22,6 +22,12 @@ public class CustomerRepositoryService extends RepositoryService<Integer, Custom
 
     public void assignContract(final Customer customer, final Contract contract) {
         customer.assignContract(contract);
+        repository.update(customer);
+    }
+
+    public void removeContract(final Customer customer, final Contract contract) {
+        customer.removeContract(contract);
+        repository.update(customer);
     }
 
     public List<Contract> getContracts(final Integer id) {

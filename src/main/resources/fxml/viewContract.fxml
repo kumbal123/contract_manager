@@ -10,32 +10,30 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="viewContractAnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ViewContractController">
+<AnchorPane id="viewContractAnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.ViewContractController">
     <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1100.0">
       <right>
-         <Pane fx:id="rightPane" prefHeight="700.0" prefWidth="660.0" visible="false" BorderPane.alignment="CENTER">
-            <children>
-               <TableView fx:id="tvHistory" layoutX="14.0" layoutY="30.0" prefHeight="400.0" prefWidth="618.0">
-                 <columns>
-                   <TableColumn fx:id="colFromDate" prefWidth="114.0" text="from" />
-                   <TableColumn fx:id="colToDate" prefWidth="106.0" text="to" />
-                     <TableColumn fx:id="colStartPrice" prefWidth="145.0" text="start price" />
-                     <TableColumn fx:id="colInterest" prefWidth="98.0" text="interest" />
-                     <TableColumn fx:id="colTotalPrice" prefWidth="133.0" text="total price" />
-                 </columns>
-               </TableView>
-               <Label fx:id="labelTotalPrice" layoutX="496.0" layoutY="454.0" prefHeight="53.0" prefWidth="121.0">
-                  <font>
-                     <Font name="System Bold" size="28.0" />
-                  </font>
-               </Label>
-               <Label layoutX="385.0" layoutY="454.0" prefHeight="53.0" prefWidth="104.0" text="Total:">
-                  <font>
-                     <Font name="System Bold" size="28.0" />
-                  </font>
-               </Label>
-            </children>
-         </Pane>
+          <Pane fx:id="rightPane" prefHeight="700.0" prefWidth="660.0" BorderPane.alignment="CENTER">
+              <TableView fx:id="tvHistory" layoutX="14.0" layoutY="30.0" prefHeight="400.0" prefWidth="618.0">
+                  <columns>
+                      <TableColumn fx:id="colFromDate" prefWidth="114.0" text="tu ngay"/>
+                      <TableColumn fx:id="colToDate" prefWidth="106.0" text="den ngay"/>
+                      <TableColumn fx:id="colStartPrice" prefWidth="145.0" text="tien goc"/>
+                      <TableColumn fx:id="colInterest" prefWidth="98.0" text="lai"/>
+                      <TableColumn fx:id="colTotalPrice" prefWidth="133.0" text="tien tra"/>
+                  </columns>
+              </TableView>
+              <Label fx:id="labelTotalPrice" layoutX="496.0" layoutY="454.0" prefHeight="53.0" prefWidth="121.0">
+                 <font>
+                     <Font name="System Bold" size="28.0"/>
+                 </font>
+              </Label>
+              <Label layoutX="354.0" layoutY="454.0" prefHeight="53.0" prefWidth="119.0" text="Toan bo:">
+                 <font>
+                     <Font name="System Bold" size="28.0"/>
+                 </font>
+              </Label>
+          </Pane>
       </right>
       <left>
             <Pane prefHeight="700.0" prefWidth="439.0" BorderPane.alignment="CENTER">
@@ -55,10 +53,9 @@
                 <TextField fx:id="itemInfoField" layoutX="45.0" layoutY="368.0" prefHeight="25.0" prefWidth="373.0" promptText="what - model, brand" />
                 <TextField fx:id="itemSpecificationField" layoutX="45.0" layoutY="406.0" prefHeight="25.0" prefWidth="373.0" promptText="s. number, weight" />
                 <TextField fx:id="totalPriceField" layoutX="282.0" layoutY="464.0" prefHeight="39.0" prefWidth="135.0" promptText="total price" />
-                <Button id="takeOutButton" layoutX="356.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#takeOut" text="take out" />
-                <Button id="withdrawButton" layoutX="295.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#withdraw" text="fufill" />
+                <Button id="takeOutButton" layoutX="356.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#takeOut" prefHeight="26.0" prefWidth="60.0" text="bo" />
+                <Button id="withdrawButton" layoutX="273.0" layoutY="557.0" mnemonicParsing="false" onMouseClicked="#withdraw" text="khach lay" />
             </Pane>
       </left>
     </BorderPane>
-
 </AnchorPane>

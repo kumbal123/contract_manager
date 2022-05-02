@@ -3,12 +3,10 @@ package cz.fit.cvut.contract_manager.repository;
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.Customer;
 import org.hibernate.query.Query;
-import org.jboss.logging.Logger;
 
 import java.util.List;
 
 public class CustomerRepository extends Repository<Integer, Customer> {
-    private static final Logger LOG = Logger.getLogger(CustomerRepository.class);
 
     public static CustomerRepository getInstance() {
         return CustomerRepository.CustomerRepositoryHolder.INSTANCE;

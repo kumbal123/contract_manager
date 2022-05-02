@@ -3,6 +3,7 @@ package cz.fit.cvut.contract_manager.controller;
 import cz.fit.cvut.contract_manager.Notification.Notification;
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
+import cz.fit.cvut.contract_manager.service.CustomerRepositoryService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -38,8 +39,8 @@ public class ContractController extends Controller {
 
     private Contract contract;
 
-    private final Integer contractLimitDisplay = 20;
     private final ContractRepositoryService contractService = ContractRepositoryService.getInstance();
+    private final CustomerRepositoryService customerService = CustomerRepositoryService.getInstance();
 
     @FXML
     public void switchToCreateContract(final MouseEvent event) throws IOException {
@@ -54,13 +55,13 @@ public class ContractController extends Controller {
     @FXML
     public void deleteContract(final MouseEvent event) {
         if(contract != null) {
-            contractService.removeCustomer(contract);
+            customerService.removeContract(contract.getCustomer(), contract);
             contractService.deleteByEntity(contract);
             showContracts();
-            Notification.showPopupMessageOk("Successfully deleted contract with id: " + contract.getContractId() + "!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Hop dong voi so: " + contract.getContractId() + " da xoa xong!", (Stage) mainPane.getScene().getWindow());
             contract = null;
         } else {
-            Notification.showPopupMessageErr("Could not delete. Pick a contract by clicking on it first!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Khong xoa duoc. Bam vao hop dong trouc khi xoa!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -98,8 +99,7 @@ public class ContractController extends Controller {
             cellData -> getStringPropertyFromDate(cellData.getValue().getExpireDateOrig())
         );
 
-        FilteredList<Contract> filteredList =
-            new FilteredList<>(contractList, contract -> contractList.indexOf(contract) < contractLimitDisplay);
+        FilteredList<Contract> filteredList = new FilteredList<>(contractList, c -> true);
 
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(Contract -> {
@@ -114,6 +114,10 @@ public class ContractController extends Controller {
                 } else if(Contract.getName().toLowerCase().contains(searchKeyword)) {
                     return true;
                 } else if(getStringFromDate(Contract.getCreationDate()).contains(searchKeyword)) {
+                    return true;
+                } else if(Contract.getItemInfo().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                } else if(Contract.getItemSpecification().toLowerCase().contains(searchKeyword)) {
                     return true;
                 } else {
                     return Contract.getContractId().toLowerCase().contains(searchKeyword);

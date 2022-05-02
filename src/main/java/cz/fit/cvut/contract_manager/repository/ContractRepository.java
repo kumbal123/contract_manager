@@ -2,15 +2,12 @@ package cz.fit.cvut.contract_manager.repository;
 
 import cz.fit.cvut.contract_manager.entity.Contract;
 import org.hibernate.query.Query;
-import org.jboss.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class ContractRepository extends Repository<Integer, Contract> {
-
-    private static final Logger LOG = Logger.getLogger(ContractRepository.class);
 
     public static ContractRepository getInstance() {
         return ContractRepositoryHolder.INSTANCE;
@@ -23,7 +20,7 @@ public class ContractRepository extends Repository<Integer, Contract> {
             session = FACTORY.openSession();
             session.beginTransaction();
 
-            Query<Contract> query = session.createQuery("from Contract where contractId=:contractId", Contract.class);
+            Query<Contract> query = session.createQuery("select c from Contract c join fetch c.customer where c.contractId=:contractId", Contract.class);
             query.setParameter("contractId", id);
 
             contracts = query.list();
@@ -77,7 +74,7 @@ public class ContractRepository extends Repository<Integer, Contract> {
             session = FACTORY.openSession();
             session.beginTransaction();
 
-            contracts = session.createQuery("from Contract", Contract.class).list();
+            contracts = session.createQuery("select c from Contract c join fetch c.customer", Contract.class).list();
 
             session.getTransaction().commit();
         } catch(final Exception e) {

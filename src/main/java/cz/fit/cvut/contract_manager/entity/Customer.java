@@ -174,4 +174,9 @@ public class Customer {
         contract.setCustomer(this);
         this.numOfContracts += 1;
     }
+
+    public void removeContract(final Contract contract) {
+        contract.setContractId(null);
+        this.numOfContracts -= 1;
+    }
 }

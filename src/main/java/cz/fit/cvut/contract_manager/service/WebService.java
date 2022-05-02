@@ -14,10 +14,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.*;
 
 public class WebService implements Service {
 
     private WebClient webClient;
+    private String htmlPage;
 
     public WebService(final WebClient webClient) {
         this.webClient = webClient;
@@ -39,17 +41,29 @@ public class WebService implements Service {
         return Integer.parseInt(str.split("Kč")[0].replaceAll("[^0-9]",""));
     }
 
+    private HtmlPage getPage(final String productName) throws IOException {
+        if(htmlPage != null) {
+            return webClient.getPage(htmlPage);
+        }
+
+        String webLink = "https://www.google.com/search?q=";
+        String link = webLink + productName.replaceAll(" ", "+");
+
+        HtmlPage htmlPage = webClient.getPage(link);
+        webClient.getCurrentWindow().getJobManager().removeAllJobs();
+        webClient.close();
+
+        return htmlPage;
+    }
+
     public List<Price> getPrices(final String productName, final Stage stage) {
         List<Price> prices = new ArrayList<>();
 
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<HtmlPage> future = executor.submit(() -> getPage(productName));
+
         try {
-            String webLink = "https://www.google.com/search?q=";
-            String link = webLink + productName.replaceAll(" ", "+");
-
-            HtmlPage page = webClient.getPage(link);
-
-            webClient.getCurrentWindow().getJobManager().removeAllJobs();
-            webClient.close();
+            HtmlPage page = future.get(15, TimeUnit.SECONDS);
 
             List<HtmlDivision> anchors = page.getByXPath("//div[contains(@class, 'rwVHAc')]");
 
@@ -59,13 +73,25 @@ public class WebService implements Service {
 
                 prices.add(new Price(name.getTextContent(), name.getHrefAttribute(), formatPriceString(priceElem.getTextContent())));
             }
-        } catch (IOException e) {
+        } catch (TimeoutException | InterruptedException | ExecutionException e) {
+            executor.shutdownNow();
             System.out.println("An error occurred: " + e);
-            Notification.showPopupMessageErr("Something went wrong while searching prices!", stage);
+
+            if(stage != null) {
+                Notification.showPopupMessageErr("Khong tim gia duoc!", stage);
+            }
         }
 
         prices.sort(Comparator.comparing(Price::getPrice));
 
         return prices;
+    }
+
+    public void setPage(final String htmlPage) {
+        this.htmlPage = htmlPage;
+    }
+
+    public String getPage() {
+        return htmlPage;
     }
 }

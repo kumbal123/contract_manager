@@ -58,7 +58,7 @@ public class ChartAnalyticsController extends Controller {
         HashMap<Integer, Integer> monthlyExpenses = new HashMap<>();
         HashMap<Integer, Integer> monthlyIncome = new HashMap<>();
 
-        int totalExpenses = 0, totalIncome = 0, withdrawn = 0, left = 0, totalContracts = contracts.size();
+        int totalExpenses = 0, totalIncome = 0, withdrawn = 0, left = 0, expired = 0, totalContracts = contracts.size();
 
         for(Contract contract: contracts) {
             int month = Util.getMonth(contract.getCreationDate());
@@ -74,6 +74,7 @@ public class ChartAnalyticsController extends Controller {
             totalIncome += contract.isWithdrawn() ? contract.getTotalPriceCurr() : 0;
             withdrawn += contract.isWithdrawn() ? 1 : 0;
             left += contract.isTakenOut() ? 1 : 0;
+            expired += contract.isExpired() ? 1 : 0;
         }
 
         for(int i = 0; i < 12; i++) {
@@ -85,20 +86,22 @@ public class ChartAnalyticsController extends Controller {
             listProfitLossData.add(new XYChart.Data<>(Util.months[i], yearIncome - monthExpense));
         }
 
-        int stillValid = totalContracts - left - withdrawn;
+        int stillValid = totalContracts - left - withdrawn - expired;
 
         labelTotalContracts.setText(String.valueOf(totalContracts));
 
+        pieChart.getData().clear();
+
         if(totalContracts != 0) {
+            double percentage = 100.0/totalContracts;
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Left behind - " + left + " - " + String.format("%.02f", left * 100.0/totalContracts) + "%", left),
-                new PieChart.Data("Withdrawn - " + withdrawn + " - " + String.format("%.02f", withdrawn * 100.0/totalContracts) + "%", withdrawn),
-                new PieChart.Data("Still valid - " + stillValid + " - " + String.format("%.02f", stillValid * 100.0/totalContracts) + "%", stillValid)
+                new PieChart.Data("Bo - " + left + " (" + String.format("%.02f", left * percentage) + "%)", left),
+                new PieChart.Data("Da Lay - " + withdrawn + " (" + String.format("%.02f", withdrawn * percentage) + "%)", withdrawn),
+                new PieChart.Data("Con Han - " + stillValid + " (" + String.format("%.02f", stillValid * percentage) + "%)", stillValid),
+                new PieChart.Data("Het Han - " + expired + " (" + String.format("%.02f", expired * percentage) + "%)", expired)
             );
 
             pieChart.setData(pieChartData);
-        } else {
-            pieChart.getData().clear();
         }
 
         ObservableList<XYChart.Data<String, Integer>> lineChartExpenseData = FXCollections.observableArrayList(listExpensesData);
@@ -128,7 +131,7 @@ public class ChartAnalyticsController extends Controller {
         HashMap<Integer, Integer> yearlyExpenses = new HashMap<>();
         HashMap<Integer, Integer> yearlyIncome = new HashMap<>();
 
-        int totalExpenses = 0, totalIncome = 0, withdrawn = 0, left = 0, totalContracts = contracts.size();;
+        int totalExpenses = 0, totalIncome = 0, withdrawn = 0, left = 0, expired = 0, totalContracts = contracts.size();;
 
         for(Contract contract: contracts) {
             int year = Util.getYear(contract.getCreationDate());
@@ -143,6 +146,7 @@ public class ChartAnalyticsController extends Controller {
             totalIncome += contract.isWithdrawn() ? contract.getTotalPriceCurr() : 0;
             withdrawn += contract.isWithdrawn() ? 1 : 0;
             left += contract.isTakenOut() ? 1 : 0;
+            expired += contract.isExpired() ? 1 : 0;
         }
 
         for(int i = fromYear; i <= toYear; i++) {
@@ -154,20 +158,22 @@ public class ChartAnalyticsController extends Controller {
             listProfitLossData.add(new XYChart.Data<>(String.valueOf(i), yearIncome - yearExpense));
         }
 
-        int stillValid = totalContracts - left - withdrawn;
+        int stillValid = totalContracts - left - withdrawn - expired;
 
         labelTotalContracts.setText(String.valueOf(totalContracts));
 
+        pieChart.getData().clear();
+
         if(totalContracts != 0) {
+            double percentage = 100.0/totalContracts;
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Left behind - " + left + " - " + String.format("%.02f", left * 100.0/totalContracts) + "%", left),
-                new PieChart.Data("Withdrawn - " + withdrawn + " - " + String.format("%.02f", withdrawn * 100.0/totalContracts) + "%", withdrawn),
-                new PieChart.Data("Still valid - " + stillValid + " - " + String.format("%.02f", stillValid * 100.0/totalContracts) + "%", stillValid)
+                new PieChart.Data("Bo - " + left + " (" + String.format("%.02f", left * percentage) + "%)", left),
+                new PieChart.Data("Da Lay - " + withdrawn + " (" + String.format("%.02f", withdrawn * percentage) + "%)", withdrawn),
+                new PieChart.Data("Con Han - " + stillValid + " (" + String.format("%.02f", stillValid * percentage) + "%)", stillValid),
+                new PieChart.Data("Het Han - " + expired + " (" + String.format("%.02f", expired * percentage) + "%)", expired)
             );
 
             pieChart.setData(pieChartData);
-        } else {
-            pieChart.getData().clear();
         }
 
 
@@ -196,7 +202,7 @@ public class ChartAnalyticsController extends Controller {
 
             analyzeContracts(String.valueOf(fromYear), contracts);
         } else {
-            Notification.showPopupMessageErr("Enter a valid year", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Hai nhap so nam da!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
@@ -213,7 +219,7 @@ public class ChartAnalyticsController extends Controller {
 
             analyzeContracts(fromYear, toYear, contracts);
         } else {
-            Notification.showPopupMessageErr("Enter valid years", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Hai nhap so nam da!", (Stage) mainPane.getScene().getWindow());
         }
     }
 

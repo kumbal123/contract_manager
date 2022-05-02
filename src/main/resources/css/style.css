@@ -1,3 +1,7 @@
+* {
+    -fx-font-family: "Arial";
+}
+
 .sidepane {
     -fx-background-color: #006edb;
     -fx-pref-height: 100%;
@@ -11,6 +15,10 @@
 .popup_ok {
     -fx-background-color: #64ff61;
     -fx-font-size: 23;
+}
+
+.chart {
+    -fx-label-line-length: 10px;
 }
 
 .text-field {
@@ -27,11 +35,19 @@
     -fx-background-color: #3b9eff;
 }
 
-.buttonPane {
-    -fx-pref-height: 40;
+.sideBarButton {
+    -fx-background-radius: 0;
+    -fx-background-color: #006edb;
+    -fx-text-fill: white;
+    -fx-pref-height: 45;
 }
 
-.buttonPane:hover {
+.sideBarButton:hover {
+    -fx-background-color: linear-gradient(to left, rgba(255,0,0,0), rgba(255,255,255,255));
+    -fx-border-width: 0px 0px 0px 3px;
+}
+
+.sideBarButton:focused {
     -fx-background-color: linear-gradient(to left, rgba(255,0,0,0), rgba(255,255,255,255));
     -fx-border-width: 0px 0px 0px 3px;
 }
@@ -39,6 +55,10 @@
 .text-field:focused {
     -fx-border-width: 0 0 2px 0;
     -fx-border-color: #ffff #ffff #006edb #ffff;
+}
+
+.text-field:disabled {
+    -fx-opacity: 1.0;
 }
 
 .text-field {

@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class CustomerController extends Controller {
@@ -49,24 +51,34 @@ public class CustomerController extends Controller {
         if(customer != null) {
             customerService.deleteByEntity(customer);
             showCustomers();
-            Notification.showPopupMessageOk("Successfully deleted customer: " + customer.getName() + "!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageOk("Khach voi ten: " + customer.getName() + "da xoa xong!", (Stage) mainPane.getScene().getWindow());
             customer = null;
         } else {
-            Notification.showPopupMessageErr("Could not delete. Pick a customer by clicking on it first!", (Stage) mainPane.getScene().getWindow());
+            Notification.showPopupMessageErr("Khach chua xoa duoc. Bam vao khach da, roi xoa!", (Stage) mainPane.getScene().getWindow());
         }
     }
 
     @FXML
-    public void editCustomer(final MouseEvent event) throws IOException {
+    public void handleMouseEvent(final MouseEvent event) throws IOException {
         customer = tvCustomers.getSelectionModel().getSelectedItem();
 
         if(event.getClickCount() > 1 && customer != null) {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/createCustomer.fxml"));
-            Pane pane = loader.load();
+            Pane pane;
 
-            CreateCustomerController createCustomerController = loader.getController();
-            createCustomerController.initUpdateCustomer(customer);
+            if(event.getButton() == MouseButton.PRIMARY) {
+                loader.setLocation(getClass().getResource("/fxml/createCustomer.fxml"));
+                pane = loader.load();
+
+                CreateCustomerController createCustomerController = loader.getController();
+                createCustomerController.initUpdateCustomer(customer);
+            } else {
+                loader.setLocation(getClass().getResource("/fxml/createContract.fxml"));
+                pane = loader.load();
+
+                CreateContractController createContractController = loader.getController();
+                createContractController.initCustomerData(customer);
+            }
 
             mainPane.setCenter(pane);
         }
@@ -84,12 +96,18 @@ public class CustomerController extends Controller {
         );
 
         colDateOfBirth.setCellValueFactory(
-            cellData -> getStringPropertyFromDate(cellData.getValue().getDateOfBirth())
+            cellData -> {
+                Date date = cellData.getValue().getDateOfBirth();
+                if(date == null) {
+                    return new SimpleStringProperty("null");
+                }
+                return getStringPropertyFromDate(date);
+            }
         );
 
         tvCustomers.setItems(customerList);
 
-        FilteredList<Customer> filteredList = new FilteredList<>(customerList, b -> true);
+        FilteredList<Customer> filteredList = new FilteredList<>(customerList, c -> true);
 
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredList.setPredicate(Customer -> {

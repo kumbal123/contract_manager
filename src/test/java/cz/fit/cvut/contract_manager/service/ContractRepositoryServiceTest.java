@@ -2,7 +2,6 @@ package cz.fit.cvut.contract_manager.service;
 
 import cz.fit.cvut.contract_manager.entity.Contract;
 import cz.fit.cvut.contract_manager.entity.ContractState;
-import cz.fit.cvut.contract_manager.entity.Customer;
 import cz.fit.cvut.contract_manager.entity.History;
 import cz.fit.cvut.contract_manager.repository.ContractRepository;
 import org.junit.jupiter.api.Test;
@@ -57,15 +56,6 @@ class ContractRepositoryServiceTest {
         verify(contractRepository, times(1)).getMostRecentByContractId(contractId);
 
         assertEquals(actualContract, expectedContract);
-    }
-
-    @Test
-    void shouldRemoveCustomer() {
-        Customer customer = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", new Date(332342342));
-        Contract contract = new Contract("R12", new Date(10), 1000, new Date(20), "Mobile", "j123", 1000, customer);
-        contractRepositoryService.removeCustomer(contract);
-
-        assertNull(contract.getCustomer());
     }
 
     @Test

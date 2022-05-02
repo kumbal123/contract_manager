@@ -20,7 +20,7 @@ public class History implements Serializable {
     private Integer interest;
     private Integer totalPrice;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     private Contract contract;
 
     public static Integer computeInterest(final Integer price, final Date fromDate, final Date toDate) {

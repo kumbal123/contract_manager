@@ -1,7 +1,9 @@
 package cz.fit.cvut.contract_manager.controller;
 
 import cz.fit.cvut.contract_manager.entity.Contract;
+import cz.fit.cvut.contract_manager.entity.Customer;
 import cz.fit.cvut.contract_manager.service.ContractRepositoryService;
+import cz.fit.cvut.contract_manager.service.CustomerRepositoryService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,53 +11,51 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
-import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.LabeledMatchers;
 
 import static cz.fit.cvut.contract_manager.controller.Controller.getDateFromString;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
 
-@ExtendWith(ApplicationExtension.class)
-class ChartAnalyticsControllerTest {
+class ChartAnalyticsControllerTest extends JavaFxTest {
 
-    private ContractRepositoryService service = ContractRepositoryService.getInstance();
+    private ContractRepositoryService contractService = ContractRepositoryService.getInstance();
+    private CustomerRepositoryService customerService = CustomerRepositoryService.getInstance();
 
     @AfterEach
     void tearDown() {
-        service.deleteAll();
+        customerService.deleteAll();
     }
 
     @Start
     public void start(final Stage stage) throws Exception {
 
-        System.setProperty("testfx.robot", "glass");
-        System.setProperty("testfx.headless", "true");
-        System.setProperty("prism.order", "sw");
-        System.setProperty("prism.text", "t2k");
-        System.setProperty("java.awt.headless", "true");
+        Customer customer = new Customer("Mike", "m", "Prague", "fast1", "velocity", "123l123", "a24234", "V", "vn", getDateFromString("12.12.2000"));
 
-        service.create(new Contract("A1", getDateFromString("20.04.2019"), 1500, getDateFromString("10.06.2022"), "Mobile", "j123", 2265, null));
+        customerService.create(customer);
 
-        service.create(new Contract("A2", getDateFromString("01.02.2020"), 1000, getDateFromString("01.03.2022"), "Mobile", "j123", 1280, null));
+        contractService.create(new Contract("A1", getDateFromString("20.04.2019"), 1500, getDateFromString("10.06.2022"), "Mobile", "j123", 2265, customer));
 
-        Contract contract3 = new Contract("A3", getDateFromString("10.06.2022"), 2500, getDateFromString("15.08.2022"), "Mobile", "j123", 4150, null);
-        service.create(contract3);
-        service.takeOut(contract3);
+        contractService.create(new Contract("A2", getDateFromString("01.02.2020"), 1000, getDateFromString("01.03.2022"), "Mobile", "j123", 1280, customer));
 
-        service.create(new Contract("A4", getDateFromString("04.09.2022"), 5500, getDateFromString("20.09.2022"), "Mobile", "j123", 6380, null));
-        service.create(new Contract("A5", getDateFromString("28.09.2022"), 3400, getDateFromString("01.11.2022"), "Mobile", "j123", 4556, null));
+        Contract contract3 = new Contract("A3", getDateFromString("10.06.2022"), 2500, getDateFromString("15.08.2022"), "Mobile", "j123", 4150, customer);
+        contractService.create(contract3);
+        contractService.takeOut(contract3);
 
-        service.create(new Contract("A10", getDateFromString("10.06.2023"), 2500, getDateFromString("15.08.2023"), "Mobile", "j123", 4150, null));
-        service.create(new Contract("A21", getDateFromString("04.09.2023"), 5500, getDateFromString("20.09.2023"), "Mobile", "j123", 6380, null));
-        service.create(new Contract("A33", getDateFromString("28.09.2023"), 3400, getDateFromString("01.11.2023"), "Mobile", "j123", 4556, null));
+        contractService.create(new Contract("A4", getDateFromString("04.09.2022"), 5500, getDateFromString("20.09.2022"), "Mobile", "j123", 6380, customer));
+        contractService.create(new Contract("A5", getDateFromString("28.09.2022"), 3400, getDateFromString("01.11.2022"), "Mobile", "j123", 4556, customer));
+
+        contractService.create(new Contract("A10", getDateFromString("10.06.2023"), 2500, getDateFromString("15.08.2023"), "Mobile", "j123", 4150, customer));
+        contractService.create(new Contract("A21", getDateFromString("04.09.2023"), 5500, getDateFromString("20.09.2023"), "Mobile", "j123", 6380, customer));
+        contractService.create(new Contract("A33", getDateFromString("28.09.2023"), 3400, getDateFromString("01.11.2023"), "Mobile", "j123", 4556, customer));
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/chartAnalytics.fxml"));
         stage.setScene(new Scene(root));
@@ -63,7 +63,7 @@ class ChartAnalyticsControllerTest {
     }
 
     @Test
-    void clearCharts(final FxRobot robot) {
+    void shouldClearCharts(final FxRobot robot) {
         robot.clickOn("#clearButton");
 
         verifyThat("#labelTotalContracts", LabeledMatchers.hasText("0"));
@@ -89,7 +89,7 @@ class ChartAnalyticsControllerTest {
     }
 
     @Test
-    void analyzeContractsInMonths(final FxRobot robot) {
+    void shouldAnalyzeContractsInMonths(final FxRobot robot) {
         int totalContracts = 3, totalExpenses = 2500 + 3400 + 5500, totalIncome = 0, profitLoss = -1 * totalExpenses;
         int totalExpensesJun = 2500, totalExpensesSep = 8900;
 
@@ -154,7 +154,7 @@ class ChartAnalyticsControllerTest {
     }
 
     @Test
-    void analyzeContractsInYears(final FxRobot robot) {
+    void shouldAnalyzeContractsInYears(final FxRobot robot) {
         int totalExpenses2019 = 1500, totalExpenses2020 = 1000, totalExpenses2022 = 2500 + 3400 + 5500;
         int totalContracts = 5, totalExpenses = totalExpenses2019 + totalExpenses2020 + totalExpenses2022;
         int totalIncome = 0, profitLoss = -1 * totalExpenses;
@@ -204,5 +204,140 @@ class ChartAnalyticsControllerTest {
         Assert.assertEquals(-totalExpenses2020, profitLossData.get(1).getYValue(), delta);
         Assert.assertEquals(0, profitLossData.get(2).getYValue(), delta);
         Assert.assertEquals(-totalExpenses2022, profitLossData.get(3).getYValue(), delta);
+    }
+
+    @Test
+    void shouldNotAnalyzeInMonthsWhenGivenIncorrectYearFormat(final FxRobot robot) {
+        robot.clickOn("#clearButton");
+
+        TextField fromField = robot.lookup("#fromYearField").queryAs(TextField.class);
+        fromField.setText("wrongYearFormat");
+
+        robot.clickOn("#monthsButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        verifyThat("#labelTotalContracts", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalExpenses", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalIncome", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalProfitLoss", LabeledMatchers.hasText("0"));
+
+        ObservableList<PieChart.Data> pieChartData = robot.lookup("#pieChart").queryAs(PieChart.class).getData();
+
+        Assert.assertTrue(pieChartData.isEmpty());
+
+        LineChart<String, Integer> lineChartIncome = robot.lookup("#lineChartIncome").query();
+
+        Assert.assertTrue(lineChartIncome.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartExpenses = robot.lookup("#lineChartExpenses").query();
+
+        Assert.assertTrue(lineChartExpenses.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartProfitLoss = robot.lookup("#lineChartProfitLoss").query();
+
+        Assert.assertTrue(lineChartProfitLoss.getData().isEmpty());
+    }
+
+    @Test
+    void shouldNotAnalyzeInYearsWhenGivenIncorrectYearFormat(final FxRobot robot) {
+        robot.clickOn("#clearButton");
+
+        TextField fromField = robot.lookup("#fromYearField").queryAs(TextField.class);
+        fromField.setText("wrongYearFormat");
+
+        TextField toField = robot.lookup("#toYearField").queryAs(TextField.class);
+        toField.setText("wrongYearFormat");
+
+        robot.clickOn("#monthsButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        verifyThat("#labelTotalContracts", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalExpenses", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalIncome", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalProfitLoss", LabeledMatchers.hasText("0"));
+
+        ObservableList<PieChart.Data> pieChartData = robot.lookup("#pieChart").queryAs(PieChart.class).getData();
+
+        Assert.assertTrue(pieChartData.isEmpty());
+
+        LineChart<String, Integer> lineChartIncome = robot.lookup("#lineChartIncome").query();
+
+        Assert.assertTrue(lineChartIncome.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartExpenses = robot.lookup("#lineChartExpenses").query();
+
+        Assert.assertTrue(lineChartExpenses.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartProfitLoss = robot.lookup("#lineChartProfitLoss").query();
+
+        Assert.assertTrue(lineChartProfitLoss.getData().isEmpty());
+    }
+
+    @Test
+    void shouldNotAnalyzeInMonthsWhenGivenNoYear(final FxRobot robot) {
+        robot.clickOn("#clearButton");
+        robot.clickOn("#monthsButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        verifyThat("#labelTotalContracts", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalExpenses", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalIncome", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalProfitLoss", LabeledMatchers.hasText("0"));
+
+        ObservableList<PieChart.Data> pieChartData = robot.lookup("#pieChart").queryAs(PieChart.class).getData();
+
+        Assert.assertTrue(pieChartData.isEmpty());
+
+        LineChart<String, Integer> lineChartIncome = robot.lookup("#lineChartIncome").query();
+
+        Assert.assertTrue(lineChartIncome.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartExpenses = robot.lookup("#lineChartExpenses").query();
+
+        Assert.assertTrue(lineChartExpenses.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartProfitLoss = robot.lookup("#lineChartProfitLoss").query();
+
+        Assert.assertTrue(lineChartProfitLoss.getData().isEmpty());
+    }
+
+    @Test
+    void shouldNotAnalyzeInYearsWhenGivenNoYears(final FxRobot robot) {
+        robot.clickOn("#clearButton");
+        robot.clickOn("#yearsButton");
+
+        Label popUp = robot.lookup("#notification").queryAs(Label.class);
+        assertTrue(popUp.getStyleClass().contains("popup_err"));
+        robot.clickOn("#notification");
+
+        verifyThat("#labelTotalContracts", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalExpenses", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalIncome", LabeledMatchers.hasText("0"));
+        verifyThat("#labelTotalProfitLoss", LabeledMatchers.hasText("0"));
+
+        ObservableList<PieChart.Data> pieChartData = robot.lookup("#pieChart").queryAs(PieChart.class).getData();
+
+        Assert.assertTrue(pieChartData.isEmpty());
+
+        LineChart<String, Integer> lineChartIncome = robot.lookup("#lineChartIncome").query();
+
+        Assert.assertTrue(lineChartIncome.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartExpenses = robot.lookup("#lineChartExpenses").query();
+
+        Assert.assertTrue(lineChartExpenses.getData().isEmpty());
+
+        LineChart<String, Integer> lineChartProfitLoss = robot.lookup("#lineChartProfitLoss").query();
+
+        Assert.assertTrue(lineChartProfitLoss.getData().isEmpty());
     }
 }

@@ -8,27 +8,28 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<HBox id="customersHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.CustomerController">
+<HBox id="customersHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.fit.cvut.contract_manager.controller.CustomerController">
     <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1101.0">
         <center>
             <Pane id="customersPane" prefHeight="400.0" prefWidth="833.0">
-                <children>
-                    <TextField fx:id="searchBar" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="907.0" promptText="search" />
-                    <Button id="createButton" layoutX="989.0" layoutY="134.0" mnemonicParsing="false" onMouseClicked="#switchToCreateCustomer" prefHeight="25.0" prefWidth="84.0" text="Create" />
-                    <Button id="deleteButton" layoutX="989.0" layoutY="176.0" mnemonicParsing="false" onMouseClicked="#deleteCustomer" prefHeight="25.0" prefWidth="84.0" text="Delete" />
-                    <Pane layoutX="46.0" layoutY="81.0" prefHeight="579.0" prefWidth="907.0">
-                  <children>
-                     <TableView fx:id="tvCustomers" onMouseClicked="#editCustomer" prefHeight="579.0" prefWidth="909.0">
-                       <columns>
-                         <TableColumn fx:id="colName" prefWidth="234.0" text="Name" />
-                         <TableColumn fx:id="colPersonalNumber" prefWidth="166.0" text="PersonalNumber" />
-                           <TableColumn fx:id="colAddress" prefWidth="232.0" text="Address" />
-                           <TableColumn fx:id="colNumOfContracts" prefWidth="134.0" text="Number of contracts" />
-                           <TableColumn fx:id="colDateOfBirth" prefWidth="116.0" text="DateOfBirth" />
-                       </columns>
-                     </TableView>
-                  </children></Pane>
-                </children>
+                <TextField fx:id="searchBar" layoutX="46.0" layoutY="43.0" prefHeight="25.0" prefWidth="907.0"
+                           promptText="tim"/>
+                <Button id="createButton" layoutX="989.0" layoutY="134.0" mnemonicParsing="false"
+                        onMouseClicked="#switchToCreateCustomer" prefHeight="25.0" prefWidth="84.0" text="Lam Moi"/>
+                <Button id="deleteButton" layoutX="989.0" layoutY="176.0" mnemonicParsing="false"
+                        onMouseClicked="#deleteCustomer" prefHeight="25.0" prefWidth="84.0" text="Xoa"/>
+                <Pane layoutX="46.0" layoutY="81.0" prefHeight="579.0" prefWidth="907.0">
+                    <TableView fx:id="tvCustomers" onMouseClicked="#handleMouseEvent" prefHeight="579.0"
+                               prefWidth="909.0">
+                        <columns>
+                            <TableColumn fx:id="colName" prefWidth="234.0" text="Ten"/>
+                            <TableColumn fx:id="colPersonalNumber" prefWidth="166.0" text="So Sinh"/>
+                            <TableColumn fx:id="colAddress" prefWidth="232.0" text="Dia Chi"/>
+                            <TableColumn fx:id="colNumOfContracts" prefWidth="134.0" text="Tong So"/>
+                            <TableColumn fx:id="colDateOfBirth" prefWidth="116.0" text="Ngay Sinh"/>
+                        </columns>
+                    </TableView>
+                </Pane>
             </Pane>
         </center>
     </BorderPane>
