@@ -80,7 +80,7 @@
          <Pane id="indexCenterPane" prefHeight="700.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
             <Pane layoutX="35.0" layoutY="105.0" prefHeight="108.0" prefWidth="319.0"
                   stylesheets="@../css/style.css">
-               <Label layoutX="14.0" prefHeight="46.0" prefWidth="113.0" text="Tien Vay:">
+               <Label layoutX="14.0" prefHeight="46.0" prefWidth="113.0" text="Expenses:">
                   <font>
                      <Font name="System Bold" size="22.0"/>
                   </font>
@@ -90,7 +90,7 @@
                      <Font name="System Bold" size="22.0"/>
                   </font>
                </Label>
-               <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="111.0" text="Tong So:">
+               <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="111.0" text="Num of contracts:">
                   <font>
                      <Font name="System Bold" size="13.0"/>
                   </font>
@@ -103,18 +103,18 @@
                </Label>
             </Pane>
             <Button id="withdrawButton" layoutX="156.0" layoutY="55.0" mnemonicParsing="false"
-                    onMouseClicked="#withdrawContract" prefHeight="25.0" prefWidth="84.0" text="khach lay"/>
+                    onMouseClicked="#withdrawContract" prefHeight="25.0" prefWidth="84.0" text="Withdraw"/>
             <TextField fx:id="contractIdField" layoutX="35.0" layoutY="55.0" prefHeight="25.0" prefWidth="110.0"
-                       promptText="so hop dong"/>
+                       promptText="contract id"/>
             <TextField fx:id="dateField" layoutX="355.0" layoutY="55.0" prefHeight="25.0" prefWidth="188.0"
-                       promptText="ngay"/>
+                       promptText="date"/>
             <Button id="prolongButton" layoutX="560.0" layoutY="55.0" mnemonicParsing="false"
-                    onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="gia han"/>
+                    onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="Prolong"/>
             <Button id="takeOutButton" layoutX="255.0" layoutY="55.0" mnemonicParsing="false"
-                    onMouseClicked="#takeOutContract" prefHeight="25.0" prefWidth="84.0" text="bo"/>
+                    onMouseClicked="#takeOutContract" prefHeight="25.0" prefWidth="84.0" text="TakeOut"/>
             <Pane layoutX="355.0" layoutY="105.0" prefHeight="102.0" prefWidth="279.0"
                   stylesheets="@../css/style.css">
-               <Label layoutX="14.0" prefHeight="46.0" prefWidth="103.0" text="Tien Tra:">
+               <Label layoutX="14.0" prefHeight="46.0" prefWidth="103.0" text="Income:">
                   <font>
                      <Font name="System Bold" size="22.0"/>
                   </font>
@@ -124,7 +124,7 @@
                      <Font name="System Bold" size="22.0"/>
                   </font>
                </Label>
-               <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="122.0" text="Tong So:">
+               <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="122.0" text="Num of contracts:">
                   <font>
                      <Font name="System Bold" size="13.0"/>
                   </font>
@@ -138,7 +138,7 @@
             </Pane>
             <Pane layoutX="39.0" layoutY="225.0" prefHeight="185.0" prefWidth="319.0"
                   stylesheets="@../css/style.css">
-               <Label layoutX="14.0" prefHeight="46.0" prefWidth="163.0" text="Tien Vay (0):">
+               <Label layoutX="14.0" prefHeight="46.0" prefWidth="163.0" text="Expenses (0):">
                   <font>
                      <Font name="System Bold" size="22.0"/>
                   </font>
@@ -148,7 +148,7 @@
                      <Font name="System Bold" size="22.0"/>
                   </font>
                </Label>
-               <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="111.0" text="Tong So:">
+               <Label layoutX="14.0" layoutY="31.0" prefHeight="46.0" prefWidth="111.0" text="Num of contracts:">
                   <font>
                      <Font name="System Bold" size="13.0"/>
                   </font>

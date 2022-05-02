@@ -26,7 +26,7 @@
                             <NumberAxis side="LEFT"/>
                         </yAxis>
                     </LineChart>
-                    <Label layoutX="14.0" layoutY="26.0" text="Tien Tra:">
+                    <Label layoutX="14.0" layoutY="26.0" text="Total Income:">
                         <font>
                             <Font name="System Bold" size="28.0"/>
                         </font>
@@ -47,7 +47,7 @@
                             <NumberAxis side="LEFT"/>
                         </yAxis>
                     </LineChart>
-                    <Label layoutX="24.0" layoutY="26.0" text="Lai:">
+                    <Label layoutX="24.0" layoutY="26.0" text="Total Profit/Loss:">
                         <font>
                             <Font name="System Bold" size="28.0"/>
                         </font>
@@ -59,11 +59,11 @@
                         </font>
                     </Label>
                 </Pane>
-                  <TextField fx:id="fromYearField" layoutX="14.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="Tu Nam" />
-                  <Button fx:id="monthsButton" layoutX="138.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeContractsInMonths" text="Tinh thang" />
-                  <TextField fx:id="toYearField" layoutX="234.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="Den nam" />
-                  <Button fx:id="yearsButton" layoutX="356.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeContractsInYears" text="Tinh nam" />
-                  <Button fx:id="clearButton" layoutX="492.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#clearCharts" text="xoa" />
+                  <TextField fx:id="fromYearField" layoutX="14.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="from year" />
+                  <Button fx:id="monthsButton" layoutX="138.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeContractsInMonths" text="months" />
+                  <TextField fx:id="toYearField" layoutX="234.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="to year" />
+                  <Button fx:id="yearsButton" layoutX="356.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeContractsInYears" text="years" />
+                  <Button fx:id="clearButton" layoutX="492.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#clearCharts" text="clear" />
                 <LineChart fx:id="lineChartExpenses" animated="false" layoutX="547.0" layoutY="67.0" prefHeight="300.0" prefWidth="550.0">
                <xAxis>
                   <CategoryAxis side="BOTTOM" />
@@ -72,7 +72,7 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </LineChart>
-            <Label layoutX="567.0" layoutY="33.0" text="Tien Vay:">
+            <Label layoutX="567.0" layoutY="33.0" text="Total Expenses:">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -83,7 +83,7 @@
                </font>
             </Label>
             <PieChart fx:id="pieChart" animated="false" legendVisible="false" layoutY="94.0" prefHeight="276.0" prefWidth="573.0" />
-            <Label layoutX="14.0" layoutY="67.0" text="Tong so:">
+            <Label layoutX="14.0" layoutY="67.0" text="Total Contracts:">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
