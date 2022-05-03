@@ -30,64 +30,61 @@
                 <Button fx:id="updateButton" disable="true" layoutX="295.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#updateCustomer" prefHeight="26.0" prefWidth="58.0" text="update" />
                 <Button fx:id="createContractButton" disable="true" layoutX="45.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#createContract" text="create contract" />
             <PieChart fx:id="pieChart" layoutX="464.0" layoutY="93.0" legendSide="LEFT" prefHeight="278.0" prefWidth="616.0" />
-            <Label layoutX="462.0" layoutY="70.0" prefHeight="34.0" prefWidth="141.0" text="Total Contracts:">
+            <Label layoutX="462.0" layoutY="70.0" prefHeight="34.0" prefWidth="231.0" text="Total Contracts:">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="labelTotalContracts" layoutX="603.0" layoutY="70.0" prefHeight="34.0" prefWidth="169.0">
+            <Label fx:id="labelTotalContracts" layoutX="693.0" layoutY="70.0" prefHeight="34.0" prefWidth="108.0">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
                 <Pane fx:id="bottomLeftPane" layoutY="340.0" prefHeight="360.0" prefWidth="550.0">
-                    <LineChart fx:id="lineChartMoney" animated="false" layoutY="60.0" prefHeight="300.0"
-                               prefWidth="550.0">
+                    <LineChart fx:id="lineChartMoney" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0">
                         <xAxis>
-                            <CategoryAxis side="BOTTOM"/>
+                            <CategoryAxis side="BOTTOM" />
                         </xAxis>
                         <yAxis>
-                            <NumberAxis side="LEFT"/>
+                            <NumberAxis side="LEFT" />
                         </yAxis>
                     </LineChart>
-                    <Label layoutX="20.0" layoutY="24.0" prefHeight="34.0" prefWidth="125.0" text="Total Money:">
+                    <Label layoutX="20.0" layoutY="24.0" prefHeight="34.0" prefWidth="185.0" text="Total Money:">
                         <font>
-                            <Font name="System Bold" size="28.0"/>
+                            <Font name="System Bold" size="28.0" />
                         </font>
                     </Label>
-                    <Label fx:id="labelTotalMoney" layoutX="157.0" layoutY="24.0" prefHeight="34.0" prefWidth="169.0">
+                    <Label fx:id="labelTotalMoney" layoutX="213.0" layoutY="24.0" prefHeight="34.0" prefWidth="122.0">
                         <font>
-                            <Font name="System Bold" size="28.0"/>
+                            <Font name="System Bold" size="28.0" />
                         </font>
                     </Label>
                 </Pane>
                 <Pane fx:id="bottomRightPane" layoutX="547.0" layoutY="340.0" prefHeight="360.0" prefWidth="550.0">
-                    <LineChart fx:id="lineChartContracts" animated="false" layoutY="60.0" prefHeight="300.0"
-                               prefWidth="550.0">
+                    <LineChart fx:id="lineChartContracts" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0">
                         <xAxis>
-                            <CategoryAxis side="BOTTOM"/>
+                            <CategoryAxis side="BOTTOM" />
                         </xAxis>
                         <yAxis>
-                            <NumberAxis side="LEFT"/>
+                            <NumberAxis side="LEFT" />
                         </yAxis>
                     </LineChart>
-                    <Label layoutX="14.0" layoutY="24.0" prefHeight="34.0" prefWidth="132.0" text="Total Contracts:">
+                    <Label layoutX="14.0" layoutY="24.0" prefHeight="34.0" prefWidth="233.0" text="Total Contracts:">
                         <font>
-                            <Font name="System Bold" size="28.0"/>
+                            <Font name="System Bold" size="28.0" />
                         </font>
                     </Label>
-                    <Label fx:id="labelTotalContractInterval" layoutX="146.0" layoutY="24.0" prefHeight="34.0"
-                           prefWidth="169.0">
+                    <Label fx:id="labelTotalContractInterval" layoutX="247.0" layoutY="24.0" prefHeight="34.0" prefWidth="144.0">
                         <font>
-                            <Font name="System Bold" size="28.0"/>
+                            <Font name="System Bold" size="28.0" />
                         </font>
                     </Label>
                 </Pane>
             <TextField fx:id="fromYearField" layoutX="462.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="from year" />
-            <Button fx:id="monthsButton" layoutX="583.0" layoutY="34.0" disable="true" mnemonicParsing="false" onMouseClicked="#analyzeInMonths" text="analyze months" />
-            <TextField fx:id="toYearField" layoutX="688.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="to year" />
-            <Button fx:id="yearsButton" layoutX="809.0" layoutY="34.0" disable="true" mnemonicParsing="false" onMouseClicked="#analyzeInYears" text="analyze years" />
-            <Button layoutX="904.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#clearChart" text="clear" />
+            <Button fx:id="monthsButton" disable="true" layoutX="584.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeInMonths" text="analyze months" />
+            <TextField fx:id="toYearField" layoutX="709.0" layoutY="34.0" prefHeight="25.0" prefWidth="113.0" promptText="to year" />
+            <Button fx:id="yearsButton" disable="true" layoutX="830.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#analyzeInYears" text="analyze years" />
+            <Button layoutX="973.0" layoutY="34.0" mnemonicParsing="false" onMouseClicked="#clearChart" text="clear" />
             </Pane>
         </center>
     </BorderPane>

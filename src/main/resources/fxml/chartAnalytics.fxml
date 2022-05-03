@@ -17,45 +17,42 @@
         <center>
             <Pane prefHeight="352.0" prefWidth="1128.0">
                 <Pane fx:id="bottomLeftPane" layoutY="340.0" prefHeight="360.0" prefWidth="550.0">
-                    <LineChart fx:id="lineChartIncome" animated="false" layoutY="60.0" prefHeight="300.0"
-                               prefWidth="550.0">
+                    <LineChart fx:id="lineChartIncome" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0">
                         <xAxis>
-                            <CategoryAxis side="BOTTOM"/>
+                            <CategoryAxis side="BOTTOM" />
                         </xAxis>
                         <yAxis>
-                            <NumberAxis side="LEFT"/>
+                            <NumberAxis side="LEFT" />
                         </yAxis>
                     </LineChart>
-                    <Label layoutX="14.0" layoutY="26.0" text="Total Income:">
+                    <Label layoutX="14.0" layoutY="26.0" prefHeight="34.0" prefWidth="203.0" text="Total Income:">
                         <font>
-                            <Font name="System Bold" size="28.0"/>
+                            <Font name="System Bold" size="28.0" />
                         </font>
                     </Label>
-                    <Label fx:id="labelTotalIncome" layoutX="152.0" layoutY="26.0" prefHeight="34.0" prefWidth="169.0">
+                    <Label fx:id="labelTotalIncome" layoutX="217.0" layoutY="26.0" prefHeight="34.0" prefWidth="169.0">
                         <font>
-                            <Font name="System Bold" size="28.0"/>
+                            <Font name="System Bold" size="28.0" />
                         </font>
                     </Label>
                 </Pane>
                 <Pane fx:id="bottomRightPane" layoutX="547.0" layoutY="340.0" prefHeight="360.0" prefWidth="550.0">
-                    <LineChart fx:id="lineChartProfitLoss" animated="false" layoutY="60.0" prefHeight="300.0"
-                               prefWidth="550.0">
+                    <LineChart fx:id="lineChartProfitLoss" animated="false" layoutY="60.0" prefHeight="300.0" prefWidth="550.0">
                         <xAxis>
-                            <CategoryAxis side="BOTTOM"/>
+                            <CategoryAxis side="BOTTOM" />
                         </xAxis>
                         <yAxis>
-                            <NumberAxis side="LEFT"/>
+                            <NumberAxis side="LEFT" />
                         </yAxis>
                     </LineChart>
-                    <Label layoutX="24.0" layoutY="26.0" text="Total Profit/Loss:">
+                    <Label layoutX="24.0" layoutY="26.0" prefHeight="34.0" prefWidth="242.0" text="Total Profit/Loss:">
                         <font>
-                            <Font name="System Bold" size="28.0"/>
+                            <Font name="System Bold" size="28.0" />
                         </font>
                     </Label>
-                    <Label fx:id="labelTotalProfitLoss" layoutX="91.0" layoutY="26.0" prefHeight="34.0"
-                           prefWidth="169.0">
+                    <Label fx:id="labelTotalProfitLoss" layoutX="266.0" layoutY="26.0" prefHeight="34.0" prefWidth="169.0">
                         <font>
-                            <Font name="System Bold" size="28.0"/>
+                            <Font name="System Bold" size="28.0" />
                         </font>
                     </Label>
                 </Pane>
@@ -72,23 +69,23 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </LineChart>
-            <Label layoutX="567.0" layoutY="33.0" text="Total Expenses:">
+            <Label layoutX="567.0" layoutY="33.0" prefHeight="34.0" prefWidth="232.0" text="Total Expenses:">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="labelTotalExpenses" layoutX="707.0" layoutY="33.0" prefHeight="34.0" prefWidth="169.0">
+            <Label fx:id="labelTotalExpenses" layoutX="799.0" layoutY="33.0" prefHeight="34.0" prefWidth="169.0">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <PieChart fx:id="pieChart" animated="false" legendVisible="false" layoutY="94.0" prefHeight="276.0" prefWidth="573.0" />
-            <Label layoutX="14.0" layoutY="67.0" text="Total Contracts:">
+            <PieChart fx:id="pieChart" animated="false" layoutY="94.0" legendVisible="false" prefHeight="276.0" prefWidth="573.0" />
+            <Label layoutX="14.0" layoutY="67.0" prefHeight="34.0" prefWidth="234.0" text="Total Contracts:">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="labelTotalContracts" layoutX="150.0" layoutY="67.0" prefHeight="34.0" prefWidth="169.0">
+            <Label fx:id="labelTotalContracts" layoutX="248.0" layoutY="67.0" prefHeight="34.0" prefWidth="169.0">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>

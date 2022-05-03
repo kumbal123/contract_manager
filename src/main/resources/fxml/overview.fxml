@@ -27,11 +27,11 @@
                     </columns>
                 </TableView>
                 <TextField fx:id="searchBar" layoutX="31.0" layoutY="38.0" prefHeight="25.0" prefWidth="952.0"
-                           promptText="tim"/>
+                           promptText="search"/>
                 <TextField fx:id="contractIdField" disable="true" layoutX="1000.0" layoutY="115.0" prefHeight="26.0"
-                           prefWidth="84.0" promptText="so hop dong"/>
+                           prefWidth="84.0" promptText="contract id"/>
                 <TextField fx:id="dateField" layoutX="1000.0" layoutY="253.0" prefHeight="26.0" prefWidth="84.0"
-                           promptText="ngay"/>
+                           promptText="date"/>
                 <Button id="prolongButton" layoutX="1000.0" layoutY="289.0" mnemonicParsing="false"
                         onMouseClicked="#prolongContract" prefHeight="25.0" prefWidth="84.0" text="Prolong"/>
                 <Button id="takeOutButton" layoutX="1000.0" layoutY="192.0" mnemonicParsing="false"
